@@ -1,0 +1,79 @@
+\documentclass{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{enumitem}
+\usepackage{array}
+
+\newcommand{\bb}[1]{\mathbb{#1}}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\brac}[1]{\langle #1 \rangle}
+
+\let\sc\relax
+\newcommand{\sc}[1]{\mathscr{#1}}
+
+\let\cal\relax
+\newcommand{\cal}[1]{\mathcal{#1}}
+
+\theoremstyle{remark}
+\newtheorem*{solution}{Solution}
+
+% \setenumerate{listparindent=\parindent, parsep=0pt}
+
+\title{Notes for \textit{Foundations of Modern Analysis} by Avner Friedman}
+\author{Anton Ottosson -- antonott@kth.se}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\chapter*{Chapter 1 -- Measure Theory}
+
+\section*{Section 1.1 -- Rings and algebras}
+
+\subsection*{Problems}
+
+\subsubsection*{1.1.1}
+\begin{equation*}
+  \left( \varliminf_n E_n \right)^c = \varlimsup_n E_n^c, \quad \left( \varlimsup_n E_n \right)^c = \varliminf_n E_n^c.
+\end{equation*}
+
+\begin{solution}
+  For the first identity, note that
+  \begin{equation*}
+    \begin{split}
+      x \in \left( \varliminf_n E_n \right)^c &\iff x \notin \varliminf_n E_n \\
+      &\iff \text{$x \notin E_n$ for infinitely many $n$} \\
+      &\iff x \in \varlimsup_n E_n^c.
+    \end{split}
+  \end{equation*}
+  For the second,
+  \begin{equation*}
+    \begin{split}
+      x \in \left( \varlimsup_n E_n \right)^c &\iff x \notin \varlimsup_n E_n \\
+      &\iff \text{$x \in E_n$ for finitely many $n$} \\
+      &\iff \text{$x \in E_n^c$ for all but finitely many $n$} \\
+      &\iff x \in \varliminf_n E_n^c.
+    \end{split}
+  \end{equation*}
+\end{solution}
+
+\subsubsection{1.1.2}
+\begin{equation*}
+  \varlimsup_n E_n = \bigcap_{k=1}^\infty \bigcup_{n=k}^\infty E_n, \quad \varliminf_n E_n = \bigcup_{k=1}^\infty \bigcap_{n=k}^\infty E_n.
+\end{equation*}
+
+\begin{solution}
+  Suppose $x \in \varlimsup_n E_n$. Then $x \in E_n$ for infinitely many $n$. It follows that $x \in \bigcup_{n=k}^\infty E_n$ for all $k \in \bb N$, and hence that $x \in \bigcap_{k=1}^\infty \bigcup_{n=k}^\infty E_n$.
+
+  Conversely, assume that $x \in \bigcap_{k=1}^\infty \bigcup_{n=k}^\infty E_n$. Then $x \in \bigcup_{n=k}^\infty E_n$ for all $k \in \bb N$. It follows that $x \in E_n$ for infinitely many $n$, and thus that $x \in \varlimsup_n E_n$. This proves the first identity.
+
+  Next, suppose that $x \in \varliminf_n E_n$. Then $x \in E_n$ for all but finitely many $n$, so there is some $k' \in \bb N$ such that $x \in E_n$ for all $n \ge k'$. It follows that $x \in \bigcap_{n=k'}^\infty E_n$, and hence that $x \in \bigcup_{k=1}^\infty \bigcap_{n=k}^\infty E_n$.
+
+  Conversely, assume that $x \in \bigcup_{k=1}^\infty \bigcap_{n=k}^\infty E_n$. Then $x \in \bigcap_{n=k'}^\infty E_n$ for some $k' \in \bb N$, which means that $x \in E_n$ for all $n \ge k'$. It follows that $x \in E_n$ for all but finitely many $n$; that is, $x \in \varliminf_n E_n$.
+\end{solution}
+
+\end{document}
