@@ -47,6 +47,7 @@
     \begin{split}
       x \in \left( \varliminf_n E_n \right)^c &\iff x \notin \varliminf_n E_n \\
       &\iff \text{$x \notin E_n$ for infinitely many $n$} \\
+      &\iff \text{$x \in E_n^c$ for infinitely many $n$} \\
       &\iff x \in \varlimsup_n E_n^c.
     \end{split}
   \end{equation*}
@@ -74,6 +75,72 @@
   Next, suppose that $x \in \varliminf_n E_n$. Then $x \in E_n$ for all but finitely many $n$, so there is some $k' \in \bb N$ such that $x \in E_n$ for all $n \ge k'$. It follows that $x \in \bigcap_{n=k'}^\infty E_n$, and hence that $x \in \bigcup_{k=1}^\infty \bigcap_{n=k}^\infty E_n$.
 
   Conversely, assume that $x \in \bigcup_{k=1}^\infty \bigcap_{n=k}^\infty E_n$. Then $x \in \bigcap_{n=k'}^\infty E_n$ for some $k' \in \bb N$, which means that $x \in E_n$ for all $n \ge k'$. It follows that $x \in E_n$ for all but finitely many $n$; that is, $x \in \varliminf_n E_n$.
+\end{solution}
+
+\subsubsection*{1.1.3}
+If $\sc R$ is a $\sigma$-ring and $E_n \in \sc R$, then
+\begin{equation*}
+  \bigcap_{n=1}^\infty E_n \in \sc R, \quad \varlimsup_n E_n \in \sc R, \quad \varliminf_n E_n \in \sc R.
+\end{equation*}
+
+\begin{solution}
+  Let $Y = \bigcup_{n=1}^\infty E_n$. Then $E_n \subset Y$ for all $Y$, and it follows that
+  \begin{equation*}
+    \bigcap_{n=1}^\infty E_n = Y \cap \left( \bigcap_{n=1}^\infty E_n \right) = Y - \left( Y - \bigcap_{n=1}^\infty E_n \right).
+  \end{equation*}
+  Notice that
+  \begin{equation*}
+    Y - \bigcap_{n=1}^\infty E_n = \bigcup_{n=1}^\infty (Y - E_n) \in \sc R,
+  \end{equation*}
+  by properties (b) and (e). (The equality is analogous to the identity (1.1.2), but with $Y$ in place of $X$.) Hence, applying (b) again, we find that
+  \begin{equation*}
+    \bigcap_{n=1}^\infty E_n = Y - \left( Y - \bigcap_{n=1}^\infty E_n \right) \in \sc R.
+  \end{equation*}
+  For later reference, let us call this result (x).
+
+  Given $k \in \bb N$, let $A_n = \varnothing$ for $n < k$, and let $A_n = E_n$ for $n \ge k$. Then $A_n \in \sc R$ for all $n$ by (a), hence
+  \begin{equation*}
+    \bigcup_{n=k}^\infty E_n = \bigcup_{n=1}^\infty A_n \in \sc R
+  \end{equation*}
+  by (e). It then follows by (x) that
+  \begin{equation*}
+    \varlimsup_n E_n = \bigcap_{k=1}^\infty \bigcup_{n=k}^\infty E_n \in \sc R.
+  \end{equation*}
+
+  By a similar argument we find that (x) implies
+  \begin{equation*}
+    \bigcap_{n=k}^\infty E_n \in \sc R
+  \end{equation*}
+  for all $k \in \bb N$. Hence
+  \begin{equation*}
+    \varliminf_n E_n = \bigcup_{k=1}^\infty \bigcap_{n=k}^\infty E_n \in \sc R
+  \end{equation*}
+  by (e).
+\end{solution}
+
+\subsubsection*{1.1.4}
+The intersection of any collection of rings (algebras, $\sigma$-rings, or $\sigma$-algebras) is also a ring (an algebra, $\sigma$-ring, or $\sigma$-algebra).
+
+\begin{solution}
+  Let $\sc C$ be a collection of classes. Let $\bigcap \sc C$ denote the intersection of all classes in $\sc C$. We will show that if one of the properties (a)-(e) is satisfied by all classes in $\sc C$, then $\bigcap \sc C$ satisfies that property as well. The result requested in the problem then follows as an immediate corollary.
+
+  It is clear that if every $\sc R \in \sc C$ satisfies (a), then so does $\bigcap \sc C$. Suppose every $\sc R \in \sc C$ satisfies (b). If $A,B \in \bigcap \sc C$ then $A,B \in \sc R$ for every $\sc R \in \sc C$. Hence $A - B \in \sc R$ for all $\sc R \in \sc C$, and it follows that $A - B \in \bigcap \sc C$. The argument for (c) is similar (with $A \cup B$ in place of $A - B$), and (d) is obvious.
+
+  Finally, suppose that every $\sc R \in \sc C$ satisfies (e). If $A_1, A_2, \dotsc \in \bigcap \sc C$ then $A_1, A_2, \dotsc \in \sc R$ for every $\sc R \in \sc C$. Hence $\bigcup_{n=1}^\infty A_n \in \sc R$ for all $\sc R \in \sc C$, and it follows that $\bigcup_{n=1}^\infty A_n \in \bigcap \sc C$.
+\end{solution}
+
+\subsubsection*{1.1.5}
+If $\sc D$ is any class of sets, then there exists a unique ring $\sc R_0$ such that (i) $\sc R_0 \supset \sc D$, and (ii) any ring $\sc R$ containing $\sc D$ contains also $\sc R_0$. $\sc R_0$ is called the \emph{ring generated} by $\sc D$, and is denoted by $\sc R(\sc D)$.
+
+\begin{solution}
+  Let $\sc R_0$ be the intersection of all rings containing $\sc D$. This is a ring by the previous exercise, and it satisfies the properties (i) and (ii). To see that it is unique, let $\sc R_0'$ also by a ring satisfying (i) and (ii). Then $\sc R_0 \subset \sc R_0'$ and $\sc R_0' \subset \sc R_0$ by property (ii), so $\sc R_0 = \sc R_0'$.
+\end{solution}
+
+\subsubsection*{1.1.6}
+If $\sc D$ is any class of sets, then there exists a unique $\sigma$-ring $\sc S_0$ such that (i) $\sc S_0 \supset \sc D$, and (ii) any $\sigma$-ring containing $\sc D$ contains also $\sc S_0$. We call $\sc S_0$ the \emph{$\sigma$-ring generated} by $\sc D$, and denote it by $\sc S(\sc D)$. A similar result holds for $\sigma$-algebras, and we speak of the \emph{$\sigma$-algebra generated} by $\sc D$.
+
+\begin{solution}
+  By the same argument as in the previous exercise, $\sc S_0$ is the intersection of all $\sigma$-rings containing $\sc D$. Similarly the $\sigma$-algebra generated by $\sc D$ is the intersection of all $\sigma$-algebras containing $\sc D$.
 \end{solution}
 
 \end{document}
