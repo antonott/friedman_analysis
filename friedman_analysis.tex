@@ -42,24 +42,27 @@
 \end{equation*}
 
 \begin{solution}
-  For the first identity, note that
+  Note that
   \begin{equation*}
     \begin{split}
-      x \in \left( \varliminf_n E_n \right)^c &\iff x \notin \varliminf_n E_n \\
-      &\iff \text{$x \notin E_n$ for infinitely many $n$} \\
-      &\iff \text{$x \in E_n^c$ for infinitely many $n$} \\
-      &\iff x \in \varlimsup_n E_n^c.
+      x \in \varliminf_n E_n &\iff \text{$x \in E_n$ for all but finitely many $n$} \\
+      &\iff \text{$x \in E_n^c$ for only finitely many $n$}.
     \end{split}
   \end{equation*}
-  For the second,
+  Hence
   \begin{equation*}
     \begin{split}
-      x \in \left( \varlimsup_n E_n \right)^c &\iff x \notin \varlimsup_n E_n \\
-      &\iff \text{$x \in E_n$ for finitely many $n$} \\
-      &\iff \text{$x \in E_n^c$ for all but finitely many $n$} \\
-      &\iff x \in \varliminf_n E_n^c.
+      x \in \left( \varliminf_n E_n \right)^c &\iff \text{$x \in E_n^c$ for infinitely many $n$} \\
+      &\iff x \in \varlimsup_n E_n^c,
     \end{split}
   \end{equation*}
+  proving the first identity.
+
+  Next, let $F_n = E_n^c$ for every $n$. Then
+  \begin{equation*}
+    \varlimsup_n E_n = \varlimsup_n F_n^c = \left( \varliminf_n F_n \right)^c = \left( \varliminf_n E_n^c \right)^c
+  \end{equation*}
+  by the first identity, and the second identity follows.
 \end{solution}
 
 \subsubsection{1.1.2}
@@ -84,7 +87,7 @@ If $\sc R$ is a $\sigma$-ring and $E_n \in \sc R$, then
 \end{equation*}
 
 \begin{solution}
-  Let $Y = \bigcup_{n=1}^\infty E_n$. Then $E_n \subset Y$ for all $Y$, and it follows that
+  Let $Y = \bigcup_{n=1}^\infty E_n \in \sc R$. Then $E_n \subset Y$ for all $Y$, and it follows that
   \begin{equation*}
     \bigcap_{n=1}^\infty E_n = Y \cap \left( \bigcap_{n=1}^\infty E_n \right) = Y - \left( Y - \bigcap_{n=1}^\infty E_n \right).
   \end{equation*}
@@ -92,11 +95,7 @@ If $\sc R$ is a $\sigma$-ring and $E_n \in \sc R$, then
   \begin{equation*}
     Y - \bigcap_{n=1}^\infty E_n = \bigcup_{n=1}^\infty (Y - E_n) \in \sc R,
   \end{equation*}
-  by properties (b) and (e). (The equality is analogous to the identity (1.1.2), but with $Y$ in place of $X$.) Hence, applying (b) again, we find that
-  \begin{equation*}
-    \bigcap_{n=1}^\infty E_n = Y - \left( Y - \bigcap_{n=1}^\infty E_n \right) \in \sc R.
-  \end{equation*}
-  For later reference, let us call this result (x).
+  by properties (b) and (e). (The equality is analogous to the identity (1.1.2), but with $Y$ in place of $X$.) It follows (by (b) again) that $\bigcap_{n=1}^\infty E_n \in \sc R$. For later reference, let us call this result (x).
 
   Given $k \in \bb N$, let $A_n = \varnothing$ for $n < k$, and let $A_n = E_n$ for $n \ge k$. Then $A_n \in \sc R$ for all $n$ by (a), hence
   \begin{equation*}
@@ -111,7 +110,7 @@ If $\sc R$ is a $\sigma$-ring and $E_n \in \sc R$, then
   \begin{equation*}
     \bigcap_{n=k}^\infty E_n \in \sc R
   \end{equation*}
-  for all $k \in \bb N$. Hence
+  for all $k \in \bb N$. Thus
   \begin{equation*}
     \varliminf_n E_n = \bigcup_{k=1}^\infty \bigcap_{n=k}^\infty E_n \in \sc R
   \end{equation*}
