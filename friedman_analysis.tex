@@ -248,11 +248,11 @@ Define $\mu^*(E)$ as the number of points in $E$ if $E$ is finite and $\mu^*(E) 
 
   Let $A$ and $B$ be sets. If either is infinite, then so is $A \cup B$, hence
   \begin{equation*}
-    \mu^*(A \cup B) = \infty = \mu(A) + \mu(B).
+    \mu^*(A \cup B) = \infty = \mu^*(A) + \mu^*(B).
   \end{equation*}
   If both $A$ and $B$ are finite sets, then
   \begin{equation*}
-    \mu^*(A \cup B) = \mu^*(A) + \mu^*(B - A) \le \mu(A) + \mu(B)
+    \mu^*(A \cup B) = \mu^*(A) + \mu^*(B - A) \le \mu^*(A) + \mu^*(B)
   \end{equation*}
   by basic set-theoretic considerations. Thus $\mu^*$ is subadditive, and finite subadditivity follows by induction on the number of sets in the union.
 
@@ -266,11 +266,11 @@ Define $\mu^*(E)$ as the number of points in $E$ if $E$ is finite and $\mu^*(E) 
   \end{equation*}
   by finite subadditivity. This proves that $\mu^*$ is countably subadditive, and hence that $\mu^*$ is an outer measure.
 
-  Note that $\mu^*$ is \emph{additive} on disjoint sets; if $A \cup B = \varnothing$, then $\mu^*(A \cup B) = \mu^*(A) + \mu^*(B)$. In particular,
+  Note that $\mu^*$ is \emph{additive} on disjoint sets; if $A \cap B = \varnothing$, then $\mu^*(A \cup B) = \mu^*(A) + \mu^*(B)$. In particular,
   \begin{equation*}
     \mu^*(A) = \mu^*(A \cap E) + \mu^*(A - E)
   \end{equation*}
-  for all sets $A, E$. That is, all sets (really subsets of $X$) are measurable.
+  for all sets $A, E$. That is, all sets are measurable.
 \end{solution}
 
 \subsubsection*{1.3.2}
@@ -291,7 +291,7 @@ Define $\mu^*(\varnothing) = 0$, $\mu^*(E) = 1$ if $E \ne \varnothing$. Show tha
   \begin{equation*}
     \mu^*(A \cap \varnothing) + \mu^*(A - \varnothing) = \mu^*(\varnothing) + \mu^*(A) = \mu^*(A)
   \end{equation*}
-  for all sets $A$. It follows by Theorem 1.3.1 that $X = \varnothing^c$ is measurable as well (the measurable sets make up a $\sigma$-algebra, and algebras are closed under conjugation). Indeed $\varnothing$ and $X$ are the only measurable sets. To see this, let $E$ be any set other than those two. Then both $E$ and $E^c$ are nonempty, so
+  for all sets $A$. It follows by Theorem 1.3.1 that $X$ is measurable as well (the measurable sets make up a $\sigma$-algebra). Indeed $\varnothing$ and $X$ are the only measurable sets. To see this, let $E$ be any set other than those two (this requires that $X$ contains at least two elements). Then both $E$ and $E^c$ are nonempty, so
   \begin{equation*}
     \mu^*(X \cap E) + \mu^*(X - E) = \mu^*(E) + \mu^*(E^c) = 2 > 1 = \mu^*(X).
   \end{equation*}
