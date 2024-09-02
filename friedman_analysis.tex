@@ -30,7 +30,7 @@
 
 \maketitle
 
-\chapter*{Chapter 1 -- Measure Theory}
+\chapter*{Chapter 1 -- Measure theory}
 
 \section*{Section 1.1 -- Rings and algebras}
 
@@ -295,6 +295,57 @@ Define $\mu^*(\varnothing) = 0$, $\mu^*(E) = 1$ if $E \ne \varnothing$. Show tha
   \begin{equation*}
     \mu^*(X \cap E) + \mu^*(X - E) = \mu^*(E) + \mu^*(E^c) = 2 > 1 = \mu^*(X).
   \end{equation*}
+\end{solution}
+
+
+\section*{Section 1.4 -- Construction of outer measures}
+
+\subsection*{Problems}
+
+\subsubsection*{1.4.4}
+If $\sc K$ is a $\sigma$-algebra and $\lambda$ is a measure on $\sc K$, then $\mu^*(A) = \lambda(A)$ for any $A \in \sc K$. [Hint: $\mu^*(A) = \inf \{\lambda(E); E \in \sc K, E \supset A\}$.]
+
+\begin{solution}
+  Note that the description of $\mu^*$ can be simplified when $\sc K$ is a $\sigma$-algebra and $\lambda$ is a measure. For suppose that $A \subset X$, $E_n \in \sc K \; (n = 1, 2, \dots$), and $A \subset \bigcup_n E_n$. Then $E := \bigcup_n E_n \in \sc K$, and $\lambda(E) \le \sum_n \lambda(E_n)$ by Theorem 1.2.2. Hence
+  \begin{equation*}
+    \mu^*(A) = \inf \{\lambda(E); E \in \sc K, E \supset A\}.
+  \end{equation*}
+
+  Now, suppose that $A \in \sc K$. Certainly $\lambda(A)$ is an element of $\{\lambda(E); E \in \sc K, E \supset A\}$. And if $E \in \sc K$ and $E \supset A$, then $\lambda(E) \ge \lambda(A)$ by Theorem 1.2.1(i). Thus
+  \begin{equation*}
+    \lambda(A) = \inf \{\lambda(E); E \in \sc K, E \supset A\} = \mu^*(A).
+  \end{equation*}
+\end{solution}
+
+\subsubsection*{1.4.5}
+If $\sc K$ is a $\sigma$-algebra and $\lambda$ is a measure on $\sc K$, then every set in $\sc K$ is $\mu^*$-measurable.
+
+\begin{solution}
+  Recall the simplified description of $\mu^*$ from the previous problem. Let $E \in \sc K$ and $A \subset X$. For every $\epsilon > 0$ there exists $F \in \sc K$ such that $F \supset A$ and
+  \begin{equation*}
+    \mu^*(A) + \epsilon > \lambda(F);
+  \end{equation*}
+  else $\mu^*(A)$ would not be the greatest lower bound of $\{\lambda(E); E \in \sc K, E \supset A\}$. Moreover,
+  \begin{equation*}
+    \lambda(F) = \lambda(F \cap E) + \lambda(F - E)
+  \end{equation*}
+  since $\lambda$ is a measure on $\sc K$,
+  \begin{equation*}
+    \lambda(F \cap E) + \lambda(F - E) = \mu^*(F \cap E) + \mu^*(F - E) 
+  \end{equation*}
+  by what we found in the previous exercise, and finally
+  \begin{equation*}
+    \mu^*(F \cap E) + \mu^*(F - E) \ge \mu^*(A \cap E) + \mu^*(A - E)
+  \end{equation*}
+  by monotonicity of the outer measure $\mu^*$. Putting all of this together, we have
+  \begin{equation*}
+    \mu^*(A) + \epsilon > \mu^*(A \cap E) + \mu^*(A - E)
+  \end{equation*}
+  for all $\epsilon > 0$, and thus
+  \begin{equation*}
+    \mu^*(A) \ge \mu^*(A \cap E) + \mu^*(A - E).
+  \end{equation*}
+  It follows that every set $E \in \sc K$ is $\mu^*$-measurable.
 \end{solution}
 
 \end{document}
