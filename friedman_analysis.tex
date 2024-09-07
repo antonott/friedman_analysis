@@ -20,7 +20,7 @@
 \theoremstyle{remark}
 \newtheorem*{solution}{Solution}
 
-% \setenumerate{listparindent=\parindent, parsep=0pt}
+\setenumerate{listparindent=\parindent, parsep=0pt}
 
 \title{Notes for \textit{Foundations of Modern Analysis} by Avner Friedman}
 \author{Anton Ottosson -- antonott@kth.se}
@@ -143,7 +143,7 @@ If $\sc D$ is any class of sets, then there exists a unique $\sigma$-ring $\sc S
 \end{solution}
 
 \subsubsection*{1.1.7}
-If $\sc D$ is any class of sets, then every set in $\sc R(\sc D)$ can be covered by (that is, is contained in) a finite union of sets of $\sc D$. [Hint: The class $\sc K$ of sets that can be covered by finite unions of sets of $\sc D$ forms a ring.]
+If $\sc D$ is any class of sets, then every set in $\sc R(\sc D)$ can be covered by (that is, is contained in) a finite union of sets of $\sc D$. [\emph{Hint:} The class $\sc K$ of sets that can be covered by finite unions of sets of $\sc D$ forms a ring.]
 
 \begin{solution}
   Let $\sc K$ be the class of all sets that can be covered by a finite union of sets in $\sc D$. Certainly $\varnothing \in \sc K$, since $\varnothing$ is a subset of the empty union. If $A, B \in \sc K$, then
@@ -303,7 +303,7 @@ Define $\mu^*(\varnothing) = 0$, $\mu^*(E) = 1$ if $E \ne \varnothing$. Show tha
 \subsection*{Problems}
 
 \subsubsection*{1.4.4}
-If $\sc K$ is a $\sigma$-algebra and $\lambda$ is a measure on $\sc K$, then $\mu^*(A) = \lambda(A)$ for any $A \in \sc K$. [Hint: $\mu^*(A) = \inf \{\lambda(E); E \in \sc K, E \supset A\}$.]
+If $\sc K$ is a $\sigma$-algebra and $\lambda$ is a measure on $\sc K$, then $\mu^*(A) = \lambda(A)$ for any $A \in \sc K$. [\emph{Hint:} $\mu^*(A) = \inf \{\lambda(E); E \in \sc K, E \supset A\}$.]
 
 \begin{solution}
   Note that the description of $\mu^*$ can be simplified when $\sc K$ is a $\sigma$-algebra and $\lambda$ is a measure. For suppose that $A \subset X$, $E_n \in \sc K \; (n = 1, 2, \dots$), and $A \subset \bigcup_n E_n$. Then $E := \bigcup_n E_n \in \sc K$, and $\lambda(E) \le \sum_n \lambda(E_n)$ by Theorem 1.2.2. Hence
@@ -346,6 +346,175 @@ If $\sc K$ is a $\sigma$-algebra and $\lambda$ is a measure on $\sc K$, then eve
     \mu^*(A) \ge \mu^*(A \cap E) + \mu^*(A - E).
   \end{equation*}
   It follows that every set $E \in \sc K$ is $\mu^*$-measurable.
+\end{solution}
+
+
+\section*{Section 1.6 -- The Lebesgue and the Lebesgue-Stieltjes measures}
+
+\subsection*{Problems}
+
+\subsubsection*{1.6.3}
+The outer Lebesgue measure of a closed bounded interval $[a,b]$ on the real line is equal to $b-a$. [\emph{Hint:} Use the Heine-Borel theorem to replace a countable covering by a finite covering.]
+
+\begin{solution}
+  Suppose $(E_n)$ is a sequence of elements of $\sc K$ (i.e.\ a sequence of open intervals) such that $[a,b] \subset \bigcup_{n=1}^\infty E_n$. The collection $\{E_n\}$ constitutes an \emph{open cover} of $[a,b]$. By the Heine-Borel theorem $[a,b]$ is compact, hence there exists a \emph{finite subcover} $\{E_{n_1}, \dots, E_{n_k}\}$, such that $[a,b] \subset \bigcup_{i=1}^k E_{n_i}$.
+
+  Assume without loss of generality that $E_{n_i} \cap [a,b] \ne \varnothing$ for all $i$; otherwise we can simply remove those $E_{n_i}$ that are disjoint with $[a,b]$ and still have a finite subcover. Write $E_{n_i} = (a_i, b_i)$ for each $i$, and define
+  \begin{equation*}
+    \alpha = \min\{a_1, \dots, a_k\}, \quad \beta = \max\{b_1, \dots, b_k\}.
+  \end{equation*}
+  It is clear that $\alpha$ and $\beta$ are the infimum and supremum, respectively, of $\bigcup_{i=1}^k E_{n_i}$. Note that $\alpha = a_j$ for some $j$, and $a_j < a < b_j$ since $E_{n_j}$ and $[a,b]$ have nonempty intersection. Thus $(\alpha, a] \subset \bigcup_{i=1}^k E_{n_i}$, and similarly $[b, \beta) \subset \bigcup_{i=1}^k E_{n_i}$. It follows that
+  \begin{equation*}
+    \bigcup_{i=1}^k E_{n_i} = (\alpha, \beta) \in \sc K.
+  \end{equation*}
+
+  Finally note that $\lambda$ is finitely subadditive. (This is easily proven with induction.) Thus,
+  \begin{equation*}
+    \sum_{n=1}^\infty \lambda(E_n) \ge \sum_{i=1}^k \lambda(E_{n_i}) \ge \lambda\left[ (\alpha, \beta) \right] = \beta - \alpha > b - a.
+  \end{equation*}
+  It follows that $b - a$ is a lower bound of the set
+  \begin{equation*}
+    \Lambda([a,b]) := \left\{ \sum_{n=1}^\infty \lambda(E_n); \, E_n \in \sc K, \, \bigcup_{n=1}^\infty E_n \supset [a,b] \right\}.
+  \end{equation*}
+  Moreover, for every $\epsilon > 0$ we have
+  \begin{equation*}
+    [a,b] \subset \left( a - \frac{\epsilon}{2}, b + \frac{\epsilon}{2} \right) \in \sc K
+  \end{equation*}
+  and
+  \begin{equation*}
+    \lambda \left[ \left( a - \frac{\epsilon}{2}, b + \frac{\epsilon}{2} \right) \right] = b - a + \epsilon.
+  \end{equation*}
+  Hence $b - a$ is the \emph{greatest} lower bound of $\Lambda([a,b])$, and $\mu^*([a,b]) = b - a$.
+\end{solution}
+
+\subsubsection*{1.6.4}
+The outer Lebesgue measure of each of the intervals $(a,b), [a,b), (a,b]$ is equal to $b-a$.
+
+\begin{solution}
+  Recall that $\mu^*$ is monotone, on account of being an outer measure. Hence $\mu^*[(a,b)] \le \mu^*([a,b]) = b - a$, the latter equality being the result of the previous problem. Moreover, for all $\epsilon \in (0, b-a)$ we have
+  \begin{equation*}
+    \left( a + \frac{\epsilon}{2}, b - \frac{\epsilon}{2} \right) \subset (a,b),
+  \end{equation*}
+  so that
+  \begin{equation*}
+    \mu^*[(a,b)] \ge \mu^* \left[ \left( a + \frac{\epsilon}{2}, b - \frac{\epsilon}{2} \right) \right] = b - a + \epsilon.
+  \end{equation*}
+  Thus $\mu^*[(a,b)] \ge b - a$, and it follows that $\mu^*[(a,b)] = b - a$.
+
+  The outer measures of $[a,b)$ and $(a,b]$ follow immediately by monotonicity:
+  \begin{equation*}
+    \mu^*[(a,b)] \le \mu^*([a,b)) \le \mu^*([a,b]),
+  \end{equation*}
+  so that $\mu^*([a,b)) = b - a$. Similarly for $(a,b]$.
+\end{solution}
+
+\subsubsection*{1.6.5}
+Consider the transformation $T x = \alpha x + \beta$ from the real line onto itself, where $\alpha, \beta$ are real numbers and $\alpha \ne 0$. It maps sets $E$ onto sets $T(E)$. Denote by $\mu$ ($\mu^*$) the Lebesgue measure (outer measure) on the real line. Prove
+\begin{enumerate}[label=(\alph*)]
+  \item For any set $E$, $\mu^*(T(E)) = |\alpha| \mu^*(E)$.
+  \item $E$ is Lebesgue-measurable if and only if $T(E)$ is Lebesgue-measureable.
+  \item If $E$ is Lebesgue-measurable, then $\mu(T(E)) = |\alpha| \mu(E)$.
+\end{enumerate}
+
+\begin{solution}
+  Let us start with a couple of simple observations:
+  \begin{itemize}
+    \item $T$ is bijective, with inverse given by
+      \begin{equation*}
+        T^{-1}(x) = \frac{x - \beta}{\alpha}.
+      \end{equation*}
+    \item Suppose $I = (a,b)$. Then
+      \begin{equation*}
+        T(I) = (\alpha a + \beta, \alpha b + \beta)
+      \end{equation*}
+      if $\alpha > 0$, and
+      \begin{equation*}
+        T(I) = (\beta b + \beta, \alpha a + \beta)
+      \end{equation*}
+      if $\alpha < 0$. Either way,
+      \begin{equation*}
+        \mu^*[T(I)] = |\alpha| (b - a) = |\alpha| \mu^*(I),
+      \end{equation*}
+      where we have used one of the results of the previous exercise. Similarly, $T^{-1}(I)$ is an open interval and
+      \begin{equation*}
+        \mu^*[T^{-1}(I)] = |\alpha|^{-1} \mu^*(I).
+      \end{equation*}
+      Of course, the latter two identities still hold if $I = \varnothing$. Hence they hold for all $I \in \sc K$.
+  \end{itemize}
+  Also, let us use the notation
+  \begin{equation*}
+    \Lambda(E) = \left\{ \sum_{n=1}^\infty \lambda(I_n); \, I_n \in \sc K, \, \bigcup_{n=1}^\infty I_n \supset E \right\}
+  \end{equation*}
+  for all $E \subset \bb R$.
+
+  \begin{enumerate}[label=(\alph*)]
+    \item Suppose $(I_n)$ is a sequence in $\sc K$ (i.e.\ a sequence of open intervals) and $E \subset \bigcup_n I_n$. Then $T(I_n) \in \sc K$ for every $n$,
+      \begin{equation*}
+        T(E) \subset T \left( \bigcup_n I_n \right) = \bigcup_n T(I_n),
+      \end{equation*}
+      and
+      \begin{equation*}
+        \sum_n \lambda[T(I_n)] = |\alpha| \sum_n \lambda(I_n).
+      \end{equation*}
+      Thus, if $s \in \Lambda(E)$, then $|\alpha| s \in \Lambda[T(E)]$. It follows that
+      \begin{equation*}
+        \mu^*[T(E)] = \inf \Lambda[T(E)] \le |\alpha| \inf \Lambda(E) = |\alpha| \mu^*(E).
+      \end{equation*}
+
+      Conversely, suppose $(J_n)$ is a sequence in $\sc K$ and $T(E) \subset \bigcup_n J_n$. Then $T^{-1}(F_n) \in \sc K$ for all $n$,
+      \begin{equation*}
+        E = T^{-1}[T(E)] \subset T^{-1} \left( \bigcup_n J_n \right) = \bigcup_n T^{-1}(J_n),
+      \end{equation*}
+      and
+      \begin{equation*}
+        \sum_n \lambda[T^{-1}(J_n)] = |\alpha|^{-1} \sum_n \lambda(J_n).
+      \end{equation*}
+      Hence, by the same logic as above, we find that $\mu^*(E) \le |\alpha|^{-1} \mu^*[T(E)]$, and it follows that
+      \begin{equation*}
+        \mu^*[T(E)] = |\alpha| \mu^*(E).
+      \end{equation*}
+
+    \item Note that if $f: X \to Y$ is a bijective function (between arbitrary sets $X,Y$), then
+      \begin{equation*}
+        \begin{split}
+          f^{-1}[f(A)] &= A, \\
+          f(A \cup B) &= f(A) \cup f(B), \\
+          f(A - B) &= f(A) - f(B), \\
+          f[f^{-1}(C)] &= C, \\
+        \end{split}
+      \end{equation*}
+      for all $A, B \subset X$ and $C \subset Y$.
+
+      Suppose that $E$ is measureable:
+      \begin{equation*}
+        \mu^*(A) = \mu^*(A \cap E) + \mu^*(A - E)
+      \end{equation*}
+      for all $A \subset \bb R$. Then, for all $B \subset \bb R$, we have
+      \begin{equation*}
+        \begin{split}
+          \mu^*[B \cap T(&E)] + \mu^*[B - T(E)] \\
+          &= \mu^*[T(T^{-1}(B) \cap E)] + \mu^*[T(T^{-1}(B) - E)] \\
+          &= |\alpha| \mu^*[T^{-1}(B) \cap E] + |\alpha| \mu^*[T^{-1}(B) - E] \\
+          &= |\alpha| \mu^*[T^{-1}(B)] \\
+          &= \mu^*(B),
+        \end{split}
+      \end{equation*}
+      so that $T(E)$ is measurable.
+
+      Conversely, suppose that $T(E)$ is measurable. Then, for all $A \subset \bb R$,
+      \begin{equation*}
+        \begin{split}
+          \mu^*(A \cap E&) + \mu^*(A - E) \\
+          &= \mu^*[T^{-1}(T(A) \cap T(E))] + \mu^*[T^{-1}(T(A) - T(E))] \\
+          &= |\alpha|^{-1} \mu^*[T(A) \cap T(E)] + |\alpha|^{-1} \mu^*[T(A) - T(E)] \\
+          &= |\alpha|^{-1} \mu^*[T(A)] \\
+          &= \mu^*(A),
+        \end{split}
+      \end{equation*}
+      so that $E$ is measurable.
+
+    \item This is immediate given (a), (b), and the definition of the Lebesgue-measure. First, $T(E)$ is Lebesgue-measurable by (b). Next, $\mu(E) = \mu^*(E)$ and $\mu[T(E)] = \mu^*[T(E)]$ since $\mu$ is simply the restriction of $\mu^*$ to the measurable sets. Finally, $\mu^*[T(E)] = |\alpha| \mu^*(E)$ by (a).
+  \end{enumerate}
 \end{solution}
 
 \end{document}
