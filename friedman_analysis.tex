@@ -368,7 +368,7 @@ The outer Lebesgue measure of a closed bounded interval $[a,b]$ on the real line
     \bigcup_{i=1}^k E_{n_i} = (\alpha, \beta) \in \sc K.
   \end{equation*}
 
-  Finally note that $\lambda$ is finitely subadditive. (This is easily proven with induction.) Thus,
+  Finally note that $\lambda$ is finitely subadditive. (This is easily proven with induction.) (TODO: This is not convincing; use better proof from Rosenthal notes.) Thus,
   \begin{equation*}
     \sum_{n=1}^\infty \lambda(E_n) \ge \sum_{i=1}^k \lambda(E_{n_i}) \ge \lambda\left[ (\alpha, \beta) \right] = \beta - \alpha > b - a.
   \end{equation*}
@@ -461,7 +461,7 @@ Consider the transformation $T x = \alpha x + \beta$ from the real line onto its
         \mu^*[T(E)] = \inf \Lambda[T(E)] \le |\alpha| \inf \Lambda(E) = |\alpha| \mu^*(E).
       \end{equation*}
 
-      Conversely, suppose $(J_n)$ is a sequence in $\sc K$ and $T(E) \subset \bigcup_n J_n$. Then $T^{-1}(F_n) \in \sc K$ for all $n$,
+      Conversely, suppose $(J_n)$ is a sequence in $\sc K$ and $T(E) \subset \bigcup_n J_n$. Then $T^{-1}(J_n) \in \sc K$ for all $n$,
       \begin{equation*}
         E = T^{-1}[T(E)] \subset T^{-1} \left( \bigcup_n J_n \right) = \bigcup_n T^{-1}(J_n),
       \end{equation*}
@@ -515,6 +515,264 @@ Consider the transformation $T x = \alpha x + \beta$ from the real line onto its
 
     \item This is immediate given (a), (b), and the definition of the Lebesgue-measure. First, $T(E)$ is Lebesgue-measurable by (b). Next, $\mu(E) = \mu^*(E)$ and $\mu[T(E)] = \mu^*[T(E)]$ since $\mu$ is simply the restriction of $\mu^*$ to the measurable sets. Finally, $\mu^*[T(E)] = |\alpha| \mu^*(E)$ by (a).
   \end{enumerate}
+\end{solution}
+
+\chapter*{Chapter 2 -- Integration}
+
+\section*{Section 2.1 -- Definition of Measurable Functions}
+
+\subsection*{Problems}
+
+\subsubsection*{2.1.6}
+The \emph{characteristic function} of a set $E$ is the function $\chi_E$ defined by
+\begin{equation*}
+  \chi_E(x) =
+  \begin{cases}
+    1, & \text{if $x \in E$,} \\
+    0, & \text{if $x \notin E$.}
+  \end{cases}
+\end{equation*}
+Prove that the set $E$ is measurable if and only if the function $\chi_E$ is measurable.
+
+\begin{solution}
+  Suppose $E \in \cal A$. For all $c \in \bb R$,
+  \begin{equation*}
+    \chi_E^{-1}\{(-\infty, c)\} = \{x \in X; \chi_E(x) < c\} =
+    \begin{cases}
+      \varnothing & (c \le 0), \\
+      E^c & (0 < c \le 1), \\
+      X & (c > 1),
+    \end{cases}
+  \end{equation*}
+  so that $\chi_E^{-1}\{(-\infty, c)\} \in \cal A$. By Theorem 2.1.1, $\chi_E$ is measurable.
+
+  Conversely, suppose $\chi_E$ is measurable. Then $E$ is measurable, since
+  \begin{equation*}
+    E = X - E^c = \chi^{-1}\{(-\infty, 2)\} - \chi^{-1}\{(-\infty, 1)\}.
+  \end{equation*}
+\end{solution}
+
+\subsubsection*{2.1.9}
+If $f$ is measurable, then $|f|$ and $|f|^2$ are measurable.
+
+\begin{solution}
+  If $c \le 0$, then
+  \begin{equation*}
+    (|f|)^{-1}\{(-\infty, c)\} = (|f|^2)^{-1}\{(-\infty, c)\} = \emptyset \in \cal A,
+  \end{equation*}
+  since $|f|$ and $|f|^2$ are nonnegative functions.
+  
+  Let $c > 0$. Then
+  \begin{equation*}
+    (|f|)^{-1}\{(-\infty, c)\} = \{x \in X; -c < f(x) < c\} = f^{-1}\{(-c,c)\}.
+  \end{equation*}
+  The set $(-c,c)$ is open, hence $f^{-1}\{(-c,c)\} \in \cal A$ by the measurability of $f$. Similarly,
+  \begin{equation*}
+    (|f|^2)^{-1}\{(-\infty, c)\} = f^{-1}\{(-\sqrt c, \sqrt c)\} \in \cal A.
+  \end{equation*}
+
+  Finally,
+  \begin{equation*}
+    (|f|)^{-1}\{+\infty\} = (|f|^2)^{-1}\{+\infty\} = f^{-1}\{+\infty\} \cup f^{-1}\{-\infty\} \in \cal A
+  \end{equation*}
+  by the measurability of $f$, and
+  \begin{equation*}
+    (|f|)^{-1}\{-\infty\} = (|f|^2)^{-1}\{-\infty\} = \emptyset \in \cal A
+  \end{equation*}
+  since $|f|$ and $|f|^2$ are nonnegative. Thus, both $|f|$ and $|f|^2$ are measurable by Theorem 2.1.1.
+\end{solution}
+
+\subsubsection*{2.1.10}
+A monotone function defined on the real line is Lebesgue-measurable.
+
+\begin{solution}
+  Let $f$ be a monotone increasing extended real-valued function on $\bb R$;
+  \begin{equation*}
+    (\forall x,y \in \bb R): \quad x < y \implies f(x) \le f(y).
+  \end{equation*}
+  Given any $c \in \bb R$, let
+  \begin{equation*}
+    \xi_c = \inf \{x \in X; f(x) \ge c\}.
+  \end{equation*}
+  We need to consider two cases: $f(\xi_c) < c$ and $f(\xi_c) \ge c$. In the former case, $f(x) < c$ for all $x \le \xi_c$ and $f(x) \ge c$ for all $x > \xi_c$ (by monotonicity). Hence
+  \begin{equation*}
+    f^{-1}\{(-\infty,c)\} = (-\infty, \xi_c].
+  \end{equation*}
+  This is a Borel set, hence also a Lebesgue set (see Problem 1.9.3). In the latter case, $f(x) < c$ for all $x < \xi_c$ and $f(x) \ge c$ for all $x \ge \xi_c$, so that
+  \begin{equation*}
+    f^{-1}\{(-\infty,c)\} = (-\infty, \xi_c),
+  \end{equation*}
+  which is Lebesgue-measurable. Since $c$ was arbitrary, we conclude that $f$ is measurable, by Theorem 2.1.1.
+
+  The proof for $f$ monotone decreasing is similar.
+\end{solution}
+
+\section*{Section 2.2 -- Operations on Measurable Functions}
+
+\subsection*{Problems}
+
+\subsubsection*{2.2.2}
+Let $g(u_1, \dots, u_k)$ be a continuous function in $\bb R^k$, and let $\varphi_1, \dots, \varphi_k$ be measurable functions. Prove that the composite function $h(x) = g[\varphi_1(x), \dots, \varphi_k(x)]$ is a measurable function. Note that as a special case we may conclude that
+\begin{equation*}
+  \max(\varphi, \dots, \varphi_n) \quad \text{and} \quad \min(\varphi, \dots, \varphi_n)
+\end{equation*}
+are measurable functions.
+
+\begin{solution}
+  We will use the following fact, which may be proven in a course in topology:
+  \begin{quote}
+    $\bb R^k$ has a countable basis of product open subsets. Hence, if $U$ is an open subset of $\bb R^k$, then there are open subsets $U_{ni} \subset \bb R$ for $n = 1, 2, \dots$ and $i = 1, \dots, k$ such that
+    \begin{equation*}
+      U = \bigcup_{n=1}^\infty (U_{n1} \times \dots \times U_{nk}).
+    \end{equation*}
+  \end{quote}
+
+  We are assuming that $g$ is real-valued, likewise for the functions $\varphi_i$. Let $c \in \bb R$. Note that $g^{-1}\{(-\infty,c)\}$ is open by continuity of $g$. Thus
+  \begin{equation*}
+    g^{-1}\{(-\infty,c)\} = \bigcup_{n=1}^\infty (U_{n1} \times \dots \times U_{nk})
+  \end{equation*}
+  for some open subsets $U_{ni} \subset \bb R$. Hence
+  \begin{equation*}
+    \begin{split}
+      h^{-1}\{(-\infty,c)\} &= \{x \in X; g(\varphi_1(x), \dots, \varphi_k(x)) \le c\} \\
+      &= \{x \in X; (\varphi_1(x), \dots, \varphi_k(x)) \in g^{-1}\{(-\infty,c)\}\} \\
+      &= \bigcup_{n=1}^\infty \{x \in X; (\varphi_1(x), \dots, \varphi_k(x)) \in U_{n1} \times \dots \times U_{nk}\} \\
+      &= \bigcup_{n=1}^\infty \bigcap_{i=1}^k \{x \in X; \varphi_i(x) \in U_{ni}\} \\
+      &= \bigcup_{n=1}^\infty \bigcap_{i=1}^k \varphi_i^{-1}(U_{ni}).
+    \end{split}
+  \end{equation*}
+  The sets $\varphi_i(U_{ni})$ are measurable since the functions $\varphi_i$ are measurable. It follows that $h^{-1}\{(-\infty,c)\}$ is measurable, and thus that $h$ is measurable, by Theorem 2.1.1.
+
+  To apply the above to the $\max$ and $\min$ functions $\bb R^k \to \bb R$ we must show that they are continuous. Let $a < b$ and note that
+  \begin{equation*}
+    \begin{split}
+      {\max}^{-1}\{(a,b)\} &= \{(x_1, \dots, x_k) \in \bb R^k; \text{$x_i > a$ for some $i$}\} \\
+      &\quad \cap \{(x_1, \dots, x_k) \in \bb R^k; \text{$x_i < b$ for all $i$}\}.
+    \end{split}
+  \end{equation*}
+  Both sets in the above binary intersection are easily seen to be open by considering $\epsilon$-neighborhoods about their points. It follows that $\max^{-1}(U)$ is open for all open subsets $U \in \bb R^k$, since every such $U$ can be written as a countable union of open intervals. Thus $\max$ is continuous, and one similarly shows that $\min$ is continuous.
+\end{solution}
+
+\subsubsection*{2.2.3}
+Let $f(x)$ be a measurable function and define
+\begin{equation*}
+  g(x) =
+  \begin{cases}
+    \frac{1}{f(x)}, & \text{if $f(x) \ne 0$,} \\
+    0, & \text{if $f(x) = 0$.}
+  \end{cases}
+\end{equation*}
+Prove that $g$ is measurable.
+
+\begin{solution}
+  For $c < 0$,
+  \begin{equation*}
+    g^{-1}\{(-\infty,c)\} = \{x; 1/f(x) < c\} = \{x; 1/c < f < 0\} = f^{-1}\{(1/c, 0)\},
+  \end{equation*}
+  which is measurable by the measurability of $f$. Next,
+  \begin{equation*}
+    g^{-1}\{(-\infty,0)\} = \{x; 1/f(x) < 0\} = \{x; f(x) < 0\} = f^{-1}\{(-\infty, 0)\},
+  \end{equation*}
+  also measurable. Note that if we take the natural convention (unfortunately not addressed in the text) that $x/(\pm \infty) = 0$ for all $x \in \bb R$, then
+  \begin{equation*}
+    g^{-1}(\{0\}) = \{x; f(x) = 0\} \cup \{x; f(x) = \pm \infty\} = f^{-1}(\{0\}) \cup f^{-1}(\{\pm \infty\}).
+  \end{equation*}
+  Hence, for $c > 0$,
+  \begin{equation*}
+    \begin{split}
+      g^{-1}\{(-\infty,c)\} &= g^{-1}\{(-\infty,0)\} \cup g^{-1}(\{0\}) \cup g^{-1}\{(0,c)\} \\
+      &= f^{-1}\{(-\infty, 0)\} \cup f^{-1}(\{0\}) \cup f^{-1}(\{\pm \infty\}) \cup f^{-1}\{(1/c, \infty)\} \\
+      &= f^{-1}\{(-\infty, 0]\} \cup f^{-1}(\{\pm \infty\}) \cup f^{-1}\{(1/c, \infty)\},
+    \end{split}
+  \end{equation*}
+  which is measurable by the measurability of $f$ (see Problem 2.1.4). Finally, $g^{-1}(\{\pm \infty\}) = \emptyset$, and it follows by Theorem 2.1.1 that $g$ is measurable.
+\end{solution}
+
+\section*{Section 2.3 -- Egoroff's Theorem}
+
+\subsection*{Problems}
+
+\subsubsection*{2.3.2}
+Let $\{f_n\}$ be a sequence of measurable functions in a finite measure space $X$. Suppose that for almost every $x$, $\{f_n(x)\}$ is a bounded set. Then for any $\epsilon > 0$ there exist a positive number $c$ and a measurable set $E$ with $\mu(X - E) < \epsilon$, such that $|f_n(x)| \le c$ for all $x \in E$, $n = 1,2, \dots$.
+
+\begin{solution}
+  The definition we have for `bounded set' applies to metric spaces, and it does not make much sense here since the functions $f_n$ may be extended real-valued. Hence we will assume that `$\{f_n(x)\}$ is a bounded set' means that $\sup_n |f_n(x)| < \infty$.
+
+  Let $g = \sup_n |f_n|$, and note that $g$ is measurable by Problem 2.1.9 and Theorem 2.2.3. Let $F = \{x; \, g(x) < \infty\}$. Notice that $g(x) < \infty$ if and only if $\{f_n(x)\}$ is bounded. Hence $\mu(X - F) = 0$.
+
+  For $k = 1,2,\dots$, define $F_k = \{x; \, g(x) \le k\}$. Then $F_1 \subset F_2 \subset \dotsm$ and $\lim_k F_k = \bigcup_{k=1}^\infty F_k = F$.  By Theorem 1.2.1(iv),
+  \begin{equation*}
+    \lim_k \mu(X - F_k) = \mu(X - F) = 0.
+  \end{equation*}
+  Given any $\epsilon > 0$, there exists a positive integer $K$ such that $\mu(X - F_k) < \epsilon$ for all $k \ge K$. In particular $\mu(X - F_K) < \epsilon$, and $g(x) \le K$ for all $x \in F_K$, which means that $|f_n(x)| \le K$ for all $x \in F_K$.
+\end{solution}
+
+\section*{Section 2.4 -- Convergence in Measure}
+
+\subsection*{Problems}
+
+\subsubsection*{2.4.3}
+Prove the following result (which immediately yields another proof of Corollary 2.4.2): Let $f_n$ ($n = 1,2,\dots$) and $f$ be a.e.\ real-valued measurable functions in a finite measure space. For any $\epsilon > 0$, $n \ge 1$, let
+\begin{equation*}
+  E_n(\epsilon) = \{x; \, |f_n(x) - f(x)| \ge \epsilon\}.
+\end{equation*}
+Then $\{f_n\}$ converges a.e.\ to $f$ if and only if
+\begin{equation*}
+  \lim_{n \to \infty} \mu \left[ \bigcup_{m=n}^\infty E_m(\epsilon) \right] = 0 \quad \text{for any $\epsilon > 0$.} \tag{2.4.2}
+\end{equation*}
+[\emph{Hint:} Let $F = \{x; \, \text{$\{f_n(x)\}$ is not convergent to $f(x)$}\}$. Then \\ $F = \bigcup_{k=1}^\infty \varlimsup_n E_n(1/k)$. Show that $\mu(F) = 0$ if and only if (2.4.2) holds.]
+
+\begin{solution}
+  Define
+  \begin{equation*}
+    F = \bigcup_{k=1}^\infty \varlimsup_n E_n \left( \frac{1}{k} \right) = \bigcup_{k=1}^\infty \bigcap_{n=1}^\infty \bigcup_{m=n}^\infty E_m \left( \frac{1}{k} \right).
+  \end{equation*}
+  Note that
+  \begin{equation*}
+    \begin{split}
+      x \in F &\iff \exists k, \forall n, \exists m \ge n, \, |f_m(x) - f(x)| \ge \frac{1}{k} \\
+      &\iff \neg \left( \forall k, \exists n, \forall m \ge n, \, |f_m(x) - f(x)| < \frac{1}{k} \right) \\
+      &\iff f_n(x) \not\to f(x),
+    \end{split}
+  \end{equation*}
+  so that
+  \begin{equation*}
+    F = \{x; \, f_n(x) \not\to f(x)\}.
+  \end{equation*}
+
+  Suppose (2.4.2) holds. Fix $\delta > 0$. For every positive integer $k$, there exists a positive integer $n_k$ such that $n \ge n_k$ implies
+  \begin{equation*}
+    \mu \left[ \bigcup_{m=n}^\infty E_m \left( \frac{1}{k} \right) \right] < \frac{\delta}{2^k}.
+  \end{equation*}
+  By subadditivity and monotonicity,
+  \begin{equation*}
+    \begin{split}
+      \mu(F) &= \mu \left[ \bigcup_{k=1}^\infty \bigcap_{n=1}^\infty \bigcup_{m=n}^\infty E_m \left( \frac{1}{k} \right) \right] \le \sum_{k=1}^\infty \mu \left[ \bigcap_{n=1}^\infty \bigcup_{m=n}^\infty E_m \left( \frac{1}{k} \right) \right] \\
+      &\le \sum_{k=1}^\infty \mu \left[ \bigcup_{m=n_k}^\infty E_m \left( \frac{1}{k} \right) \right] < \sum_{k=1}^\infty \frac{\delta}{2^k} = \delta.
+    \end{split}
+  \end{equation*}
+  Since $\delta$ was arbitrary, $\mu(F) = 0$, and it follows that $f_n \to f$ a.e.
+
+  Conversely, suppose $f_n \to f$ a.e., so that $\mu(F) = 0$. By monotonicity and Theorem 1.2.2,
+  \begin{equation*}
+    0 = \mu(F) = \mu \left[ \bigcup_{k=1}^\infty \varlimsup_n E_n \left( \frac{1}{k} \right) \right] \ge \mu \left[ \varlimsup_n E_n \left( \frac{1}{l} \right) \right] \ge \varlimsup_n \mu \left[ E_n \left( \frac{1}{l} \right) \right]
+  \end{equation*}
+  for all positive integers $l$. But of course $\varlimsup_n \mu \left[ E_n \left( 1/l \right) \right] \ge \varliminf_n \mu \left[ E_n \left( 1/l \right) \right] \ge 0$ since $\mu$ is nonnegative, so $\lim_n \mu \left[ E_n \left( 1/l \right) \right]$ exists and is equal to zero. Note that the sets $\bigcup_{m=n}^\infty E_m(1/l)$ are decreasing, so their limit as $n \to \infty$ exists. Hence we can apply Corollary 1.2.3 and monotonicity to find that
+  \begin{equation*}
+    \begin{split}
+      \lim_n \mu \left[ \bigcup_{m=n}^\infty E_m \left( \frac{1}{l} \right) \right] &= \mu \left[ \lim_n \bigcup_{m=n}^\infty E_m \left( \frac{1}{l} \right) \right] = \mu \left[ \bigcap_{n=1}^\infty \bigcup_{m=n}^\infty E_m \left( \frac{1}{l} \right) \right] \\
+      &\le \mu \left[\bigcup_{k=1}^\infty \bigcap_{n=1}^\infty \bigcup_{m=n}^\infty E_m \left( \frac{1}{k} \right) \right] = \mu(F) = 0.
+    \end{split}
+  \end{equation*}
+  Finally, given $\epsilon > 0$, note that
+  \begin{equation*}
+    E_n(\epsilon) \subset E_n \left( \frac{1}{\lceil 1/\epsilon \rceil} \right).
+  \end{equation*}
+  Hence
+  \begin{equation*}
+    \lim_n \mu \left[ \bigcup_{m=n}^\infty E_m(\epsilon) \right] \le \lim_n \mu \left[ \bigcup_{m=n}^\infty E_m \left( \frac{1}{\lceil 1/\epsilon \rceil} \right) \right] \le 0
+  \end{equation*}
+  by monotonicity, and (2.4.2) follows.
 \end{solution}
 
 \end{document}
