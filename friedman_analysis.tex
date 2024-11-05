@@ -775,4 +775,71 @@ Then $\{f_n\}$ converges a.e.\ to $f$ if and only if
   by monotonicity, and (2.4.2) follows.
 \end{solution}
 
+
+\section*{Section 2.5 -- Integrals of Simple Functions}
+
+\subsection*{Problems}
+
+\subsubsection*{2.5.2}
+An integrable simple function $f$ is equal a.e.\ to zero if and only if $\int_E f d\mu = 0$ for any measurable set $E$.
+
+\begin{solution}
+  Let $f$ be an integrable simple function. Then $f$ can be written in the form
+  \begin{equation*}
+    f = \sum_{i=1}^n \alpha_i \chi_{E_i},
+  \end{equation*}
+  for mutually disjoint sets $E_1, \dots E_n$, with all $\alpha_i \ne 0$, and all $\mu(E_i) < \infty$.
+
+  Suppose $f = 0$ a.e., and let $E$ be any measurable set. By Theorem 2.5.1(b) and (g),
+  \begin{equation*}
+    0 \le \int_E f d\mu \le \int f d\mu = \sum_{i=1}^n \alpha_i \mu(E_i).
+  \end{equation*}
+  But $\mu(E_i) = 0$ since $f = 0$ a.e., so $\int_E f d\mu = 0$.
+
+  Conversely, suppose $\int_E f d\mu = 0$ for all measurable sets $E$. Then
+  \begin{equation*}
+    \alpha_i \mu(E_i) = \int_{E_i} f d\mu = 0,
+  \end{equation*}
+  so that $\mu(E_i) = 0$, for all $i \in \{1,\dots,n\}$. It follows that $f = 0$ a.e.
+\end{solution}
+
+\section*{Section 2.6 -- Definition of the Integral}
+
+\subsection*{Problems}
+
+\subsubsection*{2.6.3}
+Let $f$ be a measurable function. Prove that $f$ is integrable if and only if $f^+$ and $f^-$ are integrable, or if and only if $|f|$ is integrable.
+
+\begin{solution}
+  Let $f$ be measurable. We must prove the equivalence of the following statements:
+  \begin{enumerate}[label=(\roman*)]
+    \item $f$ is integrable.
+    \item $f^+$ and $f^-$ are integrable.
+    \item $|f|$ is integrable.
+  \end{enumerate}
+  We will first show that (iii)$\implies$(ii), then that (ii)$\implies$(i), and finally that (i)$\implies$(iii).
+
+  Suppose that $|f|$ is integrable. Let $E = \{x; \, f(x) \ge 0\} = f^{-1}{[0,\infty)}$, and note that $E$ is measurable since $f$ is. There exists a Cauchy in the mean sequence $(g_n)$ of integrable simple functions converging to $|f|$ a.e., and the sequence $(\chi_E g_n)$ is easily seen to satisfy the corresponding properties with respect to $f^+$. Since $f^+$ is measurable by Problem 2.1.8, this implies that it is integrable. The proof that $f^-$ is integrable is similar.
+
+  Next, suppose that $f^+$ and $f^-$ are integrable. Then there exist Cauchy in the mean sequences $(g_n)$ and $(h_n)$ of integrable simple functions converging a.e.\ to $f^+$ and $f^-$, respectively. Define a new sequence $(f_n)$ of integrable simple functions by $f_n = g_n - h_n$. Then $(f_n)$ is Cachy in the mean, since
+  \begin{equation*}
+    |f_n - f_m| = |g_n - h_n - g_m + h_m| \le |g_n - g_m| + |h_n - h_m|.
+  \end{equation*}
+  It also converges to $f$ a.e.\, since
+  \begin{equation*}
+    |f_n - f| = |g_n - h_n - f^+ + f^-| \le |g_n - f^+| + |h_n - f^-|.
+  \end{equation*}
+  It follows that $f$ is integrable.
+
+  Finally, assume that $f$ is integrable. There is a Cauchy in the mean sequence $(f_n)$ of integrable simple functions converging to $f$ a.e. The sequence $(|f_n|)$ consists of integral simple functions. It is Cauchy in the mean since
+  \begin{equation*}
+    ||f_n| - |f_m|| \le |f_n - f_m|,
+  \end{equation*}
+  and it converges to $|f|$ a.e.\ since
+  \begin{equation*}
+    ||f_n| - |f|| \le |f_n - f|.
+  \end{equation*}
+  Since $|f|$ is measurable by Problem 2.1.9, it follows that $|f|$ is integrable.
+\end{solution}
+
 \end{document}
