@@ -934,7 +934,20 @@ Let $X, \rho, \hat \rho$ be as in Problem 3.1.1. Prove that $\rho(x_n, x) \to 0$
   \begin{equation*}
     \hat \rho(x_n, x) < \frac{\epsilon}{1 + \epsilon} \quad (n \ge N).
   \end{equation*}
-  Substituting the definition of $\hat \rho$ and rearranging yields $\rho(x_n, x) \le \epsilon$.
+  Substituting the definition of $\hat \rho$ and rearranging yields $\rho(x_n, x) < \epsilon$.
+
+  If $\rho$ and $\hat \rho$ are equivalent then, in particular, there exists a positive constant $\beta$ such that
+  \begin{equation*}
+    \frac{\rho(x,y)}{\hat \rho(x,y)} \le \beta
+  \end{equation*}
+  whenever $x \ne y$. But
+  \begin{equation*}
+    \frac{\rho(x,y)}{\hat \rho(x,y)} = 1 + \rho(x,y),
+  \end{equation*}
+  so this is impossible if $X$ is unbounded (w.r.t.\ $\rho$), say if $X = \bb R^n$ and $\rho$ is the Euclidean metric.
 \end{solution}
+
+\subsubsection*{3.1.6}
+
 
 \end{document}
