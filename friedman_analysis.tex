@@ -775,6 +775,16 @@ Then $\{f_n\}$ converges a.e.\ to $f$ if and only if
   by monotonicity, and (2.4.2) follows.
 \end{solution}
 
+\subsubsection*{2.4.4}
+Let $X$ be the set of all positive integers, $\cal A$ the class of all subsets of $X$, and $\mu(E)$ (for any $E \in \cal A$) the number of points in $E$. Prove that in this measure space, convergence in measure is equivalent to uniform convergence.
+
+\begin{solution}
+  Uniform convergence always implies convergence in measure. Conversely, suppose $(f_n)$ converges in measure to $f$. Given any $\epsilon > 0$, there exists a positive integer $N$ such that $n \ge N$ implies
+  \begin{equation*}
+    \mu \left[ \{x; \, |f_n(x) - f(x)| \ge \epsilon\} \right] < 1.
+  \end{equation*}
+  That is, for $n \ge N$ the set $\{x; \, |f_n(x) - f(x)| \ge \epsilon\}$ is empty, which in particular means that $\sup_x |f_n(x) - f(x)| \le \epsilon$. It follows that $f_n \to f$ uniformly.
+\end{solution}
 
 \section*{Section 2.5 -- Integrals of Simple Functions}
 
@@ -831,7 +841,7 @@ Let $f$ be a measurable function. Prove that $f$ is integrable if and only if $f
   \end{equation*}
   It follows that $f$ is integrable.
 
-  Finally, assume that $f$ is integrable. There is a Cauchy in the mean sequence $(f_n)$ of integrable simple functions converging to $f$ a.e. The sequence $(|f_n|)$ consists of integral simple functions. It is Cauchy in the mean since
+  Finally, assume that $f$ is integrable. There is a Cauchy in the mean sequence $(f_n)$ of integrable simple functions converging to $f$ a.e. The sequence $(|f_n|)$ consists of integrable simple functions. It is Cauchy in the mean since
   \begin{equation*}
     ||f_n| - |f_m|| \le |f_n - f_m|,
   \end{equation*}
@@ -840,6 +850,52 @@ Let $f$ be a measurable function. Prove that $f$ is integrable if and only if $f
     ||f_n| - |f|| \le |f_n - f|.
   \end{equation*}
   Since $|f|$ is measurable by Problem 2.1.9, it follows that $|f|$ is integrable.
+\end{solution}
+
+\subsubsection*{2.6.4}
+Let $X$ be the measure space described in Problem 2.4.4. Then $f$ is integrable if and only if the series $\sum_{n=1}^\infty |f(n)|$ is convergent. If $f$ is integrable, then
+\begin{equation*}
+  \int f \, d\mu = \sum_{n=1}^\infty f(n).
+\end{equation*}
+
+\begin{solution}
+  Suppose $f$ is integrable. Then there is a Cauchy in the mean sequence $(f_n)$ of integrable simple functions converging to $f$ a.e. We saw in the previous problem that this implies that $|f|$ is integrable, and that $(|f_n|)$ is a Cauchy in the mean sequence of integrable simple functions converging to $|f|$ a.e. Note that in this particular space convergence a.e.\ is the same as convergence everywhere (since the only subset with measure zero is $\emptyset$).
+
+  By Theorem 2.5.1(h),
+  \begin{equation*}
+    \int |f_n| \, d\mu = \sum_{i=1}^\infty \int_{\{i\}} |f_n| \, d\mu = \sum_{i=1}^\infty |f_n(i)|.
+  \end{equation*}
+  Hence, in particular,
+  \begin{equation*}
+    \int |f| \, d\mu = \lim_{n \to \infty} \sum_{i=1}^\infty |f_n(i)|.
+  \end{equation*}
+
+  Given any positive integer $m$, there exists $n'$ such that
+  \begin{equation*}
+    {|f(i) - f_{n'}(i)|} < 1/m \quad (i = 1, 2, \dots, m)
+  \end{equation*}
+  (since $f_n \to f$) and
+  \begin{equation*}
+    \left| \sum_{i=1}^\infty |f_{n'}(i)| - \int |f| \, d\mu \right| < 1
+  \end{equation*}
+  (since $\sum_i |f_n(i)| \to \int |f| \, d\mu$). Thus
+  \begin{equation*}
+    \sum_{i=1}^m |f(i)| \le \sum_{i=1}^m |f(i) - f_{n'}(i)| + \sum_{i=1}^m |f_{n'}(i)| < 1 + \sum_{i=1}^\infty |f_{n'}(i)| < 2 + \int |f| \, d\mu,
+  \end{equation*}
+  and it follows that the series $\sum_{i=1}^\infty |f(i)|$ converges (to a finite number).
+
+  Conversely, assume that the series $\sum_{i=1}^\infty |f(i)|$ converges. Define a sequence of integrable simple functions $(g_n)$ by
+  \begin{equation*}
+    g_n = \sum_{i=1}^n f(i) \chi_{\{i\}}.
+  \end{equation*}
+  It is clear that $g_n \to f$ everywhere. Moreover, if $m > n$, then
+  \begin{equation*}
+    \int |g_m - g_n| \, d\mu = \int \left| \sum_{i=n+1}^m f(i) \chi_{\{i\}} \right| d\mu = \sum_{n+1}^m |f(i)| \le \sum_{n+1}^\infty |f(i)|.
+  \end{equation*}
+  The right-hand side goes to zero as $n \to \infty$ since $\sum_{i=1}^\infty |f(i)|$ is convergent, which means that $\int |g_m - g_n| \, d\mu \to 0$ as $n,m \to \infty$; i.e., $(g_n)$ is Cauchy in the mean. It follows that $f$ is integrable, with
+  \begin{equation*}
+    \int f \, d\mu = \lim_{n \to \infty} \int g_n \, d\mu = \lim_{n \to \infty} \sum_{i=1}^n f(i) = \sum_{i=1}^\infty f(i).
+  \end{equation*}
 \end{solution}
 
 \end{document}
