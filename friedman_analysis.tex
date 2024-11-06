@@ -903,4 +903,38 @@ Let $X$ be the measure space described in Problem 2.4.4. Then $f$ is integrable 
 
 \section*{Section 3.1 -- Topological and Metric Spaces}
 
+\subsection*{Problems}
+
+\subsubsection*{3.1.1}
+Prove that if $(X,p)$ is a metric space, and if
+\begin{equation*}
+  \hat \rho(x,y) = \frac{\rho(x,y)}{1 + \rho(x,y)},
+\end{equation*}
+then also $(X,\hat \rho)$ is a metric space. [\emph{Hint:} Cf.\ the proof of (3.1.3).]
+
+\begin{solution}
+  The only nonobvious property is the triangle inequality. Let $x,y,z$ be arbitrary points of $X$. Since $t \mapsto t/(1+t)$ is monotone increasing on $[0,\infty)$, and since $\rho(x,z) \le \rho(x,y) + \rho(y,z)$, we have
+  \begin{equation*}
+    \frac{\rho(x,z)}{1 + \rho(x,z)} \le \frac{\rho(x,y) + \rho(y,z)}{1 + \rho(x,y) + \rho(y,z)}.
+  \end{equation*}
+  Moreover, by equation (3.1.3),
+  \begin{equation*}
+    \frac{\rho(x,y) + \rho(y,z)}{1 + \rho(x,y) + \rho(y,z)} \le \frac{\rho(x,y)}{1 + \rho(x,y)} + \frac{\rho(y,z)}{1 + \rho(y,z)}.
+  \end{equation*}
+  It follows that $\hat \rho(x,z) \le \hat \rho(x,y) + \rho(y,z)$.
+\end{solution}
+
+\subsubsection*{3.1.2}
+Let $X, \rho, \hat \rho$ be as in Problem 3.1.1. Prove that $\rho(x_n, x) \to 0$ if and only if $\hat \rho(x_n, x) \to 0$. Give an example showing that $\rho$ and $\hat \rho$ are not equivalent in general.
+
+\begin{solution}
+  It is clear that $\rho(x_n, x) \to 0$ implies $\hat \rho (x_n, x) \to 0$, since $\hat \rho \le \rho$.
+  
+  Conversely, suppose $\hat \rho(x_n, x) \to 0$. Given any $\epsilon > 0$, there is a positive integer $N$ such that
+  \begin{equation*}
+    \hat \rho(x_n, x) < \frac{\epsilon}{1 + \epsilon} \quad (n \ge N).
+  \end{equation*}
+  Substituting the definition of $\hat \rho$ and rearranging yields $\rho(x_n, x) \le \epsilon$.
+\end{solution}
+
 \end{document}
