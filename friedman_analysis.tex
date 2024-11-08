@@ -948,6 +948,40 @@ Let $X, \rho, \hat \rho$ be as in Problem 3.1.1. Prove that $\rho(x_n, x) \to 0$
 \end{solution}
 
 \subsubsection*{3.1.6}
+Prove that the spaces $l^1, s, c, c_0$ are separable metric spaces.
 
+\begin{solution}
+  For each of the spaces $X$ we will take an arbitrary element $x \in X$ and demonstrate that every $\epsilon$-ball around $x$ contains a point $y$ of a certain countable subset $Y \subset X$. It will then follow that $Y$ is dense in $X$, and hence that $X$ is separable.
+
+  Let $x = (x_i) \in l^1$. Fix $\epsilon > 0$. Since $\sum_i |x_i| < \infty$, there exists $n$ such that
+  \begin{equation*}
+    \sum_{i=n+1}^\infty |x_i| < \frac{\epsilon}{2}.
+  \end{equation*}
+  For $i = 1, \dots, n$, choose $y_i \in \bb Q$ (or $y_i$ with rational real and imaginary parts in the complex case) such that $|x_i - y_i| < \epsilon/2n$, and let $y = (y_1, \dots, y_n, 0, 0, \dots)$. Then
+  \begin{equation*}
+    \rho(x,y) = \sum_{i=1}^n |x_i - y_i| + \sum_{i=n+1}^\infty |x_i| < \epsilon.
+  \end{equation*}
+  Moreover, $y$ is an element of the subset of $l^1$ consisting of sequences with rational components, with only finitely many being nonzero. This subset is easily seen to be countable, and it follows that $l^1$ is separable.
+
+  Next, let $x = (x_i) \in s$, and fix $\epsilon > 0$. Choose $n$ such that
+  \begin{equation*}
+    \sum_{i=n+1}^\infty \frac{1}{2^i} \frac{|x_i|}{1 + |x_i|} < \frac{\epsilon}{2}.
+  \end{equation*}
+  For $i = 1, \dots, n$, choose $y_i \in \bb Q$ such that $|x_i - y_i| < \epsilon/2$, and let $y = (y_1, \dots, y_n, 0, 0, \dots)$. Then
+  \begin{equation*}
+    \rho(x,y) = \sum_{i=1}^n \frac{1}{2^i} \frac{|x_i - y_i|}{1 + |x_i - y_i|} + \sum_{i=n+1}^\infty \frac{1}{2^i} \frac{|x_i|}{1 + |x_i|} < \epsilon.
+  \end{equation*}
+  Similarly to the above, it follows that $s$ is dense.
+
+  Finally, let $x = (x_i) \in c$. (This argument will also cover $c_0$.) Let $\xi = \lim_i x_i$ and fix $\epsilon > 0$. Choose $n$ such that $|x_i - \xi| < \epsilon/2$ for all $i \ge n$. For $i = 1, \dots, n-1$, choose $y_i \in \bb Q$ such that $|x_i - y_i| < \epsilon$. Also choose $\eta \in \bb Q$ such that $|\xi - \eta| < \epsilon/2$ (take $\eta = \xi = 0$ in the $c_0$ case), so that
+  \begin{equation*}
+    |x_i - \eta| \le |x_i - \xi| + |\xi - \eta| < \epsilon
+  \end{equation*}
+  for all $i \ge n$. Let $y = (y_1, \dots, y_{n-1}, \eta, \eta, \dots)$. Then
+  \begin{equation*}
+    \rho(x,y) = \sup_i |x_i - y_i| \le \epsilon.
+  \end{equation*}
+  It follows that $c$ is separable (and $c_0$ as well).
+\end{solution}
 
 \end{document}
