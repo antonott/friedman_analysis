@@ -984,4 +984,176 @@ Prove that the spaces $l^1, s, c, c_0$ are separable metric spaces.
   It follows that $c$ is separable (and $c_0$ as well).
 \end{solution}
 
+\subsubsection*{3.1.10}
+If $\rho(x_n, x) \to 0$, $\rho(y_n, y) \to 0$, then $\rho(x_n, y_n) \to \rho(x,y)$.
+
+\begin{solution}
+  The triangle inequality yields
+  \begin{equation*}
+    \rho(x_n,y_n) \le \rho(x_n, x) + \rho(x, y) + \rho(y, y_n)
+  \end{equation*}
+  and
+  \begin{equation*}
+    \rho(x,y) \le \rho(x, x_n) + \rho(x_n, y_n) + \rho(y_n, y).
+  \end{equation*}
+  Hence
+  \begin{equation*}
+    |\rho(x_n, y_n) - \rho(x,y)| \le \rho(x_n, x) + \rho(y_n, y),
+  \end{equation*}
+  and the result follows.
+\end{solution}
+
+\section*{Section 3.2 -- $L^p$ Spaces}
+
+\subsection*{Problems}
+
+\subsubsection*{3.2.4}
+Prove that $l^p$ is separable if $1 \le p < \infty$.
+
+\begin{solution}
+  The argument is of the same sort as in Problem 3.1.6. Given $x = (x_i) \in l^p$ ($1 \le p < \infty$) and $\epsilon > 0$, choose $n$ such that
+  \begin{equation*}
+    \sum_{i=n+1}^\infty |x_i|^p < \frac{\epsilon^p}{2}.
+  \end{equation*}
+  (This is possible since $\sum_i |x_i|^p < \infty$ for $x \in l^p$.) For $i = 1, \dots, n$, choose $y_i \in \bb Q$ such that $|x_i - y_i|^p < \epsilon^p / 2n$ and let $y = (y_1, \dots, y_n, 0, 0, \dots)$. Then $\norm{x-y}_p < \epsilon$, and the conclusion follows as in Problem 3.1.6.
+\end{solution}
+
+\subsubsection*{3.2.5}
+Prove that $l^p$ is not a metric space if $0 < p < 1$.
+
+\begin{solution}
+  Let $x = (1,0,0,\dots)$, $y = (0,0,\dots)$, $z = (0,1,0,0,\dots)$. Then
+  \begin{equation*}
+    \norm{x-z}_p = 2^{1/p}
+  \end{equation*}
+  while
+  \begin{equation*}
+    \norm{x-y}_p + \norm{y-z}_p = 2.
+  \end{equation*}
+  But $2^{1/p} > 2$ if $0 < p < 1$, so the triangle inequality does not hold.
+\end{solution}
+
+\subsubsection*{3.2.6}
+Prove that the space $C[a,b]$ with the metric
+\begin{equation*}
+  \rho(f,g) = \int_a^b |f(t) - g(t)| \, dt
+\end{equation*}
+is not a complete metric space.
+
+\begin{solution}
+  Note that the integral defining $\rho$ is guaranteed to exist by Theorem 2.11.1 and the extreme value theorem from elementary analysis, and it can be taken in the Riemann sense. It is easily seen that $\rho$ is indeed a metric. 
+
+  For simplicity, let us assume $a = 0$ and $b = 1$. (The general argument is identical modulo a coordinate transformation.) Define a sequence of functions in $C[0,1]$ by $f_n(x) = x^n$. Clearly $(f_n)$ converges pointwise to the discontinuous function
+  \begin{equation*}
+    f(x) =
+    \begin{cases}
+      0 & (0 \le x < 1), \\
+      1 & (x = 1).
+    \end{cases}
+  \end{equation*}
+  For $n \le m$ we have $f_n \ge g_n$, hence
+  \begin{equation*}
+    \rho(f_n, f_m) = \int_0^1 f_n(t) \, dt - \int_0^1 f_m(t) \, dt = \frac{1}{n+1} - \frac{1}{m+1},
+  \end{equation*}
+  which goes to zero as $n,m \to \infty$. Thus $(f_n)$ is a Cauchy sequence in $C[0,1]$ which converges to a function $f$ which is not in $C[0,1]$, so $(C[0,1], \rho)$ is not a complete metric space.
+\end{solution}
+
+\section*{Section 3.4 -- Complete Metric Spaces}
+
+\subsection*{Problems}
+
+\subsubsection*{3.4.5}
+A set $Y$ in a metric space $X$ is said to be \emph{of the first category in $X$} if it is contained in a countable union of nowhere dense sets of $X$. If $Y$ is not of the first category in $X$, then it is said to be \emph{of the second category in $X$}. The real line with the Euclidean metric is a space of the second category. Prove, however, that, as a subset of the Euclidean plane, the real line is a set of the first category.
+
+\begin{solution}
+  We identify the real line with the subset $L = \{(x,y) \in \bb R^2: y = 0\}$, with the induced metric topology. Indeed $L$ is homeomorphic to $\bb R$ via the map $(x,0) \mapsto x$, as can easily be shown.
+
+  The sets of the form $B((0,0), r) \cap L = \{(x,0): |x| < r\}$ are easily seen to be nowhere dense in $\bb R^2$, and we have
+  \begin{equation*}
+    L = \bigcup_{n=1}^\infty B((0,0), n) \cap L.
+  \end{equation*}
+  Hence $L$ is of the first category in $\bb R^2$.
+\end{solution}
+
+\subsubsection*{3.4.7}
+Let $f(x)$ be a real-valued function on the real line. Prove that there is a nonempty interval $(a,b)$ and a positive number $c$ such that for any $x \in (a,b)$ there is a sequence $\{x_n\}$ such that $x_n \to x$ and $|f(x_n)| \le c$.
+
+\begin{solution}
+  Note that
+  \begin{equation*}
+    \bb R = |f|^{-1}(\bb R) = |f|^{-1} \left( \bigcup_{n=1}^\infty (-\infty,n] \right) = \bigcup_{n=1}^\infty |f|^{-1} \left( (-\infty,n] \right).
+  \end{equation*}
+  Since $\bb R$ is of the second category (by Theorem 3.4.2), the sets $|f|^{-1}((-\infty,n])$ cannot all be nowhere dense. Hence there is a positive integer $c$ such that the closure of $|f|^{-1}((-\infty,c])$ has nonempty interior. On account of being a nonempty open set, this interior contains an open interval $(a,b)$.
+
+  Let $x \in (a,b)$. Then, since $x$ is contained in the closure of $|f|^{-1}((-\infty,c])$, every neighborhood of $x$ contains a point of $|f|^{-1}((-\infty,c])$. It follows that we can construct a sequence $(x_n)$ in $|f|^{-1}((-\infty,c])$ converging to $x$, and this sequence will satisfy $|f(x_n)| \le c$ for all $n$.
+\end{solution}
+
+\section*{Section 3.5 -- Compact Metric Spaces}
+
+\subsection*{Problems}
+
+\subsubsection*{3.5.4}
+A subset $F$ of a compact metric space is compact if and only if it is closed.
+
+\begin{solution}
+  Let $X$ be a compact metric space, and $F$ a subset of $X$. If $F$ is compact then it is also closed by Corollary 3.5.5.
+
+  Conversely, suppose that $F$ is closed. Let $\sc C$ be any open cover of $F$. The collection $\sc C \cup \{X - F\}$ is an open cover of $X$, hence it has a finite subcover, consisting of some sets $E_1, \dots, E_n \in \sc C$ and perhaps $\{X - F\}$. The sets $E_1, \dots, E_n$ cover $F$, hence $F$ is compact.
+\end{solution}
+
+\subsubsection*{3.5.5}
+A subset $Y$ of a metric space is totally bounded if and only if its closure $\overline Y$ is totally bounded.
+
+\begin{solution}
+  Clearly $Y$ is totally bounded whenever $\overline Y$ is. Conversely, suppose $Y$ is totally bounded, and let $\epsilon > 0$ be given. Then $Y$ admits a finite $\epsilon/2$-covering,
+  \begin{equation*}
+    \{B(x_1, \epsilon/2), \dots, B(x_n, \epsilon/2)\}.
+  \end{equation*}
+  The union of the closed balls,
+  \begin{equation*}
+    \bigcup_{i=1}^n \overline B(x_i, \epsilon/2),
+  \end{equation*}
+  is a closed set containing $Y$, hence it contains $\overline Y$. It follows that
+  \begin{equation*}
+    \overline Y \subset \bigcup_{i=1}^n \overline B(x_i, \epsilon/2) \subset \bigcup_{i=1}^n B(x_i, \epsilon),
+  \end{equation*}
+  so $\overline Y$ admits a finite $\epsilon$-covering.
+\end{solution}
+
+\subsubsection*{3.5.6}
+The intersection of any number of compact subsets of a metric space is a compact space.
+
+\begin{solution}
+  Let $\sc C$ be a collection of compact subsets of a metric space $X$. By Corollary 3.5.5 each $C \in \sc C$ is closed, hence the intersection $K = \bigcap \sc C$ is closed as well. Let $C'$ be some particular member of $\sc C$. Then $K$ is a closed subset of the compact space $C'$, thus itself compact by Problem 3.5.4.
+
+  Remark: Really the above shows that $K$ is compact \emph{in $C'$}. However, one easily proves the general result that if $F$ is compact in $G$, and $G$ is compact in $H$, then $F$ is compact in $H$. Hence $K$ is indeed compact in $X$.
+\end{solution}
+
+\subsubsection{3.5.8}
+Show that a metric space is compact if and only if it has the following property: for every collection of closed subsets $\{F_\alpha\}$, if any finite subcollection has nonempty intersection, then the whole collection has a nonempty intersection.
+
+\begin{solution}
+  The wording of the problem is potentially misleading. Replace ``any'' with ``every'' to make it nonambiguous. Also, let us introduce some useful terminology. A collection of subsets of a topological space is said to have the \emph{finite intersection property} iff every finite subcollection has nonempty intersection. Our task is therefore to show that a metric space $X$ is compact iff every collection $\sc F$ of closed subsets of $X$ having the finite intersection property has nonempty intersection. However, the proof we will use is valid for general topological spaces, not just metric spaces.
+
+  Let $X$ be a topological space, and suppose first that $X$ is compact. Let $\sc F$ be a collection of closed subsets of $X$ with the finite intersection property. Assume towards a contradiction that $\bigcap \sc F = \emptyset$. Then
+  \begin{equation*}
+    \bigcup_{F \in \sc F} (X - F) = X - \bigcap_{F \in \sc F} F = X,
+  \end{equation*}
+  so $\{X - F; \, F \in \sc F\}$ is an open cover of $X$. Since $X$ is compact, there are sets $F_1, \dots, F_n \in \sc F$ such that
+  \begin{equation*}
+    X = \bigcup_{i=1}^n (X - F_i) = X - \bigcap_{i=1}^n F_i.
+  \end{equation*}
+  But then $\bigcap_{i=1}^n F_i = \emptyset$, contradicting the hypothesis that $\sc F$ has the finite intersection property. We conclude that $\bigcap \sc F \ne \emptyset$.
+
+  Conversely, suppose that $X$ has the property described in the problem statement: every collection of closed subsets of $X$ with the finite intersection property has nonempty intersection. Let $\sc U$ be any open cover of $X$, and assume towards a contradiction that $\sc U$ has no finite subcover. Then
+  \begin{equation*}
+    \bigcap_{i=1}^n (X - U_i) = X - \bigcup_{i=1}^n U_i \ne \emptyset
+  \end{equation*}
+  for every finite subcollection $\{U_1, \dots, U_n\} \subset \sc U$. Hence $\sc F = \{X - U; \, U \in \sc U\}$ is a collection of closed subsets with the finite intersection property. By hypothesis $\sc F$ has nonempty intersection, so
+  \begin{equation*}
+    \emptyset = X - \bigcup_{U \in \sc U} U = \bigcap_{U \in \sc U} (X - U) = \bigcap_{F \in \sc F} F \ne \emptyset,
+  \end{equation*}
+  a contradiction. We conclude that $\sc U$ does indeed have a finite subcover, and that $X$ is compact.
+\end{solution}
+
 \end{document}
