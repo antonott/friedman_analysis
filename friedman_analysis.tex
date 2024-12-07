@@ -9,6 +9,7 @@
 
 \newcommand{\bb}[1]{\mathbb{#1}}
 \newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\snorm}[1]{\left\lVert #1 \right\rVert}
 \newcommand{\brac}[1]{\langle #1 \rangle}
 
 \let\sc\relax
@@ -1154,6 +1155,222 @@ Show that a metric space is compact if and only if it has the following property
     \emptyset = X - \bigcup_{U \in \sc U} U = \bigcap_{U \in \sc U} (X - U) = \bigcap_{F \in \sc F} F \ne \emptyset,
   \end{equation*}
   a contradiction. We conclude that $\sc U$ does indeed have a finite subcover, and that $X$ is compact.
+\end{solution}
+
+
+\chapter*{Chapter 4 -- Elements of Functional Analysis in Banach Spaces}
+
+\section*{Section 4.1 -- Linear Normed Spaces}
+
+\subsection*{Problems}
+
+\subsubsection*{4.1.4}
+If $\{x_n\}$ is a convergent sequence in a normed linear space, with limit $x$, then also the sequence with elements $(x_1 + \dots + x_n)/n$ is convergent to $x$.
+
+\begin{solution}
+  For $n=1,2,\dots$, define
+  \begin{equation*}
+    \sigma_n = \frac{x_1 + \dots + x_n}{n} = \frac{1}{n} \sum_{i=1}^n x_i.
+  \end{equation*}
+  Let $\epsilon > 0$ be given. Since $(x_n)$ is convergent there exists a positive integer $m$ such that $\norm{x_n - x} < \epsilon/2$ for all $n \ge m+1$. For such $n$ we have
+  \begin{equation*}
+    \begin{split}
+      \norm{\sigma_n - x} &= \snorm{\frac{1}{n} \sum_{i=1}^n (x_i - x)} \\
+      &\le \frac{1}{n} \snorm{\sum_{i=1}^m (x_i - x)} + \frac{1}{n} \snorm{\sum_{i=m+1}^n (x_i - x)} \\
+      &\le \frac{1}{n} \snorm{\sum_{i=1}^m (x_i - x)} + \frac{1}{n} \sum_{i=m+1}^n \norm{x_i - x} \\
+      &\le \frac{1}{n} \snorm{\sum_{i=1}^m (x_i - x)} + \frac{n-m-1}{n} \cdot \frac{\epsilon}{2}.
+    \end{split}
+  \end{equation*}
+  The first term on the right-hand side goes to zero as $n \to \infty$, and the other goes to $\epsilon/2$. Hence $\norm{\sigma_n - x} < \epsilon$ for sufficiently large $n$, and it follows that $\sigma_n \to x$.
+\end{solution}
+
+\subsubsection*{4.1.6}
+A normed linear space is a Banach space if the following property is satisfied: every absolutely convergent series is convergent.
+
+\begin{solution}
+  Let $X$ be a normed linear space with the property that every absolutely convergent series is convergent. Let $(x_n)$ be a Cauchy sequence in $X$, and choose integers $N_1 < N_2 < \dotsm$ such that $m,n \ge N_k$ implies $\norm{x_m - x_n} < 2^{-k}$. Define a new sequence $(y_k)$ by $y_1 = x_{N_1}$ and $y_k = x_{N_k} - x_{N_{k-1}}$ for $k > 1$. Then
+  \begin{equation*}
+    \sum_{k=1}^\infty \norm{y_k} = \norm{x_{N_1}} + \sum_{k=2}^\infty \norm{x_{N_k} - x_{N_{k-1}}} \le \norm{x_{N_1}} + \sum_{k=1}^\infty 2^{-k} = \norm{x_{N_1}} + 1.
+  \end{equation*}
+  It follows by our hypothesis on $X$ that
+  \begin{equation*}
+    x_{N_k} = \sum_{i=1}^k y_i
+  \end{equation*}
+  converges to some $x \in X$. Given $\epsilon > 0$, choose an integer $j \ge 1$ such that $2^{-j} < \epsilon$, and $k > j$ such that
+  \begin{equation*}
+    \norm{x_{N_k} - x} < \epsilon - 2^{-j}.
+  \end{equation*}
+  Then, for all $n \ge N_k$,
+  \begin{equation*}
+    \norm{x_n - x} \le \norm{x_n - x_{N_k}} + \norm{x_{N_k} - x} < 2^{-k} + \epsilon - 2^{-j} < \epsilon.
+  \end{equation*}
+  We conclude that every Cauchy sequence in $X$ is convergent, and hence that $X$ is a Banach space.
+\end{solution}
+
+\section*{Section 4.2 -- Subspaces and Bases}
+
+\subsection*{Problems}
+
+\subsubsection*{4.2.6}
+If a linear vector space is infinite-dimensional, then there exist on it norms that are not equivalent. [\emph{Hint:} Let $\{y_\alpha\}$ be a Hamel basis and define norms by $\norm{x}^2 = \sum_{\alpha} c_\alpha |\lambda_\alpha|^2$, where $x$ has the form (4.2.2) and $c_\alpha$ are positive numbers.]
+
+\begin{solution}
+  Let $\{y_\alpha\}_{\alpha \in I}$ be a Hamel basis for an infinite-dimensional linear space $X$. For every $x = \sum_{\alpha \in I} \lambda_\alpha y_\alpha$, define
+  \begin{equation*}
+    \norm{x}_1 = \left( \sum_{\alpha \in I} |\lambda_\alpha|^2 \right)^{1/2}.
+  \end{equation*}
+  Then $\norm{\phantom x}_1$ is easily seen to be a norm on $X$.
+
+  Let $\{\alpha_i\}_{i=1}^\infty$ be a countable subset of the index set $I$. Define a set $\{c_\alpha\}_{\alpha \in I}$ of positive constants by $c_{\alpha_i} = 2^{-i}$ for $i = 1,2,\dots$, and $c_{\alpha} = 1$ for $\alpha \notin \{\alpha_i\}$. Define another norm $\norm{\phantom x}_2$ by
+  \begin{equation*}
+    \norm{x}_2 = \left( \sum_{\alpha \in I} c_\alpha |\lambda_\alpha|^2 \right)^{1/2},
+  \end{equation*}
+  for $x = \sum_{\alpha \in I} \lambda_\alpha y_\alpha$.
+
+  To see that these two norms are not equivalent, note that
+  \begin{equation*}
+    \norm{y_{\alpha_i}}_2^2 = c_{\alpha_i} = 2^{-i} = 2^{-i} \norm{y_{\alpha_i}}_1^2
+  \end{equation*}
+  for all $i$. Hence there exists no $\beta > 0$ such that $\norm{x}_1 \le \beta \norm{x}_2$ for all $x \in X$.
+\end{solution}
+
+\section*{Section 4.3 -- Finite-Dimensional Normed Linear Spaces}
+
+\subsection*{Problems}
+
+\subsubsection*{4.3.1}
+Let $X$ be a finite-dimensional linear space. Then any two norms on $X$ are equivalent. (According to Problem 4.2.6, the assertion is false if $X$ is infinite-dimensional.)
+
+\begin{solution}
+  Let $e_1, \dots, e_n$ be a basis of $X$. For every $x = \sum_{i=1}^n \lambda_i e_i \in X$, let
+  \begin{equation*}
+    \norm{x}_1 = \sum_{i=1}^n |\lambda_i|.
+  \end{equation*}
+  It is easily verified that $\norm{\phantom x}_1$ is a norm on $X$. We will show that every norm on $X$ is equivalent to $\norm{\phantom x}_1$, and hence (by transitivity) that any two norms on $X$ are equivalent.
+
+  Given an arbitrary norm $\norm{\phantom x}$, we must prove the existence of positive constants $\alpha$ and $\beta$ such that
+  \begin{equation*}
+    \alpha \norm{x}_1 \le \norm x \le \beta \norm{x}_1
+  \end{equation*}
+  for all $x \in X$. These inequalities hold trivially for $x = 0$, so it suffices to consider nonzero $x$. In fact it is sufficient to consider $x$ in the ``$\norm{\phantom x}_1$-sphere'' $S_1 = \{x \in X: \norm{x}_1 = 1\}$, where the inequalities reduce to
+  \begin{equation*}
+    \alpha \le \norm x \le \beta.
+  \end{equation*}
+  The inequality for general, nonzero $x$ then follows upon division by $\norm{x}_1$.
+
+  We start by showing that that the map $x \mapsto \norm x$ is continuous with respect to the metric $\rho_1(x,y) = \norm{x - y}_1$. Let $\epsilon > 0$ be given, and write $M = \max(\norm{e_1}, \dots, \norm{e_n})$. Given
+  \begin{equation*}
+    x = \sum_{i=1}^n \lambda_i e_i, \quad y = \sum_{i=1}^n \mu_i e_i
+  \end{equation*}
+  satisfying $\rho_1(x,y) < \epsilon/M$, we have
+  \begin{equation*}
+    \norm{x-y} \le \sum_{i=1}^n |\lambda_i - \mu_i| \, \norm{e_i} \le \sum_{i=1}^n |\lambda_i - \mu_i| \, M = \rho_1(x,y) M < \epsilon,
+  \end{equation*}
+  and continuity follows.
+
+  The sphere $S_1$ is obviously closed and bounded under $\norm{\phantom x}_1$, hence compact by Theorem 4.3.3. By Theorem 3.6.2 and the continuity established above, the map $x \mapsto \norm x$ attains a maximum and a minimum on $S_1$. Let
+  \begin{equation*}
+    \alpha = \inf_{x \in S_1} \norm x, \quad \beta = \sup_{x \in S_1} \norm x,
+  \end{equation*}
+  and note that $\alpha > 0$ since $\norm x = \alpha$ is attained for some nonzero $x$. It follows that $\alpha$ and $\beta$ are positive constants such that $\alpha \le \norm x \le \beta$ for all $x \in S_1$, so we are done.
+\end{solution}
+
+\subsubsection*{4.3.2}
+Let $Y$ be a finite-dimensional linear subspace of a normed linear space $X$, and let $x_0 \in X$, $x_0 \notin Y$. Then there exists a point $y_0 \in Y$ such that
+\begin{equation*}
+  \inf_{y \in Y} \norm{x_0 - y} = \norm{x_0 - y_0}.
+\end{equation*}
+
+\begin{solution}
+  Note that $Y$ is closed by Theorem 4.3.2. Let $L = \inf_{y \in Y} \norm{x_0 - y}$. For $n = 1,2, \dots$, choose $y_n \in Y$ such that
+  \begin{equation*}
+    \norm{x_0 - y_n} < L + \frac{1}{n}.
+  \end{equation*}
+  Note that $y_n \in B(x_0, L+1) \cap Y$ for all $n$. This is a bounded subset of $Y$, so by Theorems 4.3.3 and 3.5.4, the sequence $(y_n)$ has a subsequence $(y_{n_k})$ converging to a point
+  \begin{equation*}
+    y_0 \in \overline{B(x_0, L+1) \cap Y} \subset \overline Y = Y.
+  \end{equation*}
+  For all $k$ we have
+  \begin{equation*}
+    \norm{x_0 - y_0} \le \norm{x_0 - y_{n_k}} + \norm{y_{n_k} - y_0}.
+  \end{equation*}
+  The left-hand side of this inequality is bounded below by $L$, and the right-hand side converges to $L$ as $k \to \infty$. It follows that $\norm{x_0 - y_0} = L$.
+\end{solution}
+
+\subsubsection*{4.3.3}
+A norm $\norm{\phantom x}$ is said to be \emph{strictly convex} if $\norm x = 1$, $\norm y = 1$, $\norm{x+y} = 2$ imply that $x = y$. Prove that if the norm of $X$ is strictly convex, then the point $y_0$ occurring in the assertion of Problem 4.3.2 is unique.
+
+\begin{solution}
+  Let $\norm{\phantom x}$ be a strictly convex norm on a linear space $X$, and let $Y$ be a finite-dimensional linear subspace of $X$. Let $x_0 \in X - Y$,  $L = \inf_{y \in Y} \norm{x_0 - y}$, and suppose that there are elements $y_0, y_0' \in Y$ such that
+  \begin{equation*}
+    \norm{x_0 - y_0} = \norm{x_0 - y_0'} = L.
+  \end{equation*}
+
+  It is clear that $\norm{(x_0 - y_0)/L} = \norm{(x_0 - y_0')/L} = 1$. Moreover,
+  \begin{equation*}
+    \norm{(x_0 - y_0)/L + (x_0 - y_0')/L} = \frac{2}{L} \norm{x_0 - (y_0 + y_0')/2} \ge \frac{2}{L} L = 2,
+  \end{equation*}
+  and
+  \begin{equation*}
+    \norm{(x_0 - y_0)/L + (x_0 - y_0')/L} \le \frac{1}{L} \left( \norm{x_0 - y_0} + \norm{x_0 - y_0'} \right) = \frac{1}{L} 2L = 2,
+  \end{equation*}
+  so $\norm{(x_0 - y_0)/L + (x_0 - y_0')/L} = 2$. By strict convexity,
+  \begin{equation*}
+    \frac{1}{L} (x_0 - y_0) = \frac{1}{L} (x_0 - y_0'),
+  \end{equation*}
+  and it follows that $y_0 = y_0'$.
+\end{solution}
+
+\subsubsection*{4.3.4}
+Prove that the norm of $L^p(X,\mu)$ is strictly convex if $1 < p < \infty$, and is not strictly convex if $p = 1$ or if $p = \infty$.
+
+\begin{solution}
+  Let $f,g \in \sc L^p(X,\mu)$, $1 < p < \infty$, and suppose $\norm{f}_p = \norm{g}_p = 1$ and $\norm{f+g}_p = 2$. We then have equality in Minkowski's inequality:
+  \begin{equation*}
+    \norm{f+g}_p = \norm{f}_p + \norm{g}_p.
+  \end{equation*}
+  By Problem 3.2.7 this implies that $f = 0$ a.e., or $g = 0$ a.e., or $f = \lambda g$ a.e.\ for some positive constant $\lambda$. The first two possibilities are ruled out since $\norm{f}_p = \norm{g}_p = 1$, so the third alternative must hold. But then
+  \begin{equation*}
+    1 = \norm{f}_p = |\lambda| \, \norm{g}_p = |\lambda|,
+  \end{equation*}
+  so $\lambda = 1$. Thus $f = g$ a.e., so that $\tilde f = \tilde g$ in $L^p(X,\mu)$. It follows that $\norm{\phantom x}_p$ is strictly convex if $1 < p < \infty$.
+
+  For $p = 1, \infty$, surely the problem is supposed to say `not \emph{necessarily} strictly convex', because we can come up with examples where $\norm{\phantom x}_p$ \emph{is} strictly convex, such as an empty measure space $X = \emptyset$, or any space with identically zero measure $\mu = 0$. (Perhaps less trivial examples exist.) Hence we will only demonstrate that there are examples where $\norm{\phantom x}_p$ ($p \in \{1,\infty\}$) is not strictly convex.
+
+  For $p = 1$, consider the $L^1$-space $l^1$. The sequences $x = (1,0,0,\dots)$ and $y = (0,1,0,0,\dots)$ satisfy $\norm{x}_1 = \norm{y}_1 = 1$ and $\norm{x + y}_1 = 2$, yet $x \ne y$. For $p = \infty$, consider the $L^\infty$-space $l^\infty$. The sequences $x = (1,0,0,\dots)$ and $y = (1,1,1,\dots)$ satisfy $\norm{x}_\infty = \norm{y}_\infty = 1$ and $\norm{x+y}_\infty = 2$, but $x \ne y$.
+\end{solution}
+
+\subsubsection*{4.3.5}
+Prove that in $C[a,b]$ the uniform norm is not equivalent to the $L^p$ norm (for $1 \le p < \infty$).
+
+\begin{solution}
+  For simplicity, let $a = 0$ and $b = 1$. For $n = 1,2,\dots$, define ${f_n: [0,1] \to \bb R}$ (or $\bb C$) by $f_n(x) = x^n$. Let $\norm{\phantom x}_u$ denote the uniform norm. For all $n$ we have
+  \begin{equation*}
+    \norm{f_n}_u = \max_{0 \le x \le 1} |f(x)| = 1
+  \end{equation*}
+  and
+  \begin{equation*}
+    \norm{f_n}_p = \left( \int_0^1 x^n dx \right)^{1/p} = (n+1)^{-1/p}.
+  \end{equation*}
+  (We are assuming that the $L^p$ norm is defined with the standard Lebesgue measure.) In particular $\norm{f_n}_p \to 0$ as $n \to \infty$, whatever the value of $p$ ($\ne \infty$). It follows that there exists no $\beta > 0$ such that $\norm{f}_u \le \beta \norm{f}_p$ for all $f \in C[0,1]$, and hence that the two norms are not equivalent.
+\end{solution}
+
+\subsubsection*{4.3.7}
+Let $n$ be a positive integer, $1 \le p < \infty$, and let $f(x)$ be a continuous function on $0 \le x \le 1$. Then there exists a unique polynomial $Q_n$ of degree $n$ such that for any other polynomial $P_n$ of degree $n$
+\begin{equation*}
+  \int_0^1 |f(x) - P_n(x)|^p dx > \int_0^1 |f(x) - Q_n(x)|^p dx.
+\end{equation*}
+
+\begin{solution}
+  There is an error in the problem statement; it should be polynomials of degree $\le n$, not \emph{exactly} $n$. To see that the written claim is false, consider the case $f(x) = 0$ and $n = 1$. Then $f$ can be approximated arbitrarily closely by degree 1 polynomials $ax + b$, $a \ne 0$, but no such polynomial will make $\norm{f - P}_p$ vanish completely.
+
+  Let $\sc P_n$ denote the set of polynomial functions on $[0,1]$ with degree $\le n$. Then $\sc P_n$ is a linear subspace of the normed linear space $(C[0,1], \norm{\phantom x}_p)$, and is finite-dimensional since it is spanned by the polynomials $1, x, x^2, \dots, x^n$.
+
+  If $f \in \sc P_n$, then $Q = f$ satisfies the claim, since $\norm{f - P}_p > 0$ for all $P \ne f$ (else $\norm{\phantom x}_p$ would not be a norm). If $f \not\in \sc P_n$, then the conclusion of Problem 4.3.2 tells us that there exists $Q \in \sc P_n$ such that
+  \begin{equation*}
+    \inf_{P \in \sc P_n} \norm{f - P} = \norm{f - Q}.
+  \end{equation*}
+  This $Q$ is unique by Problem 4.3.3 if the norm $\norm{\phantom x}_p$ is strictly convex, whereupon the claim follows. By Problem 4.3.4 this is the case for $1 < p < \infty$. In fact the norm is strictly convex even for $p = 1$ over $C[0,1]$, as is easily verified directly from the definition.
 \end{solution}
 
 \end{document}
