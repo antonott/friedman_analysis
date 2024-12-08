@@ -1373,4 +1373,98 @@ Let $n$ be a positive integer, $1 \le p < \infty$, and let $f(x)$ be a continuou
   This $Q$ is unique by Problem 4.3.3 if the norm $\norm{\phantom x}_p$ is strictly convex, whereupon the claim follows. By Problem 4.3.4 this is the case for $1 < p < \infty$. In fact the norm is strictly convex even for $p = 1$ over $C[0,1]$, as is easily verified directly from the definition.
 \end{solution}
 
+
+\section*{Section 4.4 -- Linear Transformations}
+
+\subsection*{Problems}
+
+\subsubsection*{4.4.2}
+Let $T$ be an additive operator [that is, $T(x_1 + x_2) = Tx_1 + Tx_2$] from a real normed linear space $X$ into a normed linear space $Y$. If $T$ is continuous, then $T$ is homogeneous [that is, $T(\lambda x) = \lambda Tx$]. [\emph{Hint:} Prove that $T[(m/n)x] = (m/n)Tx$, where $m,n$ are integers.]
+
+\begin{solution}
+  Let $x$ be an arbitrary element of $X$. By induction, additivity implies $T(mx) = m \, Tx$ for positive integers $m$. Moreover,
+  \begin{equation*}
+    T0 = T(0 + 0) = T0 + T0
+  \end{equation*}
+  implies that $T0 = 0$, so that
+  \begin{equation*}
+    0 = T0 = T(mx - mx) = T(mx) + T(-mx),
+  \end{equation*}
+  which shows that $T(-mx) = -T(mx) = -m \, Tx$, thus extending the earlier result to nonpositive integers. Finally, if $m$ and $n$ are integers, $n \ne 0$, then
+  \begin{equation*}
+    n \, T \left( \frac{m}{n} x \right) = T \left( n \frac{m}{n} x \right) = T(m x) = m \, Tx,
+  \end{equation*}
+  so that $T[(m/n)x] = (m/n) Tx$, further extending the result to rationals.
+
+  Now, let $\lambda \in \bb R$. There exists a sequence $(\lambda_n)$ in $\bb Q$ such that $\lambda_n \to \lambda$. Clearly $\lambda_n x \to \lambda x$ in $X$, so $T(\lambda_n x) \to T(\lambda x)$ in $Y$ by continuity of $T$. But, by what we found above,
+  \begin{equation*}
+    T(\lambda_n x) = \lambda_n \, Tx \to \lambda \, Tx,
+  \end{equation*}
+  so $T(\lambda x) = \lambda \, Tx$.
+\end{solution}
+
+\subsubsection*{4.4.6}
+Find the norm of the operator $A \in \sc B(X)$ given by $(Af)(t) = tf(t)$ $(0 \le t \le 1)$, where (a) $X = C[0,1]$, (b) $X = L^p(0,1)$ and ($1 \le p \le \infty$).
+
+\begin{solution}
+  \leavevmode
+  \begin{enumerate}[label=(\alph*)]
+    \item For $0 \le t \le 1$ we have $|tf(t)| = |t| |f(t)| \le |f(t)|$, hence $\norm{Af} \le \norm f$, and
+      \begin{equation*}
+        \norm A = \sup_{f \ne 0} \frac{\norm{Af}}{\norm f} \le 1.
+      \end{equation*}
+      The upper bound $\norm{Af} / \norm f = 1$ is attained with $f$ constant, so $\norm A = 1$.
+
+    \item Let us first verify that $A \in \sc B(X)$, i.e.\ that it is a bounded linear operator $L^p(0,1) \to L^p(0,1)$. Linearity is immediate. If $f \in \sc L^p(0,1)$, then $|f|^p$ is integrable, so $|t f(t)|^p = |t|^p |f(t)|^p$ is integrable by Corollary 2.10.2, and we see that $A$ does indeed map into $L^p(0,1)$. Finally, since $|t f(t)|^p = |t|^p |f(t)|^p \le |f(t)|^p$ for $0 < t < 1$, we have $\norm{Af}_p \le \norm{f}_p$, so that $\norm A \le 1$.
+
+      We will now show that $\norm A \ge 1$, so that $\norm A = 1$. The case $p = \infty$ is similar to (a), so we will assume $1 \le p < \infty$. For $n = 1,2,\dots$, define simple functions $f_n: (0,1) \to \bb R$ (or $\bb C$) by
+      \begin{equation*}
+        f_n(t) =
+        \begin{cases}
+          0 & \text{if $0 < t < 1 - 1/n$,} \\
+          n^{1/p} & \text{if $1 - 1/n \le t < 1$.}
+        \end{cases}
+      \end{equation*}
+      Then one easily finds that $\norm{f_n}_p = 1$ and $\norm{A f_n}_p \ge 1 - 1/n$, so that
+      \begin{equation*}
+        \norm A \ge \frac{\norm{A f_n}_p}{\norm{f_n}_p} \ge 1 - \frac{1}{n}
+      \end{equation*}
+      for all $n$. Indeed it follows that $\norm A \ge 1$.
+  \end{enumerate}
+\end{solution}
+
+\subsubsection*{4.4.7}
+A linear operator from a normed linear space $X$ into a normed linear space $Y$ is bounded if and only if it maps bounded sets onto bounded sets.
+
+\begin{solution}
+  Let $T: X \to Y$ be a linear operator between normed linear spaces.
+
+  Suppose first that $T$ is bounded, and let $A$ be a bounded subset of $X$. Then $\norm T < \infty$, and there is some $L$ such that $\norm x \le L < \infty$ for all $x \in A$. Hence
+  \begin{equation*}
+    \norm{Tx} \le \norm T \, \norm x \le \norm T L
+  \end{equation*}
+  for all $x \in A$, so $T(A)$ is bounded.
+
+  Conversely, suppose that $T$ maps bounded sets onto bounded sets. The set $\{x \in X: \norm x = 1\}$ is bounded, so there exists $M$ such that $\norm{Tx} \le M < \infty$ whenever $\norm x = 1$. It follows that
+  \begin{equation*}
+    \norm T = \sup_{\norm x = 1} \norm{Tx} \le M,
+  \end{equation*}
+  and hence that $T$ is bounded.
+\end{solution}
+
+\subsubsection*{4.4.8}
+A linear operator from a normed linear space $X$ into a normed linear space $Y$ is continuous if and only if it maps sequences converging to 0 into bounded sequences.
+
+\begin{solution}
+  Let $T: X \to Y$ be a linear operator between normed linear spaces. The claim is immediate if $X$ is the trivial space (containing only the 0 vector), so let us assume that $X$ is nontrivial.
+
+  Suppose first that $T$ is continuous, and therefore bounded. Any sequence in $X$ converging to 0 is easily seen to be bounded, hence is mapped to a bounded sequence by the conclusion of the previous problem.
+
+  Conversely, suppose $T$ has the property that it maps sequences converging to 0 into bounded sequences. Assume towards a contradiction that $T$ is unbounded. Then it is possible to construct a sequence $(x_n)$ in $X$ such that $\norm{x_n} = 1$ and $\norm{Tx_n} > n$ for every $n$. The sequence $(x_n/\sqrt n)$ converges to 0, so $\{T(x_n/\sqrt n)\}$ is bounded by hypothesis. But
+  \begin{equation*}
+    \snorm{T \left( \frac{x_n}{\sqrt n} \right)} = \frac{1}{\sqrt n} \norm{Tx_n} > \frac{1}{\sqrt n} \cdot n = \sqrt n \to \infty
+  \end{equation*}
+  as $n \to \infty$, yielding a contradiction. We conclude that $T$ must be bounded, and thus continuous.
+\end{solution}
+
 \end{document}
