@@ -1553,4 +1553,81 @@ Let $X$ be a Banach space and let $T$ and $T^{-1}$ belong to $\sc B(X)$. Prove t
   \end{equation*}
 \end{solution}
 
+\subsubsection*{4.6.4}
+Let $X$ and $Y$ be two linear vector spaces. Find necessary and sufficient conditions for a subset $G$ of $X \times Y$ to be the graph of a linear operator from $X$ into $Y$.
+
+\begin{solution}
+  We claim that $G$ is the graph of a linear operator from $X$ into $Y$ if and only if
+  \begin{enumerate}[label=(\roman*)]
+    \item $G$ is a linear subspace of $X \times Y$.
+    \item The set $G \cap (\{0\} \times Y)$ is a singleton.
+  \end{enumerate}
+  It is clear that these conditions are necessary, so we need only prove that they are sufficient.
+
+  Since $G$ is nonempty by (ii), it contains an element $(x,y)$. By (i) it also contains $(0,0) = 0 \cdot (x,y)$, and it follows that $G \cap (\{0\} \times Y) = \{(0,0)\}$.
+
+  If $(u,v), (u,v') \in G$, then
+  \begin{equation*}
+    (0, v - v') = (u,v) - (u,v') \in G \cap (\{0\} \times Y)
+  \end{equation*}
+  by (i). It follows that $(0, v - v') = (0,0)$, hence that $v = v'$.
+
+  By the above, $G$ is a functional relation on $X \times Y$, so it defines a partial function $T: D \subset X \to Y$, where
+  \begin{equation*}
+    D = \{x \in X; \, \text{$\exists y \in Y$ such that $(x,y) \in G$}\},
+  \end{equation*}
+  and $T(x) = y$ if $(x,y) \in G$.
+
+  Suppose $x_1, x_2 \in D$, and $\lambda_1, \lambda_2$ are scalars. Then
+  \begin{equation*}
+    (\lambda_1 x_1 + \lambda_2 x_2, \lambda_1 T(x_1) + \lambda_2 T(x_2)) = \lambda_1 (x_1, T(x_1)) + \lambda_2 (x_2, T(x_2)) \in G
+  \end{equation*}
+  by (i). Hence $\lambda_1 x_1 + \lambda_2 x_2 \in D$, which shows that $D$ is a linear subspace of $X \times Y$, and
+  \begin{equation*}
+    T(\lambda_1 x_1 + \lambda_2 x_2) = \lambda_1 T(x_1) + \lambda_2 T(x_2),
+  \end{equation*}
+  so that $T$ is a linear operator.
+
+  Finally, note that $G$ is precisely the graph of $T$. This completes the proof.
+\end{solution}
+
+\subsubsection*{4.6.5}
+Let $X$ and $Y$ be Banach spaces and let $T$ be a bounded linear map from $X$ into $Y$. If $T(X)$ is of the second category (in $Y$), then $T(X) = Y$.
+
+\begin{solution}
+  We will use the following lemma:
+  \begin{quote}
+    If $W$ is a linear subspace of a normed space $V$, and if $W$ contains a nonempty open subset of $V$, then $W = V$.
+  \end{quote}
+  To see that this is true, note that $W$ contains an open ball $B(x_0,r)$. Given any $y \in V$, let
+  \begin{equation*}
+    x = \frac{r}{2 \norm y} y + x_0.
+  \end{equation*}
+  Then $x \in B(x_0,r) \subset W$, so that
+  \begin{equation*}
+    y = \frac{2 \norm y}{r} (x - x_0) \in W
+  \end{equation*}
+  by closure under linear combinations.
+
+  Now, assume that $T(X)$ is of the second category, and follow the steps of parts (a) and (b) of the proof of Theorem 4.6.1, but with $T(X)$ in place of $Y$. We find that $T(X)$ contains an open ball (see equation (4.6.2)) and hence that $T(X) = Y$ by our lemma.
+\end{solution}
+
+\subsubsection*{4.6.6}
+Let $X$ and $Y$ be Banach spaces and let $T$ be a linear map from a linear subspace $D_T$ of $X$ into $Y$. If $D_T$ (in $X$) and the graph of $T$ (in $X \times Y$) are closed, then $T$ is bounded---that is, $\norm{Tx} \le K \norm x$ for all $x \in D_T$ ($K$ constant).
+
+\begin{solution}
+  Note first that $D_T$ is complete; this is true for any closed subset of any complete space. Indeed, if $(x_n)$ is a Cauchy sequence in $D_T$, then it is also a Cauchy sequence in $X$, so it converges to a point $x \in X$, and since $D_T$ is closed we have $x \in D_T$. It follows that $D_T$ is a Banach space. Hence we can regard $T$ as a map $D_T \to Y$ and apply Theorem 4.6.4 to conclude that $T$ is continuous, thus bounded by Theorem 4.4.2.
+\end{solution}
+
+\subsubsection*{4.6.7}
+Let $X$ be a normed linear space with any one of two norms $\norm{\phantom x}_1$, $\norm{\phantom x}_2$. If $\norm{x_n}_2 \to 0$ implies $\norm{x_n}_1 \to 0$, then (4.6.5) holds.
+
+\begin{solution}
+  Assume towards a contradiction that (4.6.5) does not hold. Then, for every $n \in \{1, 2, \dots\}$, there exists $x_n \in X$ such that $\norm{x_n}_1 > n \norm{x_n}_2$. The sequence $y_n = x_n / (n \norm{x_n}_2)$ satisfies
+  \begin{equation*}
+    \norm{y_n}_1 = \frac{\norm{x_n}_1}{n \norm{x_n}_2} > \frac{n \norm{x_n}_2}{n \norm{x_n}_2} = 1
+  \end{equation*}
+  for all $n$. But $\norm{y_n}_2 = 1/n \to 0$, which by hypothesis implies $\norm{y_n}_1 \to 0$, yielding a contradiction.
+\end{solution}
+
 \end{document}
