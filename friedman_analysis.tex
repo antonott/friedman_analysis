@@ -1467,4 +1467,90 @@ A linear operator from a normed linear space $X$ into a normed linear space $Y$ 
   as $n \to \infty$, yielding a contradiction. We conclude that $T$ must be bounded, and thus continuous.
 \end{solution}
 
+
+\section*{Section 4.6 -- The Open-Mapping Theorem and the Closed-Graph Theorem}
+
+\subsection*{Problems}
+
+\subsubsection*{4.6.1}
+If $T, S, T^{-1}, S^{-1}$ belong to $\sc B(X)$, then $(TS)^{-1} \in \sc B(X)$ and $(TS)^{-1} = S^{-1} T^{-1}$.
+
+\begin{solution}
+  Note in particular that $T, S, T^{-1}, S^{-1}$ belonging to $\sc B(X)$ implies that all of these transformations are bijective, in addition to bounded. (If $T$ is not surjective, then $D_{T^{-1}} = T(X) \ne X$, hence $T^{-1} \notin \sc B(X)$.)
+
+  It is clear that $\norm{TS} \le \norm T \, \norm S < \infty$, hence $TS \in \sc B(X)$, and it is bijective on account of being a composition of bijections. Thus $(TS)^{-1}$ exists and is equal to $S^{-1} T^{-1}$. It follows that $\norm{(TS)^{-1}} \le \norm{S^{-1}} \, \norm{T^{-1}} < \infty$, hence $(TS)^{-1} \in \sc B(X)$.
+\end{solution}
+
+\subsubsection*{4.6.2}
+Let $X$ be a Banach space and let $A \in \sc B(X)$, $\norm A < 1$. Prove that $(I + A)^{-1}$ exists and is given by
+\begin{equation*}
+  (I + A)^{-1} = \sum_{n=0}^\infty (-1)^n A^n,
+\end{equation*}
+where the series is absolutely convergent [in $\sc B(X)$]. Show also that
+\begin{equation*}
+  \norm{(I + A)^{-1}} \le 1/(1 - \norm A).
+\end{equation*}
+
+\begin{solution}
+  We note first that
+  \begin{equation*}
+    \sum_{n=0}^\infty \norm{(-1)^n A^n} = \sum_{n=0}^\infty \norm{A^n} \le \sum_{n=0}^\infty \norm{A}^n = \frac{1}{1 - \norm A},
+  \end{equation*}
+  since $\norm A < 1$. Hence the series $\sum_{n=0}^\infty (-1)^n A^n$ is strongly convergent to an operator $B \in \sc B(X)$, by Theorem 4.5.2. (Recall that $\sc B(X)$ is a Banach space, hence absolute convergence implies convergence. Convergence in $\sc B(X)$ is the uniform convergence of operators, and uniform convergence implies strong convergence.)
+
+  For all $x \in X$, we have
+  \begin{equation*}
+    ABx = A \left( \sum_{n=0}^\infty (-1)^n A^n x \right) = \sum_{n=0}^\infty (-1)^n A^{n+1} x = x - \sum_{n=0}^\infty (-1)^n A^n x = (I - B)x,
+  \end{equation*}
+  where we have used the continuity of $A$ to interchange limiting processes. Also,
+  \begin{equation*}
+    BAx = \sum_{n=0}^\infty (-1)^n A^{n+1} x = ABx.
+  \end{equation*}
+  It follows that
+  \begin{equation*}
+    B(I+A) = (I+A)B = B + AB = B + I - B = I,
+  \end{equation*}
+  so that $B = (I + A)^{-1}$.
+
+  Finally,
+  \begin{equation*}
+    \norm{(I + A)^{-1}} \le \sum_{n=0}^\infty \norm{(-1)^n A^n} \le \frac{1}{1 - \norm A}
+  \end{equation*}
+  by what we found earlier.
+\end{solution}
+
+\subsubsection*{4.6.3}
+Let $X$ be a Banach space and let $T$ and $T^{-1}$ belong to $\sc B(X)$. Prove that if $S \in \sc B(X)$ and $\norm{S - T} < 1/\norm{T^{-1}}$, then $S^{-1}$ exists and is a bounded operator, and
+\begin{equation*}
+  \norm{S^{-1} - T^{-1}} < \frac{\norm{T^{-1}}}{1 - \norm{S - T} \, \norm{T^{-1}}}.
+\end{equation*}
+[\emph{Hint:} $S = [(S-T)T^{-1} + I]T$.]
+
+\begin{solution}
+  Note that $S T^{-1} = I + (S-T)T^{-1}$, and that
+  \begin{equation*}
+    \norm{(S-T)T^{-1}} \le \norm{S-T} \norm{T^{-1}} < 1.
+  \end{equation*}
+  By the previous problem $(ST^{-1})^{-1}$ exists, and
+  \begin{equation*}
+    \norm{(ST^{-1})^{-1}} \le \frac{1}{1 - \norm{(S-T)T^{-1}}} \le \frac{1}{1 - \norm{(S-T)} \, \norm{T^{-1}}}.
+  \end{equation*}
+  Moreover, since $ST^{-1}(ST^{-1})^{-1} = I$ and
+  \begin{equation*}
+    T^{-1}(ST^{-1})^{-1}S = T^{-1}(ST^{-1})^{-1}ST^{-1}T = T^{-1}T = I,
+  \end{equation*}
+  we have $S^{-1} = T^{-1}(ST^{-1})^{-1}$. Finally,
+  \begin{equation*}
+    \norm{S^{-1}} = \norm{T^{-1}(ST^{-1})^{-1}} \le \norm{T^{-1}} \, \norm{(ST^{-1})^{-1}} \le \frac{\norm{T^{-1}}}{1 - \norm{(S-T)} \, \norm{T^{-1}}},
+  \end{equation*}
+  and
+  \begin{equation*}
+    \norm{S^{-1} - T^{-1}} = \norm{S^{-1}(S - T)T^{-1}} \le \norm{S^{-1}} \, \norm{S-T} \, \norm{T^{-1}} < \norm{S^{-1}},
+  \end{equation*}
+  so that
+  \begin{equation*}
+    \norm{S^{-1} - T^{-1}} < \frac{\norm{T^{-1}}}{1 - \norm{(S-T)} \, \norm{T^{-1}}}.
+  \end{equation*}
+\end{solution}
+
 \end{document}
