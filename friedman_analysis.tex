@@ -7,8 +7,10 @@
 \usepackage{enumitem}
 \usepackage{array}
 
+\DeclareMathOperator{\vspan}{span}
+
 \newcommand{\bb}[1]{\mathbb{#1}}
-\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\norm}[1]{{\lVert #1 \rVert}}
 \newcommand{\snorm}[1]{\left\lVert #1 \right\rVert}
 \newcommand{\brac}[1]{\langle #1 \rangle}
 
@@ -1628,6 +1630,76 @@ Let $X$ be a normed linear space with any one of two norms $\norm{\phantom x}_1$
     \norm{y_n}_1 = \frac{\norm{x_n}_1}{n \norm{x_n}_2} > \frac{n \norm{x_n}_2}{n \norm{x_n}_2} = 1
   \end{equation*}
   for all $n$. But $\norm{y_n}_2 = 1/n \to 0$, which by hypothesis implies $\norm{y_n}_1 \to 0$, yielding a contradiction.
+\end{solution}
+
+
+\section*{Section 4.8 -- The Hahn-Banach Theorem}
+
+\subsection*{Problems}
+
+\subsubsection*{4.8.1}
+Let $X$ be a normed linear space and let $\{x_n\} \subset X$. A point $y_0$ is the limit of linear combinations $\sum_{j=1}^n c_j x_j$ if and only if $x^*(y_0) = 0$ for all $x^*$ for which $x^*(x_j) = 0$ for $1 \le j < \infty$.
+
+\begin{solution}
+  Note that ``$y_0$ is the limit of linear combinations $\sum_{j=1}^n c_j x_j$'' is not meant to imply $y_0 = \lim_{n \to \infty} \sum_{j=1}^n c_j x_j$ for some sequence of coefficients $(c_j)$. Rather, it just says that $y_0$ is the limit of a sequence of finite linear combinations of elements in $\{x_n\}$; i.e., that $y_0$ is a limit point of $S := \vspan\{x_n\}$. Also, the statement ``$x^*(x_j) = 0$ for $1 \le j < \infty$'' can be simplified to ``$x^*$ vanishes on $S$.''
+
+  Suppose that $y_0$ is a limit point of $S$. Then there is a sequence $(s_n)$ in $S$ such that $s_n \to y_0$. If $x^* \in X^*$ vanishes on $S$, then
+  \begin{equation*}
+    x^*(y_0) = x^*\left( \lim_{n \to \infty} s_n \right) = \lim_{n \to \infty} x^*(s_n) = 0
+  \end{equation*}
+  by continuity of $x^*$.
+
+  Conversely, suppose that $x^*(y_0) = 0$ for all $x^* \in X^*$ that vanish on $S$. Let
+  \begin{equation*}
+    d = \inf_{s \in S} \norm{s - y_0}.
+  \end{equation*}
+  If $d > 0$, then Theorem 4.8.3 tells us that there exists $x^* \in X^*$ such that $x^*(y_0) = 1$, but which vanishes on $S$. This contradicts our assumptions, so we conclude that $d = 0$, which in turn shows that $y_0$ is a limit point of $S$.
+\end{solution}
+
+\subsubsection*{4.8.5}
+Let $X$ be an infinite-dimensional Banach space. Prove that there exists an infinite, strictly decreasing sequence $\{Y_n\}$ of infinite-dimensional closed linear subspaces of $X$. [\emph{Hint:} Take $Y_1$ to be the null space of some $x_1^* \ne 0$ in $X^*$. Take $Y_2$ to be the null space of some $x_2^* \ne 0$ in $Y_1^*$, and so on.]
+
+\begin{solution}
+  We will construct such a sequence by induction. For the base case, let $Y_0 = X$. Certainly $Y_0$ is an infinite-dimensional closed linear subspace of $X$.
+
+  For the inductive step, assume that we have infinite-dimensional closed linear subspaces $Y_0 \supset Y_1 \supset \dots \supset Y_n$, with the inclusions being strict. Fix an element $x_0 \in Y_n$ such that $\norm{x_0} = 1$. (Such an element is guaranteed to exist since $Y_n$ is infinite-dimensional.) Corollary 4.8.4 provides a continuous linear functional $x^* \in Y_n$ such that $x^*(x_0) = 1$. Let $Y_{n+1}$ be the null space of $x^*$; clearly a proper linear subspace of $Y_n$, hence also of $X$. As discussed after Corollary 4.8.7, each element $x \in Y_n$ can be written as $x = z + \lambda x_0$, where $\lambda = x^*(x)$ and $z = x - \lambda x_0 \in Y_{n+1}$. It follows that $Y_{n+1}$ is infinite-dimensional. Finally, if $(y_i)$ is a sequence in $Y_{n+1}$ and $y_i \to y \in X$, then $x^*(y) = \lim_{i \to \infty} x^*(y_i) = 0$ by continuity, so $y \in Y_{n+1}$, making $Y_{n+1}$ a closed subset of $X$. This concludes the inductive step.
+\end{solution}
+
+\subsubsection*{4.8.9}
+Let $u(t)$ be a function defined on $a < t < b$ with values in a Banach space $X$. We say that $u(t)$ is \emph{strongly differentiable at $t$} [\emph{on $(a,b)$}] if $\lim_{h \to 0} \{[u(t+h) - u(t)]/h\}$ exists [for all $t \in (a,b)$]. The limit is denoted by $du(t)/dt$ and is called the derivative of $u(t)$. For functions $A(t)$ with values in $\sc B(X)$, if $\lim_{h \to 0} \{[A(t+h)x - A(t)x]/h\}$ exists for any $x \in X$, then we say that $A(t)$ has a \emph{strong derivative}. If $\lim_{h \to 0} \{[A(t+h)-A(t)]/h\}$ exists (in the uniform topology), then we say that $A(t)$ is \emph{uniformly differentiable}. Prove that $e^{tA}$ [$A \in \sc B(X)$] is uniformly differentiable and $de^{tA}/dt = A e^{tA}$.
+
+\begin{solution}
+  First note that, given any $t \in \bb R$,
+  \begin{equation*}
+    \sum_{n=0}^\infty \snorm{\frac{(tA)^n}{n!}} \le \sum_{n=0}^\infty \frac{(|t|^n \norm{A}^n)}{n!} = e^{|t| \, \norm A} < \infty,
+  \end{equation*}
+  so that the series $\sum_{n=0}^\infty (tA)^n/(n!)$ is strongly convergent (to an operator) in $\sc B(X)$ (c.f.\ Theorems 4.1.2, 4.5.2). Hence we can define a map $E_A: \bb R \to \sc B(X)$ by $E_A(t) = \sum_{n=0}^\infty (tA)^n/(n!)$. Instead of $E_A(t)$ we typically write $e^{tA}$.
+
+  With a little work we find that
+  \begin{equation*}
+    \frac{e^{(t+h)A} - e^{tA}}{h} - A e^{tA} = \sum_{n=2}^\infty \frac{1}{n!} \frac{(t+h)^n - t^n - nht^{n-1}}{h} A^n.
+  \end{equation*}
+  Further simplification with the binomial formula yields
+  \begin{equation*}
+    \frac{(t+h)^n - t^n - nht^{n-1}}{h} = \sum_{k=2}^n \binom{n}{k} t^{n-k} h^{k-1}.
+  \end{equation*}
+  Hence
+  \begin{equation*}
+    \snorm{\frac{e^{(t+h)A} - e^{tA}}{h} - A e^{tA}} \le \sum_{n=2}^\infty \frac{\norm{A}^n}{n!} \sum_{k=2}^n \binom{n}{k} |t|^{n-k} |h|^{k-1}.
+  \end{equation*}
+  If $t = 0$, then the right-hand side becomes
+  \begin{equation*}
+    |h| \cdot \norm{A}^2 \sum_{n=0}^\infty \frac{(|h| \, \norm{A})^n}{(n+2)!} \le |h| \, \norm{A}^2 \, e^{|h| \, \norm{A}},
+  \end{equation*}
+  which goes to zero as $h \to 0$. If $t \ne 0$, then
+  \begin{equation*}
+    \sum_{k=2}^n \binom{n}{k} |t|^{n-k} |h|^{k-1} \le |h| \, |t|^{n-2} \sum_{k=2}^n \binom{n}{k} = |h| \, |t|^{n-2} \, 2^n
+  \end{equation*}
+  whenever $|h| \le |t|$, yielding
+  \begin{equation*}
+    \snorm{\frac{e^{(t+h)A} - e^{tA}}{h} - A e^{tA}} \le \frac{|h|}{|t|^2} \sum_{n=2}^\infty \frac{(2 \, |t| \, \norm{A})^n}{n!} \le \frac{|h|}{|t|^2} e^{2 \, |t| \, \norm A}
+  \end{equation*}
+  for sufficiently small $h$, which also goes to zero as $h \to 0$. It follows that $e^{tA}$ is uniformly differentiable on $\bb R$, with derivative $A e^{tA}$.
 \end{solution}
 
 \end{document}
