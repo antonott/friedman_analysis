@@ -1702,4 +1702,97 @@ Let $u(t)$ be a function defined on $a < t < b$ with values in a Banach space $X
   for sufficiently small $h$, which also goes to zero as $h \to 0$. It follows that $e^{tA}$ is uniformly differentiable on $\bb R$, with derivative $A e^{tA}$.
 \end{solution}
 
+\subsubsection*{4.8.10}
+Let $X$ be a real normed linear space, and let $u(t)$ be continuous and strongly differentiable in $(a,b)$. Then for any $a < \alpha < \beta < b$,
+\begin{equation*}
+  \norm{u(\beta) - u(\alpha)} \le (\beta - \alpha) \sup_{\alpha \le t \le \beta} \snorm{\frac{du(t)}{dt}}.
+\end{equation*}
+[\emph{Hint:} Apply $x^*$ to $u(\beta) - u(\alpha)$.]
+
+\begin{solution}
+  If $u(\alpha) = u(\beta)$ then there is nothing to prove, so assume $u(\beta) \ne u(\alpha)$. By Corollary 4.8.4 there is a bounded linear operator $x^* \in X^*$ such that $\norm{x^*} = 1$ and $x^*(u(\beta) - u(\alpha)) = \norm{u(\beta) - u(\alpha)}$. Define $f = x^* \circ u: (a,b) \to \bb R$. Since $x^*$ is linear and continuous,
+  \begin{equation*}
+    \lim_{h \to 0} \frac{f(t+h) - f(t)}{h} = \lim_{h \to 0} x^* \left[ \frac{u(t+h) - u(h)}{h} \right] = x^* \left[ \lim_{h \to 0} \frac{u(t+h) - u(h)}{h} \right],
+  \end{equation*}
+  so that $f$ is differentiable with derivative
+  \begin{equation*}
+    \frac{df(t)}{dt} = x^* \left[ \frac{du(t)}{dt} \right].
+  \end{equation*}
+  By the mean value theorem from elementary real analysis, we have
+  \begin{equation*}
+    f(\beta) - f(\alpha) = (\beta - \alpha) \frac{df(\gamma)}{dt}
+  \end{equation*}
+  for some $\gamma \in (\alpha, \beta)$. Thus,
+  \begin{equation*}
+    \begin{split}
+      \norm{u(\beta) - u(\alpha)} &= x^*(u(\beta) - u(\alpha)) \\
+      &= f(\beta) - f(\alpha) \\
+      &= (\beta - \alpha) \frac{df(\gamma)}{dt} \\
+      &= (\beta - \alpha) x^* \left[ \frac{du(\gamma)}{dt} \right] \\
+      &\le (\beta - \alpha) \norm{x^*} \cdot \snorm{\frac{du(\gamma)}{dt}} \\
+      &\le (\beta - \alpha) \sup_{\alpha \le t \le \beta} \snorm{\frac{du(t)}{dt}}.
+    \end{split}
+  \end{equation*}
+\end{solution}
+
+\subsubsection*{4.8.12}
+For every normed linear space $X$ there is a set $A$ such that $X$ is isomorphic to a subspace of the Banach space of functions $f$ on $A$ with norm $\norm f = \sup_{t \in A} |f(t)|$. If $X$ is separable, $A$ is countable. [\emph{Hint:} Let $\{x_\alpha: \alpha \in A\}$ be dense in $X$. Let $f(x,\alpha)$ be the bounded linear functional (in $x \in X$) satisfying $\norm{f(\, . \,,\alpha)} = 1$, $f(x_\alpha, \alpha) = \norm{x_\alpha}$. Define the isomorphism $x \to g_x(\alpha)$, where $g_x(\alpha) = f(x, \alpha)$. Prove: $\big| |f(x,\alpha)| - \norm x \big| \le 2 \norm{x_\alpha - x}$.]
+
+\begin{solution}
+  The conclusion is immediate if $X$ is a trivial space, so assume $X \ne \{0\}$. Let $\{x_\alpha\}_{\alpha \in A}$ be any dense subset of $X$ (possibly $X$ itself), indexed by a set $A$. (Recall that any space can be indexed by itself.) For each $\alpha \in A$, Corollary 4.8.4 fashions a bounded linear functional $f_\alpha \in X^*$ such that $\norm{f_\alpha} = 1$ and $f_\alpha(x_\alpha) = \norm{x_\alpha}$.
+
+  For each $x \in X$, define $g_x: A \to \bb F$ (where $\bb F$ is the field associated with $X$) by $g_x(\alpha) = f_\alpha(x)$. We will prove the following properties of the functions $g_x$:
+  \begin{enumerate}[label=(\roman*)]
+    \item If $x, y \in X$ and $\lambda, \mu \in \bb F$, then $\lambda g_x + \mu g_y = g_{\lambda x + \mu y}$.
+    \item Each function $g_x$ is bounded, with $\sup_{\alpha \in A} |g_x(\alpha)| = \norm x$.
+  \end{enumerate}
+
+  To prove (i), simply let $\alpha \in A$ and compute
+  \begin{equation*}
+    (\lambda g_x + \mu g_y)(\alpha) = \lambda g_x(\alpha) + \mu g_y(\alpha) = \lambda f_\alpha(x) + \mu f_\alpha(y) = f_\alpha(\lambda x + \mu y) = g_{\lambda x + \mu y}(\alpha),
+  \end{equation*}
+  using the linearity of $f_\alpha$.
+
+  Proving (ii) takes more work. Note first that
+  \begin{equation*}
+    \sup_{\alpha \in A} |g_x(\alpha)| = \sup_{\alpha \in A} |f_\alpha(x)| \le \sup_{\alpha \in A} \norm{f_\alpha} \, \norm x = \norm x.
+  \end{equation*}
+  Next, given any $\epsilon > 0$, fix $\alpha' \in A$ such that $\norm{x_{\alpha'} - x} < \epsilon/2$. (This is possible because $\{x_\alpha\}_{\alpha \in A}$ is dense in $X$.) By the triangle inequality,
+  \begin{equation*}
+    \norm x \le \big| \norm x - \norm{x_{\alpha'}} \big| + \big| \norm{x_{\alpha'}} - |f_{\alpha'}(x)| \big| + |f_{\alpha'}(x)|.
+  \end{equation*}
+  Now, the ``reverse triangle inequality'' yields
+  \begin{equation*}
+    \big| \norm x - \norm{x_{\alpha'}} \big| \le \norm{x_{\alpha'} - x} < \frac{\epsilon}{2}
+  \end{equation*}
+  and
+  \begin{equation*}
+    \begin{split}
+      \big| \norm{x_{\alpha'}} - |f_{\alpha'}(x)| \big| &\le \big| \norm{x_{\alpha'}} - f_{\alpha'}(x) \big| \\
+      &= |f_{\alpha'}(x_{\alpha'}) - f_{\alpha'}(x)| \\
+      &= |f_{\alpha'}(x_{\alpha'} - x)| \\
+      &\le \norm{f_{\alpha'}} \, \norm{x_{\alpha'} - x} \\
+      &= \norm{x_{\alpha'} - x} \\
+      &< \frac{\epsilon}{2}.
+    \end{split}
+  \end{equation*}
+  Also,
+  \begin{equation*}
+    |f_{\alpha'}(x)| \le \sup_{\alpha \in A} |f_\alpha(x)| = \sup_{\alpha \in A} |g_x(\alpha)|.
+  \end{equation*}
+  Putting it all together, we have
+  \begin{equation*}
+    \norm x \le \sup_{\alpha \in A} |g_x(\alpha)| + \epsilon,
+  \end{equation*}
+  and since this holds for every $\epsilon$ we finally arrive at (ii).
+
+  Let $F_A$ be the Banach space of all bounded functions $A \to \bb F$, with the supremum norm $\norm g = \sup_{\alpha \in A} |g(\alpha)|$. Since the functions $g_x$ are bounded by (ii), we can define a map $\sigma: X \to F_A$ by $\sigma(x) = g_x$. The image of $\sigma$ is a linear subspace of $F_A$ by (i). Moreover, $\sigma$ is an imbedding, since
+  \begin{equation*}
+    \norm{\sigma(x) - \sigma(y)} = \norm{g_x - g_y} = \norm{g_{x-y}} = \sup_{\alpha \in A} |g_{x-y}(\alpha)| = \norm{x - y}
+  \end{equation*}
+  for all $x,y \in X$, by (i) and (ii). Every imbedding injective, so $\sigma$ is an isomorphism (in the sense of Section 3.3) onto its image.
+
+  Finally, if $X$ is separable, then we can take $A$ to be countable.
+\end{solution}
+
 \end{document}
