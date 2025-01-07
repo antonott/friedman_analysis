@@ -1795,4 +1795,48 @@ For every normed linear space $X$ there is a set $A$ such that $X$ is isomorphic
   Finally, if $X$ is separable, then we can take $A$ to be countable.
 \end{solution}
 
+
+\chapter*{Chapter 6 -- Hilbert Spaces and Spectral Theory}
+
+\section*{Section 6.2 -- The Projection Theorem}
+
+\subsection*{Problems}
+
+\subsubsection*{6.2.1}
+If $M$ and $N$ are closed linear spaces and $M \perp N$, then $M \oplus N$ is a closed linear space.
+
+\begin{solution}
+  We start by noting that an analogue of the Pythagorean theorem holds in Hilbert spaces, and in fact more generally in inner product spaces. Namely, if $u \perp v$ then
+  \begin{equation*}
+    \norm{u+v}^2 = (u+v,u+v) = (u,u) + (u,v) + (v,u) + (v,v) = \norm{u}^2 + \norm{v}^2.
+  \end{equation*}
+
+  We will assume that $M, N \subset H$, with $H$ a Hilbert space. It is clear that $M \oplus N$ is a linear subspace, so it remains only to show that it is closed. Let $(x_n)$ be a sequence in $M \oplus N$ with limit $x \in H$. For each $n$ we have $x_n = y_n + z_n$ for some $y_n \in M$ and $z_n \in N$, and $x = y + z$ for some $y \in M$ and $z \in M^\perp$ by the projection theorem (Theorem 6.2.2). Note that $y_n - y \in M$ and $z_n - z \in M^\perp$, so that $(y_n - y) \perp (z_n - z)$. Thus
+  \begin{equation*}
+    \norm{z_n - z} \le \norm{y_n - y + z_n - z} = \norm{x_n - x}
+  \end{equation*}
+  by the analogue of the Pythagorean theorem with $u = y_n - y$ and $v = z_n - z$. It follows that $z_n \to z$, so that $z \in N$ since $N$ is closed. This in turn means that $x \in M \oplus N$, hence that $M \oplus N$ is closed.
+\end{solution}
+
+\subsubsection*{6.2.2}
+Let $M$ be any subset of a Hilbert space $H$. Then $(M^\perp)^\perp$ is the closed linear space spanned by $M$.
+
+\begin{solution}
+  We begin with a small lemma:
+  \begin{quote}
+    If $C$ is a closed linear subspace of a Hilbert space, then $(C^\perp)^\perp = C$.
+  \end{quote}
+  Indeed, it is clear that $C \subset (C^\perp)^\perp$. Conversely, suppose $x \in (C^\perp)^\perp$. By the projection theorem $x = y + z$ for some $y \in C$ and $z \in C^\perp$. But
+  \begin{equation*}
+    \norm{z}^2 = (z,z) = (x-y,z) = (x,z) - (y,z) = 0
+  \end{equation*}
+  by orthogonality, so $z = 0$ and $x = y \in C$. Hence $(C^\perp)^\perp \subset C$, and the lemma follows.
+
+  Note that ``the closed linear space spanned by $M$'' is the intersection of all linear subspaces of $H$ that contain $M$ (by definition; see Section 4.2). Let us denote this subspace by $C$. We immediately see that $C \subset (M^\perp)^\perp$, since the latter is a closed linear subspace containing $M$. Moreover, since $M \subset C$, we have $C^\perp \subset M^\perp$. By taking orthogonal complements once more and applying the lemma, we obtain
+  \begin{equation*}
+    (M^\perp)^\perp \subset (C^\perp)^\perp = C,
+  \end{equation*}
+  thus proving that $(M^\perp)^\perp = C$.
+\end{solution}
+
 \end{document}
