@@ -902,6 +902,73 @@ Let $X$ be the measure space described in Problem 2.4.4. Then $f$ is integrable 
 \end{solution}
 
 
+
+\section*{Section 2.7 -- Elementary Properties of Integrals}
+
+\subsection*{Problems}
+
+\subsubsection*{2.7.3}
+Let $f$ be an integrable function. Prove: (a) if $\int_E f d\mu \ge 0$ for all measurable sets $E$, then $f \ge 0$ a.e.; (b) if $\mu(X) < \infty$ and if $\int_E f d\mu \le \mu(E)$ for all measurable sets $E$, then $f \le 1$ a.e.
+
+\begin{solution}
+  \leavevmode
+  \begin{enumerate}[label=(\alph*)]
+    \item Let $F = \{x; \, f(x) < 0\}$. Then $-f$ is positive on $F$, so
+      \begin{equation*}
+        -\int_F f d\mu = \int_F (-f) d\mu \ge 0
+      \end{equation*}
+      by Theorem 2.7.1(b). But
+      \begin{equation*}
+        \int_F f d\mu \ge 0
+      \end{equation*}
+      by our hypothesis on $f$, so
+      \begin{equation*}
+        \int_F f d\mu = 0,
+      \end{equation*}
+      and it follows by Theorem 2.7.5 that $\mu(F) = 0$. That is, $f \ge 0$ a.e.
+
+    \item Let $G = \{x: \, f(x) > 1\}$. Then $f-1$ is positive on $G$, so
+      \begin{equation*}
+        \int_G (f-1) d\mu \ge 0
+      \end{equation*}
+      by Theorem 2.7.1(b). Note that $\chi_G$ is integrable since $\mu(G) \le \mu(X) < \infty$. Hence we also have
+      \begin{equation*}
+        \int_G (f-1) d\mu = \int_G f d\mu - \int_G d\mu = \int_G f d\mu - \mu(G) \le 0,
+      \end{equation*}
+      with the inequality following from our hypothesis on $f$. Thus
+      \begin{equation*}
+        \int_G (f-1) d\mu = 0,
+      \end{equation*}
+      and Theorem 2.7.5 yields $\mu(G) = 0$. That is, $f \le 1$ a.e.
+  \end{enumerate}
+\end{solution}
+
+\section*{Section 2.8 -- Sequences of Integrable Functions}
+
+\subsection*{Problems}
+
+\subsubsection*{2.8.1}
+A measurable function $f$ is acalled a \emph{null function} if $f = 0$ a.e. We shall say that $f$ is \emph{equivalent} to $g$ (and write $f \sim g$) if $f - g$ is a null function. Denote by $\bar f$ the class of all measurable functions that are equivalent to $f$. We denote by $L^1(X, \cal A, \mu)$, or, more briefly, by $L^1(X,\mu)$, the set of all classes $\bar f$ for which $f$ is integrable, and define on it the function
+\begin{equation*}
+  \rho(\bar f, \bar g) = \rho(f, g) = \int |f-g| d\mu.
+\end{equation*}
+[Note that if $f_0 \in \bar f$, $g_0 \in \bar g$, then $\rho(f_0,g_0) = \rho(f,g)$.] Prove that $L^1(X,\mu)$ is a complete metric space with the metric $\rho$.
+
+\begin{solution}
+  Let $(\bar f_n)$ be a Cauchy sequence in $L^1(X,\mu)$. Then
+  \begin{equation*}
+    \int |f_m - f_n| d\mu = \rho(\bar f_m, \bar f_n) \to 0
+  \end{equation*}
+  as $m,n \to \infty$, so the sequence $(f_n)$ (of representative functions) is Cauchy in the mean. By Theorem 2.8.3 there is an integrable function $f$ such that $f_n \to f$ in the mean. Hence
+  \begin{equation*}
+    \rho(\bar f_n, \bar f) = \int |f_n - f| d\mu \to 0
+  \end{equation*}
+  as $n \to \infty$. That is, $\bar f_n \to \bar f$ in $L^1(X,\mu)$.
+\end{solution}
+
+\subsection*{2.8.2}
+TODO.
+
 \chapter*{Chapter 3 -- Metric Spaces}
 
 \section*{Section 3.1 -- Topological and Metric Spaces}
