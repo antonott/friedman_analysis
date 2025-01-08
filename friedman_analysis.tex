@@ -90,26 +90,26 @@ If $\sc R$ is a $\sigma$-ring and $E_n \in \sc R$, then
 \end{equation*}
 
 \begin{solution}
-  Let $Y = \bigcup_{n=1}^\infty E_n \in \sc R$. Then $E_n \subset Y$ for all $Y$, and it follows that
+  Note that
   \begin{equation*}
-    \bigcap_{n=1}^\infty E_n = Y \cap \left( \bigcap_{n=1}^\infty E_n \right) = Y - \left( Y - \bigcap_{n=1}^\infty E_n \right).
+    \bigcap_{n=1}^\infty E_n = E_1 \cap \left( \bigcap_{n=1}^\infty E_n \right) = E_1 - \left( E_1 - \bigcap_{n=1}^\infty E_n \right),
   \end{equation*}
-  Notice that
+  and that
   \begin{equation*}
-    Y - \bigcap_{n=1}^\infty E_n = \bigcup_{n=1}^\infty (Y - E_n) \in \sc R,
+    E_1 - \bigcap_{n=1}^\infty E_n = \bigcup_{n=1}^\infty (E_1 - E_n) \in \sc R,
   \end{equation*}
-  by properties (b) and (e). (The equality is analogous to the identity (1.1.2), but with $Y$ in place of $X$.) It follows (by (b) again) that $\bigcap_{n=1}^\infty E_n \in \sc R$. For later reference, let us call this result (x).
+  using one of De Morgan's laws along with properties (b) and (e). It follows (by (b) again) that $\bigcap_{n=1}^\infty E_n \in \sc R$. That is, $\sc R$ is closed under countable intersections.
 
   Given $k \in \bb N$, let $A_n = \varnothing$ for $n < k$, and let $A_n = E_n$ for $n \ge k$. Then $A_n \in \sc R$ for all $n$ by (a), hence
   \begin{equation*}
     \bigcup_{n=k}^\infty E_n = \bigcup_{n=1}^\infty A_n \in \sc R
   \end{equation*}
-  by (e). It then follows by (x) that
+  by (e). Since $\sc R$ is closed under countable intersections, we then have
   \begin{equation*}
     \varlimsup_n E_n = \bigcap_{k=1}^\infty \bigcup_{n=k}^\infty E_n \in \sc R.
   \end{equation*}
 
-  By a similar argument we find that (x) implies
+  By a similar argument we find that
   \begin{equation*}
     \bigcap_{n=k}^\infty E_n \in \sc R
   \end{equation*}
@@ -166,7 +166,7 @@ If $\sc D$ is any class of sets, then every set in $\sc R(\sc D)$ can be covered
   The above shows that $\sc K$ is a ring, and certainly $\sc D \subset \sc K$. Hence $\sc R(\sc D) \subset \sc K$ by Problem 1.1.5, and it follows that every set in $\sc R(\sc D)$ can be covered by a finite union of sets in $\sc D$.
 \end{solution}
 
-\section*{Section 1.1 -- Definition of Measure}
+\section*{Section 1.2 -- Definition of Measure}
 
 \subsection*{Problems}
 
