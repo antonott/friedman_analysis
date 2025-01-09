@@ -969,6 +969,54 @@ A measurable function $f$ is acalled a \emph{null function} if $f = 0$ a.e. We s
 \subsection*{2.8.2}
 TODO.
 
+
+\section*{Section 2.9 -- Lebesgue's Bounded Convergence Theorem}
+
+\subsection*{Problems}
+
+\subsubsection*{2.9.1}
+Let $f_n(x) = n$ if $0 \le x < 1/n$, $f_n(x) = 0$ if $1 \ge x \ge 1/n$. Then $\lim_n f_n(x) = 0$ on $[0,1]$, but $\lim_n \int f_n d\mu = 1$ ($\mu$ is the Lebesgue integral). This example shows that the boundedness condition $|f_n| \le g$ in Theorem 2.9.1 is essential.
+
+\begin{solution}
+  Indeed $f_n(x) \to 0$ for all $x > 0$, and
+  \begin{equation*}
+    \mu([0,1] - (0,1]) = \mu(\{0\}) = 0,
+  \end{equation*}
+  so $f_n(x) \to 0$ a.e. Note that $f_n = n \chi_{[0,1/n)}$ for each $n$, so that
+  \begin{equation*}
+    \int f_n d\mu = n \mu([0,1/n)) = n \frac{1}{n} = 1.
+  \end{equation*}
+  Hence $\lim_n \int f_n d\mu = 1$.
+\end{solution}
+
+\subsubsection*{2.9.4}
+If $\mu(X) < \infty$ and if $\{f_n\}$ is a sequence of measurable functions that converges uniformly to a function $f$, then $f$ is integrable and $\lim_n \int f_n d\mu = \int f d\mu$.
+
+\begin{solution}
+  The problem statement, as written, is wrong. For a counterexample, let $X = \{1,2, \dots\}$ and define the measure by $\mu(\{x\}) = 2^{-x}$ (extended additively to all subsets of $X$). Then $\mu(X) = 1$. Define $f$ by $f(x) = 2^x$ and let $f_n = f$ for all $n$. These definitions match the assumptions of the problem, but
+  \begin{equation*}
+    f \ge g_n := \sum_{i=1}^n f(i) \chi_{\{i\}}
+  \end{equation*}
+  for all $n$, and
+  \begin{equation*}
+    \int g_n d\mu = n \to \infty,
+  \end{equation*}
+  so $f$ cannot possibly be integrable.
+
+  We will therefore assume that the functions $f_n$ are integrable, not just measurable. Given any $\epsilon > 0$, there is an integer $N$ such that $n \ge N$ implies $|f_n - f| < \epsilon$. Hence
+  \begin{equation*}
+    |f_m - f_n| \le |f_m - f| + |f_n - f| < \epsilon
+  \end{equation*}
+  whenever $m,n \ge N$, and
+  \begin{equation*}
+    \int |f_m - f_n| d\mu \le \epsilon \mu(X).
+  \end{equation*}
+  It follows that the sequence $(f_n)$ is Cauchy in the mean, hence that $f$ is integrable and $\int f d\mu = \lim_n \int f_n d\mu$ by Theorem 2.8.2
+
+  Remark: Assuming that the functions $f_n$ are integrable might not be the right way to fix to this problem, in particular since we did not even need to use the bounded convergence theorem to solve this version of it.
+
+\end{solution}
+
 \chapter*{Chapter 3 -- Metric Spaces}
 
 \section*{Section 3.1 -- Topological and Metric Spaces}
