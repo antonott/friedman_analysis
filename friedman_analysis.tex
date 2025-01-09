@@ -396,11 +396,11 @@ The outer Lebesgue measure of each of the intervals $(a,b), [a,b), (a,b]$ is equ
 \begin{solution}
   Recall that $\mu^*$ is monotone, on account of being an outer measure. Hence $\mu^*[(a,b)] \le \mu^*([a,b]) = b - a$, the latter equality being the result of the previous problem. Moreover, for all $\epsilon \in (0, b-a)$ we have
   \begin{equation*}
-    \left( a + \frac{\epsilon}{2}, b - \frac{\epsilon}{2} \right) \subset (a,b),
+    \left[ a + \frac{\epsilon}{2}, b - \frac{\epsilon}{2} \right] \subset (a,b),
   \end{equation*}
   so that
   \begin{equation*}
-    \mu^*[(a,b)] \ge \mu^* \left[ \left( a + \frac{\epsilon}{2}, b - \frac{\epsilon}{2} \right) \right] = b - a + \epsilon.
+    \mu^*[(a,b)] \ge \mu^* \left( \left[ a + \frac{\epsilon}{2}, b - \frac{\epsilon}{2} \right] \right) = b - a - \epsilon.
   \end{equation*}
   Thus $\mu^*[(a,b)] \ge b - a$, and it follows that $\mu^*[(a,b)] = b - a$.
 
@@ -1005,13 +1005,13 @@ If $\mu(X) < \infty$ and if $\{f_n\}$ is a sequence of measurable functions that
 
   We will therefore assume that the functions $f_n$ are integrable, not just measurable. Given any $\epsilon > 0$, there is an integer $N$ such that $n \ge N$ implies $|f_n - f| < \epsilon$. Hence
   \begin{equation*}
-    |f_m - f_n| \le |f_m - f| + |f_n - f| < \epsilon
+    |f_m - f_n| \le |f_m - f| + |f_n - f| < 2 \epsilon
   \end{equation*}
   whenever $m,n \ge N$, and
   \begin{equation*}
-    \int |f_m - f_n| d\mu \le \epsilon \mu(X).
+    \int |f_m - f_n| d\mu \le 2 \epsilon \mu(X).
   \end{equation*}
-  It follows that the sequence $(f_n)$ is Cauchy in the mean, hence that $f$ is integrable and $\int f d\mu = \lim_n \int f_n d\mu$ by Theorem 2.8.2
+  It follows (since $\mu(X) < \infty$) that the sequence $(f_n)$ is Cauchy in the mean, hence that $f$ is integrable and $\int f d\mu = \lim_n \int f_n d\mu$ by Theorem 2.8.2
 
   Remark: Assuming that the functions $f_n$ are integrable might not be the right way to fix to this problem, in particular since we did not even need to use the bounded convergence theorem to solve this version of it.
 
