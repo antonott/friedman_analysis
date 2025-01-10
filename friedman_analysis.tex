@@ -1017,6 +1017,221 @@ If $\mu(X) < \infty$ and if $\{f_n\}$ is a sequence of measurable functions that
 
 \end{solution}
 
+
+\section*{Section 2.10 -- Applications of Lebesgue's \\ Bounded Convergence Theorem}
+
+\subsection*{Problems}
+
+\subsubsection*{2.10.2}
+Derive the Lebesgue monotone convergence theorem from Fatou's Lemma.
+
+\begin{solution}
+  Let $(f_n)$ be a monotone increasing sequence of non-negative integrable functions. Note that
+  \begin{equation*}
+    \varliminf_n f_n(x) = \lim_n \inf_{j \ge n} f_j(x) = \lim_n f_n(x)
+  \end{equation*}
+  for all $x$, since $f_1(x) \le f_2(x) \le \dotsm$. Similarly,
+  \begin{equation*}
+    \varliminf_n \int f_n d\mu = \lim_n \int f_n d\mu.
+  \end{equation*}
+  By Fatou's lemma (Theorem 2.10.5),
+  \begin{equation*}
+    \int \lim_n f_n d\mu = \int \varliminf_n f_n d\mu \le \varliminf_n \int f_n d\mu = \lim_n \int f_n d\mu.
+  \end{equation*}
+  (Note that either the right-hand side or both sides of this inequality may be infinite.) On the other hand we also have
+  \begin{equation*}
+    \lim_n \int f_n d\mu \le \int \lim_n f_n d\mu
+  \end{equation*}
+  (again with the possibility of infinite values), since $f_j \le \lim_n f_n$ for all $j$. Combining these results, we obtain
+  \begin{equation*}
+    \lim_n \int f_n d\mu = \int \lim_n f_n d\mu,
+  \end{equation*}
+  with both sides either finite or infinite.
+\end{solution}
+
+\subsubsection*{2.10.7}
+Let $\{f_n\}$ be a sequence of integrable functions. Prove that if $\sum_{n=1}^\infty \int |f_n| d\mu < \infty$, then the series $\sum_{n=1}^\infty f_n(x)$ is convergent to an integrable function $f(x)$, and
+\begin{equation*}
+  \int f \, d\mu = \sum_{n=1}^\infty \int f_n d\mu.
+\end{equation*}
+
+\begin{solution}
+  Assume that
+  \begin{equation*}
+    \sum_{n=1}^\infty \int |f_n| \, d\mu < \infty.
+  \end{equation*}
+  For each $n \ge 1$, let
+  \begin{equation*}
+    g_n = \sum_{i=1}^n f_i^+.
+  \end{equation*}
+  Then $(g_n)$ is a monotone-increasing sequence of nonnegative integrable functions. Also define $g = \lim_n g_n$. By the monotone convergence theorem (Theorem 2.10.4),
+  \begin{equation*}
+    \int g \, d\mu = \lim_n \int g_n d\mu = \lim_n \int \sum_{i=1}^n f_i^+ d\mu = \lim_n \sum_{i=1}^n \int f_i^+ d\mu = \sum_{n=1}^\infty \int f_n^+ d\mu,
+  \end{equation*}
+  which is finite, since
+  \begin{equation*}
+    \sum_{n=1}^\infty \int f_n^+ d\mu \le \sum_{n=1}^\infty \int |f_n| \, d\mu < \infty.
+  \end{equation*}
+  Similarly defining $h_n = \sum_{i=1}^n f_i^-$ and $h = \lim_n h_n$, we find that 
+  \begin{equation*}
+    \int h \, d\mu = \sum_{n=1}^\infty \int f_i^- d\mu < \infty.
+  \end{equation*}
+  
+  Next, define $f = g - h$. Note that $f$ is integrable by the above, and that
+  \begin{equation*}
+    f = \sum_{n=1}^\infty (f_n^+ - f_n^-) = \sum_{n=1}^\infty f_n.
+  \end{equation*}
+  Also by what we found above,
+  \begin{equation*}
+    \int f \, d\mu = \int g \, d\mu - \int h \, d\mu = \sum_{n=1}^\infty \int f_n^+ d\mu - \sum_{n=1}^\infty \int f_n^- d\mu,
+  \end{equation*}
+  from which we easily get
+  \begin{equation*}
+    \int f \, d\mu = \sum_{n=1}^\infty \int f_n d\mu.
+  \end{equation*}
+\end{solution}
+
+\subsubsection*{2.10.8}
+Let $\{f_n\}$ be a sequence of nonnegative integrable functions. Prove that if the series $f(x) = \sum f_n(x)$ is an integrable function, then $\sum_{n=1}^\infty \int f_n d\mu < \infty$.
+
+\begin{solution}
+  Assume that $f$ is integrable. Then
+  \begin{equation*}
+    \sum_{n=1}^m \int f_n d\mu = \int \sum_{n=1}^m f_n d\mu \le \int f \, d\mu < \infty
+  \end{equation*}
+  for every $m$. Also,
+  \begin{equation*}
+    \sum_{n=1}^m \int f_n d\mu \le \sum_{n=1}^{m+1} \int f_n d\mu
+  \end{equation*}
+  for every $m$, since the functions $f_n$ are nonnegative. Hence the partial sums make up a monotone-increasing sequence of real numbers that is bounded above, and it follows that they converge to a finite number.
+\end{solution}
+
+\subsubsection*{2.10.9}
+Let $f$ and $f_n$ ($n = 1,2,\dots$) be integrable functions such that $0 \le f_n(x) \le f(x)$ a.e. Then
+\begin{equation*}
+  \int \left( \varlimsup_n f_n \right) d\mu \ge \varlimsup_n \int f_n d\mu \ge \varliminf_n \int f_n d\mu \ge \int \left( \varliminf_n f_n \right) d\mu.
+\end{equation*}
+
+\begin{solution}
+  For each $n \ge 1$, define
+  \begin{equation*}
+    \tilde f_n(x) =
+    \begin{cases}
+      f_n(x) & \text{if $0 \le f_n(x) \le f(x)$,} \\
+      0 & \text{otherwise,}
+    \end{cases}
+  \end{equation*}
+  and
+  \begin{equation*}
+    \tilde f(x) =
+    \begin{cases}
+      f(x) & \text{if $0 \le f_n(x) \le f(x)$,} \\
+      0 & \text{otherwise.}
+    \end{cases}
+  \end{equation*}
+  Then $\tilde f_n(x) = f_n(x)$ a.e., $\tilde f(x) = f(x)$ a.e., and $0 \le \tilde f_n(x) \le f(x)$ \emph{everywhere}. By Problem 2.6.1, the functions $\tilde f_n$ and $\tilde f$ are integrable with
+  \begin{equation*}
+    \int \tilde f_n d\mu = \int f_n d\mu, \quad \int \tilde f \, d\mu = \int f \, d\mu.
+  \end{equation*}
+  Moreover, since
+  \begin{equation*}
+    \varliminf_n \tilde f_n(x) \ne \varliminf_n f_n(x) \quad \implies \quad \exists n: \tilde f_n(x) \ne f_n(x)
+  \end{equation*}
+  we have
+  \begin{equation*}
+    \{x; \, \varliminf_n \tilde f_n(x) \ne \varliminf_n f_n(x)\} \subset \bigcup_{n=1}^\infty \{x; \, \tilde f_n(x) \ne f_n(x)\}.
+  \end{equation*}
+  Each of the sets in the union on the right-hand side has measure zero, so $\varliminf_n \tilde f_n(x) = \varliminf_n f_n(x)$ a.e. Similarly, $\varlimsup_n \tilde f_n(x) = \varlimsup_n f_n(x)$ a.e. These functions are all integrable by Theorem 2.10.1 (since they are bounded a.e.\ by $f$), and Problem 2.6.1 again gives
+  \begin{equation*}
+    \int \varliminf_n \tilde f_n d\mu = \int \varliminf_n f_n d\mu, \quad \int \varlimsup_n \tilde f_n d\mu = \int \varlimsup_n f_n d\mu.
+  \end{equation*}
+
+  The upshot of the preceding discussion is that we can safely assume that $0 \le f_n(x) \le f(x)$ holds \emph{everywhere}; otherwise we simply work with the functions $\tilde f_n$ and $\tilde f$ instead. With such an assumption the inequality
+  \begin{equation*}
+    \int \varliminf_n f_n d\mu \le \varliminf_n \int f_n d\mu
+  \end{equation*}
+  follows immediately from Fatou's lemma. The next inequality,
+  \begin{equation*}
+    \varliminf_n \int f_n d\mu \le \varlimsup_n \int f_n d\mu,
+  \end{equation*}
+  is trivial. For the final inequality, note that
+  \begin{equation*}
+    f(x) - \varlimsup_n f_n(x) = \varliminf_n (f(x) - f_n(x))
+  \end{equation*}
+  for all $x$. Hence, again by Fatou's lemma,
+  \begin{equation*}
+    \begin{split}
+      \int f \, d\mu - \int \varlimsup_n f_n d\mu &= \int \varliminf_n (f - f_n) d\mu \\
+      &\le \varliminf_n \int (f - f_n) d\mu \\
+      &= \varliminf_n \left( \int f \, d\mu - \int f_n d\mu \right) \\
+      &= \int f \, d\mu - \varlimsup_n \int f_n d\mu,
+    \end{split}
+  \end{equation*}
+  whereby
+  \begin{equation*}
+    \varlimsup_n \int f_n d\mu \le \int \varlimsup_n f_n d\mu.
+  \end{equation*}
+\end{solution}
+
+\subsubsection*{2.10.11}
+Let $X = \bigcup_{n=1}^\infty E_n$, $E_n \subset E_{n+1}$ for all $n$. Let $f$ be a nonnegative measurable function. Prove that
+\begin{equation*}
+  \int f \, d\mu = \lim_{n \to \infty} \int_{E_n} f \, d\mu.
+\end{equation*}
+
+\begin{solution}
+  Note that $(\chi_{E_n} f)$ is a monotone-increasing sequence of nonnegative measurable functions, and that
+  \begin{equation*}
+    \int_{E_n} f \, d\mu = \int \chi_{E_n} f \, d\mu.
+  \end{equation*}
+  Consider first the case that there is some $n$ such that $\chi_{E_n} f$ is not integrable. Then $f$ cannot be integrable, and $\chi_{E_m} f$ cannot be integrable for $m \ge n$, by Theorem 2.10.1 (since these functions bound $\chi_{E_n} f$ from above). Hence
+  \begin{equation*}
+    \int f \, d\mu = \lim_n \int \chi_{E_n} f \, d\mu = \infty
+  \end{equation*}
+  in this case. If on the other hand all of the functions $\chi_{E_n} f$ are integrable, then the monotone convergence theorem tells us that
+  \begin{equation*}
+    \lim_n \int \chi_{E_n} f \, d\mu = \int f \, d\mu,
+  \end{equation*}
+  since $ \lim_n \chi_{E_n} f = f$.
+\end{solution}
+
+\subsubsection*{2.10.12}
+Let $f$ be a nonnegative measurable function and let
+\begin{equation*}
+  f_n(x) =
+  \begin{cases}
+    f(x), & \text{if $f(x) \le n$,} \\
+    n, & \text{if $f(x) > n$.}
+  \end{cases}
+\end{equation*}
+Prove that $\lim_n \int f_n d\mu = \int f d\mu$.
+
+\begin{solution}
+  Note that $(f_n)$ is a monotone-increasing sequence of nonnegative measurable functions, with $\lim_n f_n = f$. If $f_n$ is not integrable for some $n$, then
+  \begin{equation*}
+    \int f \, d\mu = \lim_n \int f_n d\mu = \infty
+  \end{equation*}
+  by Theorem 2.10.1. Otherwise the result follows by the monotone convergence theorem.
+\end{solution}
+
+\subsubsection*{2.10.14}
+Give an example where Fatou's lemma holds with strict inequality.
+
+\begin{solution}
+  Consider $[0,1] \subset \bb R$ with Lebesgue measure. Let $f_n = \chi_{[0,1/2]}$ for odd $n$, and $f_n = \chi_{(1/2,1]}$ for even $n$. Then
+  \begin{equation*}
+    \int f_n d\mu = \frac{1}{2}
+  \end{equation*}
+  for all $n$, so that
+  \begin{equation*}
+    \varliminf_n \int f_n d\mu = \frac{1}{2},
+  \end{equation*}
+  but $\varliminf_n f_n = 0$ so that
+  \begin{equation*}
+    \int \varliminf_n f_n d\mu = 0.
+  \end{equation*}
+\end{solution}
+
 \chapter*{Chapter 3 -- Metric Spaces}
 
 \section*{Section 3.1 -- Topological and Metric Spaces}
