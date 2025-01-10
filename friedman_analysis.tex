@@ -1115,38 +1115,11 @@ Let $f$ and $f_n$ ($n = 1,2,\dots$) be integrable functions such that $0 \le f_n
 \begin{solution}
   For each $n \ge 1$, define
   \begin{equation*}
-    \tilde f_n(x) =
-    \begin{cases}
-      f_n(x) & \text{if $0 \le f_n(x) \le f(x)$,} \\
-      0 & \text{otherwise,}
-    \end{cases}
+    E_n = \{x; \, 0 \le f_n(x) \le f(x)\},
   \end{equation*}
-  and
-  \begin{equation*}
-    \tilde f(x) =
-    \begin{cases}
-      f(x) & \text{if $0 \le f_n(x) \le f(x)$,} \\
-      0 & \text{otherwise.}
-    \end{cases}
-  \end{equation*}
-  Then $\tilde f_n(x) = f_n(x)$ a.e., $\tilde f(x) = f(x)$ a.e., and $0 \le \tilde f_n(x) \le f(x)$ \emph{everywhere}. By Problem 2.6.1, the functions $\tilde f_n$ and $\tilde f$ are integrable with
-  \begin{equation*}
-    \int \tilde f_n d\mu = \int f_n d\mu, \quad \int \tilde f \, d\mu = \int f \, d\mu.
-  \end{equation*}
-  Moreover, since
-  \begin{equation*}
-    \varliminf_n \tilde f_n(x) \ne \varliminf_n f_n(x) \quad \implies \quad \exists n: \tilde f_n(x) \ne f_n(x)
-  \end{equation*}
-  we have
-  \begin{equation*}
-    \{x; \, \varliminf_n \tilde f_n(x) \ne \varliminf_n f_n(x)\} \subset \bigcup_{n=1}^\infty \{x; \, \tilde f_n(x) \ne f_n(x)\}.
-  \end{equation*}
-  Each of the sets in the union on the right-hand side has measure zero, so $\varliminf_n \tilde f_n(x) = \varliminf_n f_n(x)$ a.e. Similarly, $\varlimsup_n \tilde f_n(x) = \varlimsup_n f_n(x)$ a.e. These functions are all integrable by Theorem 2.10.1 (since they are bounded a.e.\ by $f$), and Problem 2.6.1 again gives
-  \begin{equation*}
-    \int \varliminf_n \tilde f_n d\mu = \int \varliminf_n f_n d\mu, \quad \int \varlimsup_n \tilde f_n d\mu = \int \varlimsup_n f_n d\mu.
-  \end{equation*}
+  and let $N = \bigcup_n E_n^c$. Each set $E_n^c$ has measure zero by the given assumptions on $f_n$ and $f$, hence so does $N$. Define new functions $\tilde f_n$ and $\tilde f$ which are identical to $f_n$ and $f$ except that they vanish on $N$. Then $\tilde f_n(x) = f_n(x)$ a.e., $\tilde f(x) = f(x)$ a.e., and $0 \le \tilde f_n(x) \le \tilde f(x)$ \emph{everywhere}. The new functions are integrable by Problem 2.6.1, and their integrals are identical to the old ones. Similarly, $\varliminf_n \tilde f_n(x) = \varliminf_n f_n(x)$ a.e. and $\varlimsup_n \tilde f_n(x) = \varlimsup_n f_n(x)$ a.e., once again with integrals unchanged. Thus we can safely assume that $0 \le f_n(x) \le f(x)$ holds everywhere; otherwise we simply work with the functions $\tilde f_n$ and $\tilde f$ instead.
 
-  The upshot of the preceding discussion is that we can safely assume that $0 \le f_n(x) \le f(x)$ holds \emph{everywhere}; otherwise we simply work with the functions $\tilde f_n$ and $\tilde f$ instead. With such an assumption the inequality
+  With such an assumption the inequality
   \begin{equation*}
     \int \varliminf_n f_n d\mu \le \varliminf_n \int f_n d\mu
   \end{equation*}
