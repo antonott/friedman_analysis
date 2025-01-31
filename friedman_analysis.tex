@@ -520,6 +520,59 @@ Consider the transformation $T x = \alpha x + \beta$ from the real line onto its
   \end{enumerate}
 \end{solution}
 
+
+\section*{Section 1.7 -- Metric Spaces}
+
+\subsection*{Problems}
+
+\subsubsection*{1.7.5}
+Let $A$ be any set and $x,y$ any two points. If $\rho(x,A) > \alpha$, $\rho(y,A) < \beta$ and $\alpha > \beta$, then $\rho(x,y) > \alpha - \beta$.
+
+\begin{solution}
+  Since $\rho(x,z) \le \rho(x,y) + \rho(y,z)$ for all $z \in A$ (by the triangle inequality), we have
+  \begin{equation*}
+    \alpha < \rho(x,A) \le \rho(x,y) + \rho(y,A) < \rho(x,y) + \beta,
+  \end{equation*}
+  whereby the result follows.
+\end{solution}
+
+\section*{Section 1.8 -- Metric Outer Measure}
+
+\subsection*{Problems}
+
+\subsubsection*{1.8.1}
+Prove the converse of Corollary 1.8.3 -- that is, if $\mu^*$ is an outer measure and if every open set is measurable, then $\mu^*$ is a metric outer measure.
+
+\begin{solution}
+  Suppose $A$ and $B$ are sets such that $\rho(A,B) > 0$. Let $d = \rho(A,B)$, and define $E = \bigcup_{x \in A} B(x,d)$. Then $E$ is open (hence measurable), $A \subset E$, and $B \subset E^c$. Thus
+  \begin{equation*}
+    \mu^*(A \cup B) = \mu^*((A \cup B) \cap E) + \mu^*((A \cup B) \setminus E) = \mu^*(A) + \mu^*(B)
+  \end{equation*}
+  by (1.3.3). This shows that $\mu^*$ is a metric outer measure.
+\end{solution}
+
+\subsubsection*{1.8.3}
+Let $(X, \rho)$ be a metric space and let $\{x_n\}$ be a sequence of points in $X$. Define $\mu^*(E)$ to be the number of points $x_n$ that belong to $E$. Prove that $\mu^*$ is a metric outer measure.
+
+\begin{solution}
+  To show that $\mu^*$ is an outer measure one can argue similarly to Problem 1.3.1; hence we will only show that it satisfies property (vi).
+
+  Suppose $A$ and $B$ are subsets of $X$ such that $\rho(A,B) > 0$. Then $A$ and $B$ are disjoint, so the number of points of $\{x_n\}$ that lie in $A \cup B$ is simply the sum of the number that lie in $A$ and the number that lie in $B$. That is,
+  \begin{equation*}
+    \mu^*(A \cup B) = \mu^*(A) + \mu^*(B).
+  \end{equation*}
+\end{solution}
+
+\subsubsection*{1.8.4}
+Let $(X,\rho)$ be a metric space. Define $\mu^*(E) = 1$ if $E \ne \varnothing$ and $\mu^*(\varnothing) = 0$. Is $\mu^*$ a metric outer measure?
+
+\begin{solution}
+  It was shown in Problem 1.3.2 that $\mu^*$ is an outer measure, but it is \emph{not} a \emph{metric} outer measure (unless $|X| < 2$). Indeed, if $X$ contains two distinct elements $x$ and $y$, take $A = \{x\}$ and $B = \{y\}$. Then $\rho(A,B) = \rho(x,y) > 0$, but
+  \begin{equation*}
+    \mu^*(A \cup B) = 1 \ne 2 = \mu^*(A) + \mu^*(B).
+  \end{equation*}
+\end{solution}
+
 \chapter*{Chapter 2 -- Integration}
 
 \section*{Section 2.1 -- Definition of Measurable Functions}
