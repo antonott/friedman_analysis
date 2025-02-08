@@ -573,6 +573,49 @@ Let $(X,\rho)$ be a metric space. Define $\mu^*(E) = 1$ if $E \ne \varnothing$ a
   \end{equation*}
 \end{solution}
 
+
+\section*{Section 1.9 -- Construction of Metric Outer Measures}
+
+\subsection*{Problems}
+
+\subsubsection*{1.9.7}
+If a set $F$ in $R^n$ is Lebesgue-measurable and if $\mu(F) < \infty$, then for any $\epsilon > 0$ there exists an open set $E$ such that $E \supset F$ and $\mu(E) < \mu(F) + \epsilon$.
+
+\begin{solution}
+  Let $\sc K$, $\lambda$, $\mu^*$, and $\mu$ be as in Section 1.6. By the definition of the Lebesgue measure via the Lebesgue outer measure, there exist $\{E_n\} \subset \sc K$ such that $F \subset E := \bigcup_n E_n$ and
+  \begin{equation*}
+    \sum_n \lambda(E_n) < \mu(F) + \epsilon.
+  \end{equation*}
+  Since every element of $\sc K$ is open, $E$ is open; thus $E$ is Lebesgue-measurable by Problem 1.9.3. It follows that
+  \begin{equation*}
+    \mu(E) \le \sum_n \lambda(E_n),
+  \end{equation*}
+  hence $\mu(E) < \mu(F) + \epsilon$.
+\end{solution}
+
+\subsubsection*{1.9.8}
+If a set $F$ in $R^n$ is Lebesgue-measurable, then there exists a Borel set $E$ such that $E \supset F$ and $\mu(E - F) = 0$. [Hint: Consider first the case where $\mu(F) < \infty$.]
+
+\begin{solution}
+  Assume for now that $\mu(F) < \infty$. By the previous problem, for every $n \ge 1$ there exists an open set $E_n$ such that $E_n \supset F$ and $\mu(E_n) < \mu(F) + 1/n$. Let $E = \varliminf_n E_n$; then $E$ is a Borel set, and measurable by Problem 1.9.3. Moreover, $\mu(F) \ge \mu(E)$ since $F \supset E$, and
+  \begin{equation*}
+    \mu(E) \le \varliminf_n \mu(E_n) \le \mu(F)
+  \end{equation*}
+  by Theorem 1.2.2. It follows that
+  \begin{equation*}
+    \mu(E - F) = \mu(E) - \mu(F) = 0.
+  \end{equation*}
+
+  Now remove the assumption that $\mu(F) < \infty$. Fix a sequence $A_1, A_2, \dots$ of Borel sets such that $X = \bigcup_n A_n$ and $\mu(A_n) < \infty$. For example, by Problem 1.9.6, we can take the sets $A_n$ to be a suitable family of open intervals of increasing size. For each $n$, let $F_n = F \cap \bigcup_{i=1}^n A_i$, so that $\mu(F_n) < \infty$. By the previous argument, there exists a Borel set $G_n$ such that $G_n \supset F_n$ and $\mu(G_n - F_n) = 0$. Define $G = \varliminf_n G_n$; then $G_n$ is a Borel set (hence measurable). Since
+  \begin{equation*}
+    \varliminf_n (G_n - F_n) = \varliminf_n G_n - \varlimsup_n F_n = G - F,
+  \end{equation*}
+  we have
+  \begin{equation*}
+    \mu(G - F) \le \varliminf_n \mu(G_n - F_n) = 0.
+  \end{equation*}
+\end{solution}
+
 \chapter*{Chapter 2 -- Integration}
 
 \section*{Section 2.1 -- Definition of Measurable Functions}
@@ -1280,7 +1323,7 @@ then also $(X,\hat \rho)$ is a metric space. [\emph{Hint:} Cf.\ the proof of (3.
   \begin{equation*}
     \frac{\rho(x,y) + \rho(y,z)}{1 + \rho(x,y) + \rho(y,z)} \le \frac{\rho(x,y)}{1 + \rho(x,y)} + \frac{\rho(y,z)}{1 + \rho(y,z)}.
   \end{equation*}
-  It follows that $\hat \rho(x,z) \le \hat \rho(x,y) + \rho(y,z)$.
+  It follows that $\hat \rho(x,z) \le \hat \rho(x,y) + \hat \rho(y,z)$.
 \end{solution}
 
 \subsubsection*{3.1.2}
@@ -1316,7 +1359,7 @@ Prove that the spaces $l^1, s, c, c_0$ are separable metric spaces.
   \begin{equation*}
     \sum_{i=n+1}^\infty |x_i| < \frac{\epsilon}{2}.
   \end{equation*}
-  For $i = 1, \dots, n$, choose $y_i \in \bb Q$ (or $y_i$ with rational real and imaginary parts in the complex case) such that $|x_i - y_i| < \epsilon/2n$, and let $y = (y_1, \dots, y_n, 0, 0, \dots)$. Then
+  For $i = 1, \dots, n$, choose $y_i \in \bb Q$ (or $y_i \in \bb Q + i \bb Q$ in the complex case) such that $|x_i - y_i| < \epsilon/2n$, and let $y = (y_1, \dots, y_n, 0, 0, \dots)$. Then
   \begin{equation*}
     \rho(x,y) = \sum_{i=1}^n |x_i - y_i| + \sum_{i=n+1}^\infty |x_i| < \epsilon.
   \end{equation*}
