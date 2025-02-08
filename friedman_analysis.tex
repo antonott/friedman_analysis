@@ -9,6 +9,12 @@
 
 \DeclareMathOperator{\vspan}{span}
 
+\let\Re\relax
+\DeclareMathOperator{\Re}{\mathrm{Re}}
+
+\let\Im\relax
+\DeclareMathOperator{\Im}{\mathrm{Im}}
+
 \newcommand{\bb}[1]{\mathbb{#1}}
 \newcommand{\norm}[1]{{\lVert #1 \rVert}}
 \newcommand{\snorm}[1]{\left\lVert #1 \right\rVert}
@@ -614,6 +620,87 @@ If a set $F$ in $R^n$ is Lebesgue-measurable, then there exists a Borel set $E$ 
   \begin{equation*}
     \mu(G - F) \le \varliminf_n \mu(G_n - F_n) = 0.
   \end{equation*}
+\end{solution}
+
+\section*{Section 1.10 -- Signed Measures}
+
+\subsection*{Problems}
+
+\subsubsection*{1.10.1}
+If $X = \bigcup_{n=1}^\infty A_n$ and $\mu$ is a signed measure with $|\mu(A_n)| < \infty$ for all $n$, then $\mu^+$ and $\mu^-$ are $\sigma$-finite. (Hence, by definition, $\mu$ is $\sigma$-finite.)
+
+\begin{solution}
+  For all $n$ we have $|\mu^+(A_n) - \mu^-(A_n)| = |\mu(A_n)| < \infty$, hence $\mu^+(A_n) < \infty$ and $\mu^-(A_n) < \infty$. It follows that $\mu^+$ and $\mu^-$ are $\sigma$-finite.
+\end{solution}
+
+\subsubsection*{1.10.2}
+Let $\mu$ be a signed measure and let $\{E_n\}$ be a monotone sequence of measurable sets [with $|\mu(E_1)| < \infty$ if $\{E_n\}$ decreasing]. Then
+\begin{equation*}
+  \mu \left( \lim_n E_n \right) = \lim_n \mu(E_n).
+\end{equation*}
+
+\begin{solution}
+  Note that
+  \begin{equation*}
+    \mu^\pm \left( \lim_n E_n \right) = \lim_n \mu^\pm(E_n)
+  \end{equation*}
+  by Theorem 1.2.1. Hence
+  \begin{equation*}
+    \mu \left( \lim_n E_n \right) = \mu^+ \left( \lim_n E_n \right) - \mu^- \left( \lim_n E_n \right) = \lim_n \mu^+(E_n) - \lim_n \mu^-(E_n),
+  \end{equation*}
+  while
+  \begin{equation*}
+    \lim_n \mu(E_n) = \lim_n \left[ \mu^+(E_n) - \mu^-(E_n) \right].
+  \end{equation*}
+  If $\mu^\pm \left( \lim_n E_n \right)$ are both finite, then the sequences $\mu^\pm(E_n)$ are convergent, and the result follows immediately. If $\mu^+ \left( \lim_n E_n \right) = \infty$, then $\mu^-$ must be a finite measure. It follows that the sequence $\mu^-(E_n)$ is bounded by some $K > 0$, hence
+  \begin{equation*}
+    \mu \left( \lim_n E_n \right) \ge \infty - K = \infty
+  \end{equation*}
+  and
+  \begin{equation*}
+    \lim_n \mu(E_n) \ge \lim_n \left[ \mu^+(E_n) - K \right] = \mu^+ \left( \lim_n E_n \right) - K = \infty,
+  \end{equation*}
+  so that $\mu \left( \lim_n E_n \right) = \lim_n \mu(E_n)$ again. The argument when $\mu^- \left( \lim_n E_n \right) = \infty$ is similar.
+\end{solution}
+
+\subsubsection*{1.10.3}
+Give an example of a signed measure for which the Hahn decomposition is not unique.
+
+\begin{solution}
+  Let $X = \{0,1\}$, let $\cal A$ be the power set of $X$, and let $\mu(E) = \sum_{x \in E} x$. Then $\mu$ is a signed measure; in fact it is a measure. One Hahn decomposition is given by $A = X$ and $B = \varnothing$, another by $A = \{1\}$ and $B = \{0\}$.
+\end{solution}
+
+\subsubsection*{1.10.4}
+If $X = A_1 \cup B_1$, $X = A_2 \cup B_2$ are two Hahn decompositions of a signed measure $\mu$, then for any measurable set $E$,
+\begin{equation*}
+  \mu(E \cap A_1) = \mu(E \cap A_2), \quad \mu(E \cap B_1) = \mu(E \cap B_2).
+\end{equation*}
+
+\begin{solution}
+  Consider $\mu(E \cap A_1 \cap B_2)$. On the one hand it is nonnegative, since $A_1$ is positive with respect to $\mu$, on the other it is nonpositive, since $B_2$ is negative. Hence $\mu(E \cap A_1 \cap B_2) = 0$, and similarly $\mu(E \cap A_2 \cap B_1) = 0$. It follows that
+  \begin{equation*}
+    \begin{split}
+      \mu(E \cap A_1) &= \mu(E \cap A_1 \cap A_2) + \mu(E \cap A_1 \cap B_2) \\
+      &= \mu(E \cap A_2 \cap A_1) + \mu(E \cap A_2 \cap B_1) \\
+      &= \mu(E \cap A_2).
+    \end{split}
+  \end{equation*}
+  The argument that $\mu(E \cap B_1) = \mu(E \cap B_2)$ is similar.
+\end{solution}
+
+\subsubsection*{1.10.5}
+A \emph{complex measure} is, by definition, a finite complex-valued set functions satisfying the properties (i), (iii), (iv) of Definition 1.2.1. Prove that $\mu$ is a complex measure with domain $\cal A$ if and only if their exist finite measures $\mu_1, \mu_2, \mu_3, \mu_4$ with the same domain $\cal A$ such that
+\begin{equation*}
+  \mu = \mu_1 - \mu_2 + i \mu_3 - i \mu_4.
+\end{equation*}
+
+\begin{solution}
+  Suppose $\mu$ is a complex measure. Define $\alpha = \Re \mu$ and $\beta = \Im \mu$. Then $\alpha$ and $\beta$ are easily seen to be finite signed measures, so they each have a Jordan decomposition with $\alpha^\pm$ and $\beta^\pm$ finite, and
+  \begin{equation*}
+    \mu = \alpha^+ - \alpha^- + i \beta^+ - i \beta^-.
+  \end{equation*}
+
+  The converse implication is pretty much immediate.
 \end{solution}
 
 \chapter*{Chapter 2 -- Integration}
