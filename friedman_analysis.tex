@@ -1388,6 +1388,82 @@ Give an example where Fatou's lemma holds with strict inequality.
   \end{equation*}
 \end{solution}
 
+
+\section*{Section 2.12 -- The Radon-Nikodym Theorem}
+
+\subsection*{Problems}
+
+\subsubsection*{2.12.1}
+Prove that if $f$ is integrable with respect to $\mu$ then it is also integrable with respect to $\mu^+$ and $\mu^-$. [Therefore the integrals in (2.12.5) are well defined.]
+
+\begin{solution}
+  Since $f$ is $|\mu|$-integrable there exists a sequence $(f_n)$ of $|\mu|$-integrable simple functions that is Cauchy in the mean w.r.t.\ $|\mu|$ and converges to $f$ a.e.\ w.r.t.\ $|\mu|$. Note that $\mu^+ \le |\mu|$; consequently the functions $f_n$ are $\mu^+$-integrable. Another simple consequence is that $\int \varphi \, d\mu^+ \le \int \varphi \, d|\mu|$ for all nonnegative $|\mu|$-integrable simple functions $\varphi$. Hence
+  \begin{equation*}
+    \int |f_m - f_n| \, d\mu^+ \le \int |f_m - f_n| \, d|\mu|
+  \end{equation*}
+  for all $m,n \ge 1$, and it follows that $(f_n)$ is Cauchy in the mean w.r.t.\ $\mu^+$. Finally, letting $N = \{x; \, f_n(x) \not\to f(x)\}$, we have $\mu^+(N) \le |\mu|(N) = 0$, so that $f_n \to f$ a.e.\ w.r.t.\ $\mu^+$. Thus $f$ is $\mu^+$-integrable. The proof that $f$ is $\mu^-$-integrable is similar.
+\end{solution}
+
+\subsubsection*{2.12.2}
+The Radon-Nikodym theorem remains true in case $\mu$ is a $\sigma$-finite signed measure.
+
+\begin{solution}
+  Let $X = A \cup B$ be a Hahn decomposition of $(X, \cal A, \mu)$, and let $\mu = \mu^+ - \mu^-$ be the corresponding Jordan decomposition. Let $\cal A_A \subset \cal A$ be the collection of all measurable subsets of $A$, and $\cal A_B \subset \cal A$ the measurable subsets of $B$. We will consider separately the measure subspaces $(A, \cal A_A, \mu^+)$ and $(B, \cal A_B, \mu^-)$ (c.f.\ Problems 2.1.1-2.1.3).
+
+  Let $\nu$ be $\sigma$-finite measure on $\cal A$, with $\nu \ll \mu$. Note that $|\mu|(E) = \mu^+(E)$ for $E \in \cal A_A$, hence $\nu \ll \mu^+$ on $(A, \cal A_A, \mu^+)$. The Radon-Nikodym theorem yields a measurable function $f: A \to \bb R$ such that
+  \begin{equation*}
+    \nu(E) = \int_E f \, d\mu^+ \quad \text{for all $E \in \cal A_A$ such that $|\nu|(E) < \infty$.}
+  \end{equation*}
+  Similarly, there is a measurable function $g: B \to \bb R$ such that
+  \begin{equation*}
+    \nu(E) = \int_E g \, d\mu^- \quad \text{for all $E \in \cal A_B$ such that $|\nu|(E) < \infty$.}
+  \end{equation*}
+  It follows that
+  \begin{equation*}
+    \nu(E) = \nu(E \cap A) + \nu(E \cap B) = \int_{E \cap A} f \, d\mu^+ + \int_{E \cap B} g \, d\mu^-
+  \end{equation*}
+  for all $E \in \cal A$ such that $|\nu|(E) < \infty$. Define $h: X \to \bb R$ such that $h = f$ on $A$ and $h = -g$ on $B$. Clearly $h$ is measurable, and if $E \in \cal A$ and $|\nu|(E) < \infty$, then $h$ is $\mu^+$-integrable on $E$ since it is separately integrable on $E \cap A$ (where it equals $f$) and on $E \cap B$ (since $\mu^+(E \cap B) = 0$, c.f. Theorem 2.7.4); similarly $h$ is $\mu^-$-integrable on $E$. Thus, for such $E$,
+  \begin{equation*}
+    \begin{split}
+      \nu(E) &= \int_{E \cap A} h \, d\mu^+ - \int_{E \cap B} h \, d\mu^- \\
+      &= \int_{E \cap A} h \, d\mu^+ + \int_{E \cap B} h \, d\mu^+ - \int_{E \cap A} h \, d\mu^- - \int_{E \cap B} h \, d\mu^- \\
+      &= \int_E h \, d\mu^+ - \int_E h \, d\mu^- \\
+      &= \int_E h \, d\mu.
+    \end{split}
+  \end{equation*}
+
+  Finally, suppose there is another measurable function $\tilde h: X \to \overline{\bb R}$ (where $\overline{\bb R} = \bb R \cup \{\pm \infty\}$) such that $\nu(E) = \int_E \tilde h \, d\mu$ whenever $E \in \cal A$ and $|\nu|(E) < \infty$. Define $\tilde f: A \to \overline{\bb R}$ and $\tilde g: B \to \overline{\bb R}$ such that they equal $\tilde h$ on their respective domains. Then
+  \begin{equation*}
+    \nu(E) = \int_E \tilde h \, d\mu = \int_E \tilde h \, d\mu^+ + \int_E \tilde h \, d\mu^- = \int_E \tilde f \, d\mu^+
+  \end{equation*}
+  for all $E \in \cal A_A$ such that $|\nu|(E) < \infty$, hence $\tilde f = f$ a.e.\ in $(A, \cal A_A, \mu^+)$ by the Radon-Nikodym theorem. Similarly, $\tilde g = g$ a.e.\ in $(B, \cal A_B, \mu^-)$. Let $N = \{x; \, \tilde h(x) \ne h(x)\}$, and note that $N \cap A = \{x \in A; \, \tilde f(x) \ne f(x)\}$ and $N \cap B = \{x \in B; \, \tilde g(x) \ne g(x)\}$. Then
+  \begin{equation*}
+    |\mu|(N) = \mu^+(N) + \mu^-(N) = \mu^+(N \cap A) + \mu^-(N \cap B) = 0,
+  \end{equation*}
+  so $\tilde h = h$ a.e.\ w.r.t.\ $|\mu|$.
+\end{solution}
+
+\subsubsection*{2.12.3}
+If $\nu$ and $\mu$ are $\sigma$-finite signed measures and $\nu \ll \mu$, then the set $\{x; \, (d\nu/d\mu)(x) = 0\}$ has $\nu$-measure zero.
+
+\begin{solution}
+  By the preceding problem, there exists a Radon-Nikodym derivative $f$ of $\nu$ w.r.t.\ $\mu$. Let $N = \{x; \, f(x) = 0\}$. Since $\nu$ is $\sigma$-finite we can write $X = \bigcup_n A_n$ with $A_n$ disjoint measurable sets such that $|\nu|(A_n) < \infty$. It follows that
+  \begin{equation*}
+    \nu(N) = \sum_n \nu(N \cap A_n) = \sum_n \int_{N \cap A_n} f \, d\mu = \sum_n 0 = 0.
+  \end{equation*}
+\end{solution}
+
+\subsubsection*{2.12.4}
+Let $\nu$ and $\mu$ be $\sigma$-finite signed measures and let $\nu \ll \mu$. For any $\nu$-integrable function $\varphi$, the function $\varphi (d\nu/d\mu)$ is $\mu$-integrable and
+\begin{equation*}
+  \int \varphi \, d\nu = \int \varphi \, \frac{d\nu}{d\mu} \, d\mu.
+\end{equation*}
+[\emph{Hint:} Consider first the case where $\mu$ and $\nu$ are measures and $\varphi$ is a simple function.]
+
+\begin{solution}
+
+\end{solution}
+
 \chapter*{Chapter 3 -- Metric Spaces}
 
 \section*{Section 3.1 -- Topological and Metric Spaces}
