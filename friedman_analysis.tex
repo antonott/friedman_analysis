@@ -2358,6 +2358,104 @@ For every normed linear space $X$ there is a set $A$ such that $X$ is isomorphic
 \end{solution}
 
 
+
+\section*{Section 4.10 -- Conjugate Spaces and Reflexive Spaces}
+
+\subsection*{Problems}
+
+\subsubsection*{4.10.1}
+A sequence $\{x_n\}$ cannot have two distinct weak limits.
+
+\begin{solution}
+  Let $(x_n)$ be a sequence in a normed linear space $X$, and suppose $(x_n)$ converges weakly to both $x$ and $y$ in $X$. Then
+  \begin{equation*}
+    x^*(x - y) = x^*(x) - x^*(y) = \lim_n x^*(x_n) - \lim_n x^*(x_n) = 0
+  \end{equation*}
+  for all $x^* \in X^*$, so $x - y = 0$ by Corollary 4.8.4.
+\end{solution}
+
+\subsubsection*{4.10.2}
+Let $X$ be a normed linear space and let $B$ be a dense subset of $X^*$. If a sequence $\{x_n\}$ in $X$ is bounded, and if $\lim_n x^*(x_n)$ exists for each $x^* \in B$, then $\lim_n x^*(x_n)$ exists for all $x^*$ in $X^*$.
+
+\begin{solution}
+  Let $X$, $B$, and $(x_n)$ be as in the problem description. Fix any $x^* \in X^*$; we will show that $(x^*(x_n))$ is a Cauchy sequence (in $\bb R$ or $\bb C$), and hence that $\lim_n x^*(x_n)$ exists.
+
+  Given $\epsilon > 0$, choose $y^* \in B$ such that $\norm{x^* - y^*} < \epsilon/4M$, where $M > 0$ is an upper bound of $\{\norm{x_n}\}$. Since $\lim_n y^*(x_n)$ exists, there is some $N \in \bb N$ such that
+  \begin{equation*}
+    m, n \ge N \implies \norm{y^*(x_m) - y^*(x_n)} < \epsilon/2.
+  \end{equation*}
+  It follows that
+  \begin{equation*}
+    \begin{split}
+      \norm{x^*(x_m) - x^*(x_n)} &\le \norm{x^*(x_m) - y^*(x_m)} + \norm{y^*(x_m) - y^*(x_n)} \\
+      &\quad + \norm{y^*(x_n) - x^*(x_n)} \\
+      &< \norm{x^* - y^*} \cdot \norm{x_m} + \frac{\epsilon}{2} + \norm{y^* - x^*} \cdot \norm{x_n} \\
+      &< \epsilon
+    \end{split}
+  \end{equation*}
+  for all $m,n \ge N$, and hence that $(x^*(x_n))$ is a Cauchy sequence.
+\end{solution}
+
+\subsubsection*{4.10.3}
+In a finite-dimensional normed linear space, the concepts of convergence and weak convergene coincide.
+
+\begin{solution}
+  It is clear that (strong) convergence implies weak convergence (also for infinite-dimensional spaces), hence we need only prove the converse. Moreover, since any two norms on a finite-dimensional linear space are equivalent by Problem 4.3.1, it suffices to prove the result for any one particular norm.
+
+  Let $X$ be a finite-dimensional linear space, with $\{e_1, \dots, e_n\}$ a basis. Define a norm $\norm{\phantom x}$ on $X$ by
+  \begin{equation*}
+    \snorm{\sum_{i=1}^n \lambda_i e_i} = \sum_{i=1}^n |\lambda_i|.
+  \end{equation*}
+  Next, define $e_1^*, \dots, e_n^* \in X^*$ by
+  \begin{equation*}
+    e_i^*(e_j) =
+    \begin{cases}
+      1 & \text{if $i=j$,} \\
+      0 & \text{if $i \ne j$.}
+    \end{cases}
+  \end{equation*}
+  It is easily verified that the functionals $e_i^*$ are linearly independent, and that every $x^* \in X^*$ can be written
+  \begin{equation*}
+    x^* = \sum_{i=1}^n x^*(e_i) e_i^*.
+  \end{equation*}
+  Hence $\{e_1^*, \dots, e_n^*\}$ is a basis of $X^*$. Note also that
+  \begin{equation*}
+    e_j^* \left( \sum_{i=1}^n \lambda_i e_i \right) = \lambda_j,
+  \end{equation*}
+  so in fact 
+  \begin{equation*}
+    x = \sum_{i=1}^n e_i^*(x) e_i
+  \end{equation*}
+  for all $x \in X$.
+
+  Now let $(x_k)$ be a weakly convergent sequence in $X$, with weak limit $x$. Then
+  \begin{equation*}
+    \norm{x_k - x} = \snorm{\sum_{i=1}^n e_i^*(x_k - x) e_i} = \sum_{i=1}^n |e_i^*(x_k) - e_i^*(x)|.
+  \end{equation*}
+  The right-hand side of this inequality goes to 0 as $k \to \infty$ by weak convergence, hence $\norm{x_k - x} \to 0$ as well, and $(x_k)$ converges (strongly) to $x$.
+\end{solution}
+
+\subsubsection*{4.10.7}
+A normed linear space that is weakly complete is complete.
+
+\begin{solution}
+  Let $(x_n)$ be a Cauchy sequence in a weakly complete normed linear space $X$. For all $x^* \in X^*$ we have
+  \begin{equation*}
+    |x^*(x_m) - x^*(x_n)| \le \norm{x^*} \cdot \norm{x_m - x_n} \to 0 \quad \text{as $m,n \to \infty$,}
+  \end{equation*}
+  so $(x_n)$ is weakly Cauchy as well. Thus $(x_n)$ has a weak limit $x \in X$, by the weak completeness of $X$.
+
+  Assume towards a contradiction that $(x_n)$ does not converge (strongly) to $x$. Then there exists $\epsilon > 0$ such that $\norm{x_n - x} \ge \epsilon$ for infinitely many $n$. Let $(y_n)$ be a subsequence such that $\norm{y_n - x} \ge \epsilon$ and $\norm{y_m - y_n} < \epsilon/2$ for all $m,n \in \bb N$. By Corollary 4.8.4 there exists $x^* \in X^*$ such that $\norm{x^*} = 1$ and $x^*(y_1 - x) = \norm{y_1 - x}$, hence we have
+  \begin{equation*}
+    \begin{split}
+      x^*(y_n) - x^*(x) &= x^*(y_1 - x) - x^*(y_1 - y_n) \\
+      &\ge \norm{y_1 - x} - \norm{x^*} \cdot \norm{y_1 - y_n} \\
+      &> \epsilon/2
+    \end{split}
+  \end{equation*}
+  for all $n$. But $|x^*(y_n) - x^*(x)| \to 0$ since $(y_n)$ is a subsequence of $(x_n)$, so we have a contradiction. Thus $(x_n)$ converges (strongly) to $x$, and $X$ is complete.
+\end{solution}
+
 \chapter*{Chapter 6 -- Hilbert Spaces and Spectral Theory}
 
 \section*{Section 6.2 -- The Projection Theorem}
