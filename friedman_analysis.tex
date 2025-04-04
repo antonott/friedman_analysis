@@ -1967,6 +1967,62 @@ Let $T$ be an additive operator [that is, $T(x_1 + x_2) = Tx_1 + Tx_2$] from a r
   so $T(\lambda x) = \lambda \, Tx$.
 \end{solution}
 
+
+\subsubsection*{4.4.4}
+Let $f(x) = \sum_{n=0}^\infty a_n z^n$ be an entire complex analytic function. Prove that for every $T \in \sc B(X)$, $X$ a Banach space, the series $\sum_{n=0}^\infty a_n T^n$ ($T^0 = I$) is absolutely convergent in $\sc B(X)$. One defines $f(T)$ by
+\begin{equation*}
+  f(T) = \sum_{n=0}^\infty a_n T^n.
+\end{equation*}
+
+\begin{solution}
+  Recall that every complex power series converges absolutely on the interior of its disc of convergence (see for example Abel's theorem in Ahlfors' \emph{Complex Analysis}). For $\sum_n a_n z^n$ the disc of convergence is the entire complex plane (since $f$ is entire), so $\sum_n |a_n z^n| < \infty$ for all $z \in \bb C$.
+
+  By Theorem 4.4.4, $\sc B(X)$ is a Banach space and hence a Banach algebra by Example 2. Thus $\norm{T^n} = \norm T^n$ for all $n \in \bb N$. It follows that
+  \begin{equation*}
+    \sum_{n=0}^\infty \norm{a_n T^n} \le \sum_{n=0}^\infty |a_n| \cdot \norm T^n < \infty.
+  \end{equation*}
+  The series $\sum_{n=0}^\infty a_n T^n$ is therefore (uniformly) convergent, and defines an operator $f(T) \in \sc B(X)$.
+
+  \emph{Remark:} If $(S_n)$ is a (uniformly) convergent sequence of operators in $\sc B(X)$ with limit $S$, then
+  \begin{equation*}
+    |S_n x - S x| \le \norm{S_n - S} \cdot \norm x \to 0
+  \end{equation*}
+  for all $x \in X$, so that $S_n x \to S x$ (pointwise) as well. In particular,
+  \begin{equation*}
+    f(T) x = \sum_{n=0}^\infty a_n T^n x.
+  \end{equation*}
+\end{solution}
+
+\subsubsection*{4.4.5}
+Let $f(z)$, $g(z)$ be entire complex analytic functions, and let $h(z) = f(z)g(z)$. Prove that for any $T \in \sc B(X)$, $X$ a Banach space, $h(T) = f(T) g(T)$. In particular we have $e^{\lambda T} e^{\mu T} = e^{(\lambda + \mu)T}$.
+
+\begin{solution}
+  We will use Mertens' theorem; see for example Theorem 3.50 in Rudin's \emph{Principles of Mathematical Analysis}, and note that the proof remains valid for any Banach algebra.
+
+  Since $f$ and $g$ are entire they can be expressed as everywhere convergent power series
+  \begin{equation*}
+    f(z) = \sum_{n=0}^\infty a_n z^n, \quad g(z) = \sum_{n=0}^\infty b_n z^n.
+  \end{equation*}
+  By Mertens' theorem,
+  \begin{equation*}
+    h(z) = \sum_{n=0}^\infty c_n z^n, \quad c_n = \sum_{k=0}^n a_k b_{n-k} z^n.
+  \end{equation*}
+  Let $f(T)$, $g(T)$, and $h(T)$ be defined as in the previous problem. Then, again by Mertens' theorem (applied to the Banach algebra $\sc B(X)$),
+  \begin{equation*}
+    f(T)g(T) = \sum_{n=0}^\infty \sum_{k=0}^n a_k T^k b_{n-k} T^{n-k} = \sum_{n=0}^\infty \sum_{k=0}^n a_k b_{n-k} T^n = \sum_{n=0}^\infty c_n T^n = h(T).
+  \end{equation*}
+
+  The exponential function is known from basic complex analysis to be entire, with power series representation
+  \begin{equation*}
+    e^z = \sum_{n=0}^\infty \frac{z^n}{n!}.
+  \end{equation*}
+  (This is either a theorem or a definition, depending on how the subject is developed.) It is also well-known that $e^{z + w} = e^{z} e^{w}$ for all $z, w \in \bb C$. Hence, given $\lambda, \mu \in \bb C$, we can apply the above to $f(z) = e^{\lambda z}$, $g(z) = e^{\mu z}$, and $h(z) = e^{(\lambda + \mu)z}$, all clearly entire functions, to obtain
+  \begin{equation*}
+    e^{(\lambda + \mu) T} = e^{\lambda T} e^{\mu T}
+  \end{equation*}
+  for all $T \in \sc B(X)$.
+\end{solution}
+
 \subsubsection*{4.4.6}
 Find the norm of the operator $A \in \sc B(X)$ given by $(Af)(t) = tf(t)$ $(0 \le t \le 1)$, where (a) $X = C[0,1]$, (b) $X = L^p(0,1)$ and ($1 \le p \le \infty$).
 
@@ -2231,37 +2287,36 @@ Let $X$ be an infinite-dimensional Banach space. Prove that there exists an infi
 Let $u(t)$ be a function defined on $a < t < b$ with values in a Banach space $X$. We say that $u(t)$ is \emph{strongly differentiable at $t$} [\emph{on $(a,b)$}] if $\lim_{h \to 0} \{[u(t+h) - u(t)]/h\}$ exists [for all $t \in (a,b)$]. The limit is denoted by $du(t)/dt$ and is called the derivative of $u(t)$. For functions $A(t)$ with values in $\sc B(X)$, if $\lim_{h \to 0} \{[A(t+h)x - A(t)x]/h\}$ exists for any $x \in X$, then we say that $A(t)$ has a \emph{strong derivative}. If $\lim_{h \to 0} \{[A(t+h)-A(t)]/h\}$ exists (in the uniform topology), then we say that $A(t)$ is \emph{uniformly differentiable}. Prove that $e^{tA}$ [$A \in \sc B(X)$] is uniformly differentiable and $de^{tA}/dt = A e^{tA}$.
 
 \begin{solution}
-  First note that, given any $t \in \bb R$,
+  Fix any $t \in \bb R$ and $A \in \sc B(X)$. By Problem 4.4.4,
   \begin{equation*}
-    \sum_{n=0}^\infty \snorm{\frac{(tA)^n}{n!}} \le \sum_{n=0}^\infty \frac{(|t|^n \norm{A}^n)}{n!} = e^{|t| \, \norm A} < \infty,
+    e^{tA} = \sum_{n=0}^\infty \frac{(tA)^n}{n!} \in \sc B(X),
   \end{equation*}
-  so that the series $\sum_{n=0}^\infty (tA)^n/(n!)$ is strongly convergent (to an operator) in $\sc B(X)$ (c.f.\ Theorems 4.1.2, 4.5.2). Hence we can define a map $E_A: \bb R \to \sc B(X)$ by $E_A(t) = \sum_{n=0}^\infty (tA)^n/(n!)$. Instead of $E_A(t)$ we typically write $e^{tA}$.
-
-  With a little work we find that
+  and by Problem 4.4.5 we have $e^{(t+h)A} = e^{hA} e^{tA}$ for all $h \in \bb R$. It follows that
   \begin{equation*}
-    \frac{e^{(t+h)A} - e^{tA}}{h} - A e^{tA} = \sum_{n=2}^\infty \frac{1}{n!} \frac{(t+h)^n - t^n - nht^{n-1}}{h} A^n.
+    \begin{split}
+      \snorm{\frac{e^{(t+h)A} - e^{tA}}{h} - A e^{tA}} = \snorm{\left( \frac{e^{hA} - I}{h} - A \right) e^{tA}} \le \snorm{\frac{e^{hA} - I}{h} - A} \cdot \snorm{e^{tA}},
+    \end{split}
   \end{equation*}
-  Further simplification with the binomial formula yields
+  hence it is sufficient to show that
   \begin{equation*}
-    \frac{(t+h)^n - t^n - nht^{n-1}}{h} = \sum_{k=2}^n \binom{n}{k} t^{n-k} h^{k-1}.
+    \lim_{h \to 0} \frac{e^{hA} - I}{h} = A.
   \end{equation*}
-  Hence
+  To that end, note that
   \begin{equation*}
-    \snorm{\frac{e^{(t+h)A} - e^{tA}}{h} - A e^{tA}} \le \sum_{n=2}^\infty \frac{\norm{A}^n}{n!} \sum_{k=2}^n \binom{n}{k} |t|^{n-k} |h|^{k-1}.
+    \frac{e^{hA} - I}{h} - A = \frac{1}{h} \left( \sum_{n=0}^\infty \frac{(hA)^n}{n!} - I - hA \right) = \frac{1}{h} \sum_{n=2}^\infty \frac{(hA)^n}{n!}.
   \end{equation*}
-  If $t = 0$, then the right-hand side becomes
+  Thus
   \begin{equation*}
-    |h| \cdot \norm{A}^2 \sum_{n=0}^\infty \frac{(|h| \, \norm{A})^n}{(n+2)!} \le |h| \, \norm{A}^2 \, e^{|h| \, \norm{A}},
+    \begin{split}
+      \begin{split}
+        \snorm{\frac{e^{hA} - I}{h} - A} &\le \frac{1}{|h|} \sum_{n=2}^\infty \frac{|h|^n \cdot \norm A^n}{n!} \\
+        &= |h| \cdot \norm A^2 \sum_{n=2}^\infty \frac{|h|^{n-2} \cdot \norm A^{n-2}}{n!} \\
+        &= |h| \cdot \norm A^2 \sum_{n=0}^\infty \frac{(|h| \cdot \norm A)^n}{(n+2)!} \\
+        &\le |h| \cdot \norm A^2 \cdot e^{|h| \cdot \norm A},
+      \end{split}
+    \end{split}
   \end{equation*}
-  which goes to zero as $h \to 0$. If $t \ne 0$, then
-  \begin{equation*}
-    \sum_{k=2}^n \binom{n}{k} |t|^{n-k} |h|^{k-1} \le |h| \, |t|^{n-2} \sum_{k=2}^n \binom{n}{k} = |h| \, |t|^{n-2} \, 2^n
-  \end{equation*}
-  whenever $|h| \le |t|$, yielding
-  \begin{equation*}
-    \snorm{\frac{e^{(t+h)A} - e^{tA}}{h} - A e^{tA}} \le \frac{|h|}{|t|^2} \sum_{n=2}^\infty \frac{(2 \, |t| \, \norm{A})^n}{n!} \le \frac{|h|}{|t|^2} e^{2 \, |t| \, \norm A}
-  \end{equation*}
-  for sufficiently small $h$, which also goes to zero as $h \to 0$. It follows that $e^{tA}$ is uniformly differentiable on $\bb R$, with derivative $A e^{tA}$.
+  which goes to zero as $h \to 0$. It follows that $e^{tA}$ is uniformly differentable on $\bb R$, with derivative $A e^{tA}$.
 \end{solution}
 
 \subsubsection*{4.8.10}
