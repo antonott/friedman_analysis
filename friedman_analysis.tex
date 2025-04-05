@@ -2511,6 +2511,54 @@ A normed linear space that is weakly complete is complete.
   for all $n$. But $|x^*(y_n) - x^*(x)| \to 0$ since $(y_n)$ is a subsequence of $(x_n)$, so we have a contradiction. Thus $(x_n)$ converges (strongly) to $x$, and $X$ is complete.
 \end{solution}
 
+
+\chapter*{Chapter 5 -- Completely Continuous Operators}
+
+\section*{Section 5.3 -- Elements of Spectral Theory}
+
+\subsection*{Problems}
+
+\subsubsection*{5.3.1}
+$\sigma(T)$ is nonempty.
+
+\begin{solution}
+  The claim is false for the trivial space $X = \{0\}$, so let $X$ be a nontrivial Banach space.
+
+  Assume towards a contradiction that $\sigma(T)$ is empty; then $R(\lambda) := R(\lambda; T) = (\lambda I - T)^{-1}$ is a bounded linear operator $X \to X$ for all $\lambda \in \bb C$. That is, we have a function
+  \begin{equation*}
+    R: \bb C \to \sc B(X), \quad \lambda \mapsto R(\lambda) = (\lambda I - T)^{-1},
+  \end{equation*}
+  and $R$ is differentiable (in the uniform topology) everywhere by Theorem 5.3.1. In particular, $R$ is continuous.
+
+  For $|\lambda| > \norm T$ we have
+  \begin{equation*}
+    \norm{(I - (1/\lambda)T)^{-1}} \le \frac{1}{1 - \norm{(1/\lambda) T}}
+  \end{equation*}
+  by Problem 4.6.2, and hence
+  \begin{equation*}
+    \norm{R(\lambda)} = \frac{1}{|\lambda|} \norm{(I - (1/\lambda)T)^{-1}} \le \frac{1}{|\lambda| - \norm{T}}.
+  \end{equation*}
+  Consequently $\norm{R(\lambda)} < 1$ outside a closed disc around the origin, and since the disc is compact it follows by Theorem 3.6.2 (applied to $\lambda \mapsto \norm{R(\lambda)}$) that $\norm{R(\lambda)}$ has a global bound $M < \infty$.
+
+  Given any linear functional $\ell \in \sc B(X)^* = \sc B(\sc B(X), \bb C)$, we define $f_\ell = \ell \circ R: \bb C \to \bb C$. Then $f_\ell$ is differentiable everywhere, since
+  \begin{equation*}
+    \begin{split}
+      \lim_{\mu \to \lambda} \frac{f_\ell(\mu) - f_\ell(\lambda)}{\mu - \lambda} &= \lim_{\mu \to \lambda} \ell \left( \frac{R(\mu) - R(\lambda)}{\mu - \lambda} \right) \\
+      &= \ell \left( \lim_{\mu \to \lambda} \frac{R(\mu) - R(\lambda)}{\mu - \lambda} \right) \\
+      &= \ell\left( \frac{d R(\lambda)}{d \lambda} \right),
+    \end{split}
+  \end{equation*}
+  and also bounded because
+  \begin{equation*}
+    |f_\ell(\lambda)| = |\ell(R(\lambda))| \le \norm \ell \cdot \norm{R(\lambda)} \le \norm \ell \cdot M.
+  \end{equation*}
+  That is, $f_\ell$ is a bounded entire function; by Liouville's theorem from complex analysis, it must be constant. And because
+  \begin{equation*}
+    |f_\ell(\lambda)| \le \frac{\norm \ell}{|\lambda| - \norm T}
+  \end{equation*}
+  for all sufficiently large $|\lambda|$, it must in fact be the zero functional. Since this holds for all $\ell \in \sc B(X)^*$, it follows by Corollary 4.8.4 that $R = 0$ (i.e.\ $R(\lambda)$ is the zero operator for every $\lambda$). But this is a contradiction since $R(\lambda)$ is invertible for every $\lambda$, with inverse $\lambda I - T$.
+\end{solution}
+
 \chapter*{Chapter 6 -- Hilbert Spaces and Spectral Theory}
 
 \section*{Section 6.2 -- The Projection Theorem}
