@@ -2512,6 +2512,44 @@ A normed linear space that is weakly complete is complete.
 \end{solution}
 
 
+
+\section*{Section 4.13 -- Adjoint Operators}
+
+\subsection*{Problems}
+
+\subsubsection*{4.13.3}
+Let $X$ and $Y$ be Banach spaces and let $T \in \sc B(X,Y)$. Prove:
+\begin{enumerate}[label=(\alph*)]
+  \item If $T$ has a continuous inverse, then $R_T$ is closed.
+  \item $T^*$ is one-to-one if and only if $R_T$ is dense in $Y$.
+  \item If $T$ maps $X$ onto $Y$, then $T^*$ has a bounded inverse with domain $R_{T^*}$.
+\end{enumerate}
+
+\begin{solution}
+  \leavevmode
+  \begin{enumerate}[label=(\alph*)]
+    \item Let $(y_n)$ be a sequence in $R_T$ with limit $y \in Y$, and let $x_n = T^{-1} y_n$ for each $n \in \bb N$. Note that $(y_n)$ is Cauchy, and it follows (since $T^{-1}$ is bounded) that $(x_n)$ is Cauchy as well;
+      \begin{equation*}
+        \norm{x_m - x_n} = \norm{T^{-1} y_m - T^{-1} y_n} \le \norm{T^{-1}} \cdot \norm{y_m - y_n}.
+      \end{equation*}
+      Hence $(x_n)$ has a limit $x \in X$, and we have
+      \begin{equation*}
+        Tx = T(\lim_n x_n) = \lim_n Tx_n = \lim_n y_n = y.
+      \end{equation*}
+      Thus $y \in R_T$, and we conclude that $R_T$ is closed.
+
+    \item We prove the forward implication in the contrapositive; if $R_T$ is not dense in $Y$, then $T^*$ is not injective. Indeed, if $R_T$ is not dense, then Corollary 4.8.7 implies that there exists $y^* \in Y^*$, $y^* \ne 0$, such that $y^*(y) = 0$ for all $y \in R_T$. But then $(T^*y^*)(x) = y^*(Tx) = 0$ for all $x \in X$, so $T^*$ has nontrivial kernel and is therefore not injective.
+
+      For the converse, suppose that $R_T$ is dense in $Y$, and let $y_1^*, y_2^* \in Y^*$ be such that $T^* y_1^* = T^* y_2^*$. If $y \in Y$, then there exists a sequence $(Tx_n)$ in $R_T$ such that $Tx_n \to y$, and we have
+      \begin{equation*}
+        y_1^*(y)  = \lim_n y_1^*(T x_n) = \lim_n y_2^*(T x_n) = y_2^*(y)
+      \end{equation*}
+      by continuity. Thus $y_1^* = y_2^*$, and $T^*$ is injective.
+
+    \item It follows by (b) that $T^*$ is injective. Moreover, its range $R_{T^*}$ is closed by Theorem 4.13.6, and therefore a Banach space. Hence we can regard $T^*$ as an operator $Y^* \to R_{T^*}$ and apply Theorem 4.6.2 to find that $(T^{-1})^*: R_{T^*} \to Y^*$ is bounded.
+  \end{enumerate}
+\end{solution}
+
 \chapter*{Chapter 5 -- Completely Continuous Operators}
 
 \section*{Section 5.3 -- Elements of Spectral Theory}
