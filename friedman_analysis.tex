@@ -2517,6 +2517,25 @@ A normed linear space that is weakly complete is complete.
 
 \subsection*{Problems}
 
+\subsubsection*{4.13.2}
+iLet $f(z)$ be an entire complex analytic function and let $T \in \sc B(X)$. Prove that $[f(T)]^* = f(T^*)$.
+
+\begin{solution}
+  Let $f(z) = \sum_{n=0}^\infty a_n z^n$. Note that $(T^n)^* = (T^*)^n$ for $n \in \bb N$ by Theorem 4.13.2. Hence, for all $y^* \in Y^*$ and $x \in X$,
+  \begin{equation*}
+    \begin{split}
+      ([f(T)]^* y^*)(x) &= y^*(f(T)x) \\
+      &= y^*\left( \sum_{n=0}^\infty a_n T^n x \right) \\
+      &= \sum_{n=0}^\infty a_n y^*(T^n x) \\
+      &= \sum_{n=0}^\infty a_n ((T^n)^* y^*)(x) \\
+      &= \sum_{n=0}^\infty a_n ((T^*)^n y^*)(x) \\
+      &= \left( \sum_{n=0}^\infty a_n (T^*)^n y^* \right)(x) \\
+      &= (f(T^*) y^*)(x),
+    \end{split}
+  \end{equation*}
+  where we have used the continuity of $y^*$ to interchange limiting processes. The result follows.
+\end{solution}
+
 \subsubsection*{4.13.3}
 Let $X$ and $Y$ be Banach spaces and let $T \in \sc B(X,Y)$. Prove:
 \begin{enumerate}[label=(\alph*)]
@@ -2595,6 +2614,67 @@ $\sigma(T)$ is nonempty.
     |f_\ell(\lambda)| \le \frac{\norm \ell}{|\lambda| - \norm T}
   \end{equation*}
   for all sufficiently large $|\lambda|$, it must in fact be the zero functional. Since this holds for all $\ell \in \sc B(X)^*$, it follows by Corollary 4.8.4 that $R = 0$ (i.e.\ $R(\lambda)$ is the zero operator for every $\lambda$). But this is a contradiction since $R(\lambda)$ is invertible for every $\lambda$, with inverse $\lambda I - T$.
+\end{solution}
+
+\subsubsection*{5.3.2}
+$\rho(T) = \rho(T^*)$ and $R(\lambda; T^*) = R(\lambda;T)^*$.
+
+\begin{solution}
+  This follows immediately from Theorem 4.13.4, applied to $\lambda I - T$.
+\end{solution}
+
+\subsubsection*{5.3.3}
+If $\lambda_0 \in \sigma(T)$ and $p(z)$ is a polynomial, then $p(\lambda_0) \in \sigma[p(T)]$. [\emph{Hint:} $p(\lambda_0)I - p(T) = (\lambda_0 I - T)q(T)$, $q(z)$ a polynomial. If $p(\lambda_0)I - p(T)$ has a bounded inverse, then also $\lambda_0 I - T$ has a bounded inverse.]
+
+\begin{solution}
+  Let $p(z) = \sum_{i=0}^n a_i z^i$. We will prove the claim in the contrapositive; hence suppose that $p(\lambda_0) \in \rho[p(T)]$. Note that
+  \begin{equation*}
+    \begin{split}
+      \lambda_0^i I - T^i &= (\lambda_0 I - T)(\lambda_0^{i-1} I + \lambda_0^{i-2} T + \dots + \lambda_0 T^{i-2} + T^{i-1}) \\
+      &= (\lambda_0^{i-1} I + \lambda_0^{i-2} T + \dots + \lambda_0 T^{i-2} + T^{i-1})(\lambda_0 I - T)
+    \end{split}
+  \end{equation*}
+  for all $i \in \bb N$ (with the obvious interpretation for $i = 1$). Hence
+  \begin{equation*}
+    p(\lambda_0) I - p(T) = \sum_{i=1}^n a_i (\lambda_0^i I - T^i) = (\lambda_0 I - T)q(T) = q(T)(\lambda_0 I - T),
+  \end{equation*}
+  with
+  \begin{equation*}
+    q(T) = \sum_{i=1}^n a_i (\lambda_0^{i-1} I + \lambda_0^{i-2} T + \dots + \lambda_0 T^{i-2} + T^{i-1}).
+  \end{equation*}
+  It follows that
+  \begin{equation*}
+    (\lambda_0 I - T) q(T) R(p(\lambda_0); p(T)) = R(p(\lambda_0); p(T)) q(T) (\lambda_0 I - T) = I,
+  \end{equation*}
+  so $(\lambda_0 I - T)$ has a right inverse $q(T) R(p(\lambda_0); p(T))$ and a left inverse $R(p(\lambda_0); p(T)) q(T)$. It follows that both inverses are equal, hence making a two-sided inverse, which clearly is bounded. Thus $\lambda_0 \in \rho(T)$, and the proof is complete.
+\end{solution}
+
+\subsubsection*{5.3.5}
+The series $\sum_{n=0}^\infty T^n/\lambda^{n+1}$ is uniformly convergent if $|\lambda| > \varlimsup_n \norm{T^n}^{1/n}$. Its sum is equal to the resolvent $R(\lambda; T)$.
+
+\begin{solution}
+  Note that $|\lambda| > \varlimsup_n \norm{T^n}^{1/n}$ implies
+  \begin{equation*}
+    \varlimsup_n \snorm{\frac{T^n}{\lambda^{n+1}}}^{1/n} = \varlimsup_n \frac{\norm{T^n}^{1/n}}{|\lambda|^{(n+1)/n}} \le \frac{1}{|\lambda|} \varlimsup_n \norm{T^n}^{1/n} < 1.
+  \end{equation*}
+  It follows by the root test that $\sum_{n=0}^\infty T^n/\lambda^{n+1}$ converges absolutely (see for example Theorem 3.33 of Rudin's \emph{Principles of Mathematical Analysis}), hence it converges in $\sc B(X)$. For all $x \in X$,
+  \begin{equation*}
+    \begin{split}
+      \left( \sum_{n=0}^\infty \frac{T^n}{\lambda^{n+1}} \right) (\lambda I - T)(x) &= \sum_{n=0}^\infty \frac{\lambda T^n x - T^{n+1}x}{\lambda^{n+1}} \\
+      &= \sum_{n=0}^\infty \frac{T^n x}{\lambda^n} - \sum_{n=0}^\infty \frac{T^{n+1}x}{\lambda^{n+1}} \\
+      &= \sum_{n=0}^\infty \frac{T^n x}{\lambda^n} - \sum_{n=1}^\infty \frac{T^n x}{\lambda^n} \\
+      &= \frac{T^0 x}{\lambda^0} \\
+      &= x,
+    \end{split}
+  \end{equation*}
+  so $\sum_{n=0}^\infty T^n/\lambda^{n+1}$ is a left inverse of $(\lambda I - T)$. Similarly one finds that it is a right inverse, hence the resolvent $R(\lambda; T)$ exists and is equal to this sum.
+\end{solution}
+
+\subsubsection*{5.3.6}
+If $\lambda_0 \in \sigma(T)$, then $|\lambda_0| \le \norm{T}$.
+
+\begin{solution}
+  Suppose $|\lambda_0| > \norm T$. Then $|\lambda_0|^n > \norm T^n \ge \norm{T^n}$, so $|\lambda_0| > \norm{T^n}^{1/n}$. It follows by the previous problem that $R(\lambda_0; T)$ exists, hence that $\lambda_0 \in \rho(T)$.
 \end{solution}
 
 \chapter*{Chapter 6 -- Hilbert Spaces and Spectral Theory}
