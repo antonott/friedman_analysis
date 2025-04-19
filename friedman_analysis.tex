@@ -1,5 +1,4 @@
 \documentclass{report}
-\usepackage[utf8]{inputenc}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
@@ -2513,12 +2512,63 @@ A normed linear space that is weakly complete is complete.
 
 
 
+
+\section*{Section 4.12 -- Weak Topology in Conjugate\\ Spaces}
+
+\subsection*{Notes}
+
+\subsubsection*{Terminology: Weak and Weak-*}
+The topology introduced in this section is called the \emph{weak-* topology} by other authors, and the convergence defined in Definition 4.12.2 is called \emph{weak-* convergence}. Indeed this is a better name, since we could also consider weak convergence in $X^*$ in the sense of Definition 4.10.2; i.e.\ that $x^*_n \to x^*$ weakly if $\lim_n x^{**}(x^*_n) = x^{**}(x^*)$ for all $x^{**} \in X^{**}$. The two types of convergence are equivalent if $X$ is reflexive, but not in general, hence using the same term is problematic.
+
+\subsection*{Problems}
+
+\subsubsection*{4.12.1}
+Let $X$ be a normed linear space. A sequence $\{f_n\}$ in $X^*$ is weakly convergent to $f \in X^*$ if and only if the following conditions hold: (i) the sequence $\{\norm{f_n}\}$ is bounded, and (ii) $\lim_n f_n(x) = f(x)$ for all $x$ in a dense subset of $X$.
+
+\begin{solution}
+  There is an error in the problem statement; $(f_n)$ being weakly convergent to $f$ does not in general imply that $\{\norm{f_n}\}$ is bounded, unless $X$ is a Banach space (in which case it follows by the uniform boundedness principle). For a counterexample, let $X$ be the subspace of $l^\infty$ consisting of the sequences with only finitely many nonzero entries. Define linear functionals $x^*_n \in X^*$ by $x^*_n(x) = nx_n$ (where $x_n$ denotes the $n$th entry of the sequence $x$). It is easily seen that $\norm{x_n^*} = n$, hence $\{\norm{x^*_n}\}$ is unbounded. On the other hand $\lim_n x_n^*(x) = 0$ for all $x \in X$, since every $x$ is eventually zero, so $(x_n^*)$ is weakly convergent to the zero functional.
+
+  The converse direction does hold as stated; if (i) and (ii) hold, then $(f_n)$ is weakly convergent to $f$ (even if $X$ is not Banach). To prove this, let $A \subset X$ be the dense subset in (ii), and let $K < \infty$ be an upper bound of $\{\norm{f_n}\}$. Fix any $x \in X$. Given $\epsilon > 0$, there exists $y \in A$ such that
+  \begin{equation*}
+    \norm{x-y} < \frac{\epsilon}{2(K + \norm f)},
+  \end{equation*}
+  and $N \in \bb N$ such that
+  \begin{equation*}
+    n \ge N \implies |f_n(y) - f(y)| < \frac{\epsilon}{2}.
+  \end{equation*}
+  Thus
+  \begin{equation*}
+    \begin{split}
+      |f_n(x) - f(x)| &\le |f_n(x) - f_n(y)| + |f_n(y) - f(y)| + |f(y) - f(x)| \\
+      &= \norm{f_n} \cdot \norm{x - y} + \frac{\epsilon}{2} + \norm f \cdot \norm{x-y} \\
+      &\le (K + \norm f) \cdot \norm{x-y} + \frac{\epsilon}{2} \\
+      &< \epsilon
+    \end{split}
+  \end{equation*}
+  for sufficiently large $n$. It follows that $f_n(x) \to f(x)$, and hence that $(f_n)$ is weakly convergent to $f$, since $x$ was arbitrary.
+\end{solution}
+
+\subsubsection*{4.12.3}
+Give a direct proof of Theorem 4.12.3. [\emph{Hint:} Choose a subsequence $\{x_{n,1}^*\}$ such that $\lim x_{n,1}^*(x_1)$ exists. Choose a subsequence $\{x_{n,2}^*\}$ such that $\lim x_{n,2}^*(x_2)$ exists, and so on. Then $\{x_{n,n}^*\}$ is weakly convergent.]
+
+\begin{solution}
+  Let $X$ be a separable normed linear space over a field $\bb F \in \{\bb R, \bb C\}$, and let $(x^*_n)$ be a bounded sequence in $X^*$. We will show that $(x^*_n)$ has a weakly convergent subsequence.
+
+  Fix a countable dense subset $A = \{x_n\} \subset X$. Note that $(x^*_n(x_1))$ is a bounded sequence in $\bb F$, hence it has a convergent subsequence by the Bolzano-Weierstrass theorem of elementary real analysis. That is, there is a subsequence $(x^*_{n,1})$ of $(x^*_n)$ such that $(x^*_{n,1}(x_1))$ converges. Similarly $(x^*_{n,1})$ has a subsequence $(x^*_{n,2})$ such that $(x^*_{n,2}(x_2))$ converges, and so on.
+
+  Consider the sequence $(x^*_{n,n})$. For each $k \in \bb N$, excluding the first $k-1$ terms makes it a subsequence of $(x^*_{n,k})$, so that $\lim_n x^*_{n,n}(x_k) = \lim_n x^*_{n,k}(x_k)$. That is, the sequence $(x^*_{n,n}(x))$ converges for every $x \in A$. In fact $(x^*_{n,n}(y))$ converges for all $y$ in the linear span $Y$ of $A$; if $y = \sum_{i=1}^m \lambda_i x_{k_i}$, then
+  \begin{equation*}
+    \lim_n x^*_{n,n}(y) = \lim_n x^*_{n,n} \left( \sum_{i=1}^m \lambda_i x_{k_i} \right) = \sum_{i=1}^m \lambda_i \lim_n x^*_{n,n}(x_{k_i}).
+  \end{equation*}
+  Hence define $f: Y \to \bb F$ by $f(y) = \lim_n x^*_{n,n}(y)$. It is clear that $f$ is linear and bounded, so $f \in Y^*$. By Theorem 4.8.2, we can extend $f$ to a bounded linear functional $F \in X^*$. We then have $\lim_n x^*_{n,n}(x) = F(x)$ for all $x \in A$ by construction, thus $(x^*_{n,n})$ is weakly convergent to $F$ by Problem 4.12.1.
+\end{solution}
+
 \section*{Section 4.13 -- Adjoint Operators}
 
 \subsection*{Problems}
 
 \subsubsection*{4.13.2}
-iLet $f(z)$ be an entire complex analytic function and let $T \in \sc B(X)$. Prove that $[f(T)]^* = f(T^*)$.
+Let $f(z)$ be an entire complex analytic function and let $T \in \sc B(X)$. Prove that $[f(T)]^* = f(T^*)$.
 
 \begin{solution}
   Let $f(z) = \sum_{n=0}^\infty a_n z^n$. Note that $(T^n)^* = (T^*)^n$ for $n \in \bb N$ by Theorem 4.13.2. Hence, for all $y^* \in Y^*$ and $x \in X$,
@@ -2646,7 +2696,7 @@ If $\lambda_0 \in \sigma(T)$ and $p(z)$ is a polynomial, then $p(\lambda_0) \in 
   \begin{equation*}
     (\lambda_0 I - T) q(T) R(p(\lambda_0); p(T)) = R(p(\lambda_0); p(T)) q(T) (\lambda_0 I - T) = I,
   \end{equation*}
-  so $(\lambda_0 I - T)$ has a right inverse $q(T) R(p(\lambda_0); p(T))$ and a left inverse $R(p(\lambda_0); p(T)) q(T)$. It follows that both inverses are equal, hence making a two-sided inverse, which clearly is bounded. Thus $\lambda_0 \in \rho(T)$, and the proof is complete.
+  so $(\lambda_0 I - T)$ has $q(T) R(p(\lambda_0); p(T))$ as a right inverse and $R(p(\lambda_0); p(T)) q(T)$ as a left inverse. It follows that both inverses are equal, hence making a two-sided inverse, which clearly is bounded. Thus $\lambda_0 \in \rho(T)$, and the proof is complete.
 \end{solution}
 
 \subsubsection*{5.3.5}
