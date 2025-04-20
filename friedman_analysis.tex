@@ -1693,6 +1693,19 @@ The intersection of any number of compact subsets of a metric space is a compact
   Remark: Really the above shows that $K$ is compact \emph{in $C'$}. However, one easily proves the general result that if $F$ is compact in $G$, and $G$ is compact in $H$, then $F$ is compact in $H$. Hence $K$ is indeed compact in $X$.
 \end{solution}
 
+\subsubsection*{3.5.7}
+A subset of a separable metric space is a separable space.
+
+\begin{solution}
+  Let $X$ be a separable metric space, and $Y \subset X$ an arbitrary subset. Since $X$ is separable, there exists a countable subset $A \subset X$ such that $\overline A = X$.
+
+  For each $n \in \bb N$, define a countable subset $Z_n \subset Y$ as follows. For each $x \in A$ such that $B(x,1/(2n)) \cap Y \ne \emptyset$, choose an element $z \in B(x,1/(2n)) \cap Y$, and let $Z_n$ be the set of these elements. Then the collection $\{B(z,1/n): z \in Z_n\}$ covers $Y$. Indeed, if $y \in Y$, then there is some $x \in A$ such that $d(y,x) < 1/(2n)$, hence $B(x,1/(2n)) \cap Y \ne \emptyset$ and there is $z \in Z_n$ with $d(x,z) < 1/(2n)$, so that finally
+  \begin{equation*}
+    d(y,z) \le d(y,x) + d(x,z) < \frac{1}{n}.
+  \end{equation*}
+  The union $Z = \bigcup_n Z_n$ is a countable subset of $Y$, and by the above each point of $Y$ is within $1/n$ of a point of $Z$ for every $n \in \bb N$, thus $Y \subset \overline Z$ so that $Y$ is separable.
+\end{solution}
+
 \subsubsection{3.5.8}
 Show that a metric space is compact if and only if it has the following property: for every collection of closed subsets $\{F_\alpha\}$, if any finite subcollection has nonempty intersection, then the whole collection has a nonempty intersection.
 
@@ -2620,6 +2633,60 @@ Let $X$ and $Y$ be Banach spaces and let $T \in \sc B(X,Y)$. Prove:
 \end{solution}
 
 \chapter*{Chapter 5 -- Completely Continuous Operators}
+
+\section*{Section 5.1 -- Basic Properties}
+
+\subsection*{Notes}
+
+\subsubsection*{Characterization in terms of sequences}
+Let $X$ and $Y$ be normed linear spaces. An operator $T \in \sc B(X,Y)$ is compact if and only if it has the following property: if $(x_n)$ is a bounded sequence in $X$, then $(Tx_n)$ has a convergent subsequence.
+
+\begin{proof}
+  Suppose first that $T$ is compact. If $(x_n)$ is a bounded sequence in $X$, then $\{Tx_n\} \subset K$ for some compact subset $K \subset Y$. But $K$ is sequentially compact by Theorem 3.5.4, hence $(Tx_n)$ has a convergent subsequence.
+
+  Conversely, suppose $T$ has the property that if $(x_n)$ is a bounded sequence in $X$, then $(Tx_n)$ has a convergent subsequence. Let $A \subset X$ be bounded. Every sequence in $T(A)$ is the image of some (bounded) sequence in $A$, and therefore has a convergent subsequence. It follows that $\overline{T(A)}$ is sequentially compact, and thus compact by Theorem 3.5.4.
+\end{proof}
+
+\subsection*{Problems}
+
+\subsubsection*{5.1.1}
+A continuous linear transformation with finite-dimensional range is compact.
+
+\begin{solution}
+  Let $X$ and $Y$ be normed linear spaces, and let $T \in \sc B(X,Y)$ with $T(X)$ finite-dimensional. Note that $T(X)$ is closed by Theorem 4.3.2. Let $A \subset X$ be bounded; $\norm x < K < \infty$ for all $x \in A$. Then $\norm{Tx} \le \norm T \cdot K$ for all $x \in A$, so $T(A)$ is bounded as well. It follows by Theorem 4.3.3 that $T(A)$ is relatively compact in $T(X)$. Since $T(X)$ is closed, the closure of $T(A)$ in $T(X)$ is also its closure in $Y$, hence $\overline{T(A)}$ is compact in $Y$ as well.
+\end{solution}
+
+\subsubsection*{5.1.2}
+A linear combination of completely continuous linear transformations is completely continuous.
+
+\begin{solution}
+  It suffices to show that any linear combination of just two compact operators is compact; the claim then follows by induction. Hence let $X$ and $Y$ be normed linear spaces, let $T, S \in \sc B(X,Y)$ be compact, and let $\lambda, \mu$ be scalars. Let $(x_n)$ be a bounded sequence in $X$. Then $(Tx_n)$ has a convergent subsequence; i.e.\ there is a subsequence $(y_n)$ of $(x_n)$ such that $(Ty_n)$ converges. Likewise, there is a subsequence $(z_n)$ of $(y_n)$ such that $(Sz_n)$ converges. It follows that the sequence $(\lambda Tz_n + \mu Sz_n)$ is convergent. Hence $\lambda T + \mu S$ is a compact operator.
+\end{solution}
+
+\subsubsection*{5.1.5}
+Is the operator $T$ defined by $(Tx)(t) = tx(t)$ ($0 < t < 1$) completely continuous in $L^2(0,1)$?
+
+\begin{solution}
+  We start with a small generalization of our notion of Riemann integral. Given a bounded and a.e.\ continuous function $f: (a,b) \to \bb F$ (where $\bb F \in \{\bb R, \bb C\}$), let $\tilde f: [a,b] \to \bb F$ be an extension of $f$. Then $\tilde f$ is Riemann-integrable by Theorem 2.11.1. Moreover, by the elementary theory of the Riemann integral, the values of $\tilde f(a)$ and $\tilde f(b)$ do not affect the value of the integral. Hence we \emph{define} the Riemann integral of $f$ to be the Riemann-integral of \emph{any} such extension $\tilde f$. Note that a result analogous to Theorem 2.11.2 holds for $f$;
+  \begin{equation*}
+    \int_{(a,b)} f(x) \, dx = \int_{[a,b]} \tilde f(x) \, dx = \int_a^b \tilde f(x) \, dx = \int_a^b f(x) \, dx,
+  \end{equation*}
+  with the second equality following from Theorem 2.11.2, and the last one being our new definition of the Riemann-integral of $f$.
+
+  Define functions $x_n: (0,1) \to \bb R$ by
+  \begin{equation*}
+    x_n(t) =
+    \begin{cases}
+      0 & \text{if $t < 1/2$,} \\
+      t^{-1} \sin(2 \pi n t) & \text{if $t \ge 1/2$.}
+    \end{cases}
+  \end{equation*}
+  By the preceding discussion each $x_n$ is Riemann-integrable, and also Lebesgue-integrable, with the two integrals agreeing. The same goes for $|x_n|^2$, $|Tx_n|^2$, and $|Tx_n - Tx_m|^2$. We have
+  \begin{equation*}
+    \int_0^1 |x_n(x)|^2 dx \le \int_0^1 2 \, dx = 2,
+  \end{equation*}
+  so $(x_n)$ is a bounded sequence in $L^2(0,1)$. By a rather tedious computation of Riemann-integrals, one finds that $\norm{T x_m - T x_n}_2 = 1/2$ whenever $m \ne n$, hence no subsequence of $(Tx_n)$ is Cauchy. Since $L^2(0,1)$ is a Banach space, this implies that every subsequence is divergent, and thus that $T$ is not a compact operator.
+\end{solution}
 
 \section*{Section 5.3 -- Elements of Spectral Theory}
 
