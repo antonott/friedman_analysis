@@ -2647,6 +2647,9 @@ Let $X$ and $Y$ be normed linear spaces. An operator $T \in \sc B(X,Y)$ is compa
   Conversely, suppose $T$ has the property that if $(x_n)$ is a bounded sequence in $X$, then $(Tx_n)$ has a convergent subsequence. Let $A \subset X$ be bounded. Every sequence in $T(A)$ is the image of some (bounded) sequence in $A$, and therefore has a convergent subsequence. It follows that $\overline{T(A)}$ is sequentially compact, and thus compact by Theorem 3.5.4.
 \end{proof}
 
+\subsubsection*{Proof Theorem 5.1.3}
+Let $A \subset X$ be bounded, with $\norm x < K < \infty$ for all $x \in X$. Then $\norm{Sx} \le \norm S \cdot K$ for all $x \in A$, so $S(A)$ is bounded. It follows that $(TS)(A) = T(S(A))$ is relatively compact since $T$ is compact, and hence that $TS$ is compact. Moreover, $S(T(A)) \subset S(\overline{T(A)})$, and the latter set is compact since it is a continuous image of the compact set $\overline{T(A)}$. Thus $ST$ is compact as well.
+
 \subsection*{Problems}
 
 \subsubsection*{5.1.1}
@@ -2686,6 +2689,20 @@ Is the operator $T$ defined by $(Tx)(t) = tx(t)$ ($0 < t < 1$) completely contin
     \int_0^1 |x_n(x)|^2 dx \le \int_0^1 2 \, dx = 2,
   \end{equation*}
   so $(x_n)$ is a bounded sequence in $L^2(0,1)$. By a rather tedious computation of Riemann-integrals, one finds that $\norm{T x_m - T x_n}_2 = 1/2$ whenever $m \ne n$, hence no subsequence of $(Tx_n)$ is Cauchy. Since $L^2(0,1)$ is a Banach space, this implies that every subsequence is divergent, and thus that $T$ is not a compact operator.
+\end{solution}
+
+\subsubsection*{5.1.6}
+Let $f(z)$ be an entire complex analytic function with $f(0) = 0$, and let $X$ be a Banach space. If $T \in \sc B(X)$ is completely continuous, then $f(T)$ is also completely continuous.
+
+\begin{solution}
+  Since $f$ is entire and $f(0) = 0$, it has a power series representation $f(z) = \sum_{n=1}^\infty a_n z^n$. By Theorem 5.1.3, $T^n$ is compact for every $n \ge 1$, hence it follows by Problem 5.1.2 that $\sum_{n=1}^k a_n T^n$ is compact for every $k \ge 1$. Since $f(T)$ is the uniform limit of the operators $\sum_{n=1}^k a_n T^n$ (c.f.\ Problem 4.4.4), Theorem 5.1.2 then implies that $f(T)$ is compact.
+\end{solution}
+
+\subsubsection*{5.1.7}
+Let $T$ be a compact linear operator from a Banach space $X$ onto itself. If $T^{-1}$ is a bounded operator, then $X$ is finite-dimensional.
+
+\begin{solution}
+  The assumption that $T$ is onto is unnecessary; we need only assume that $T$ is injective. By Theorem 5.1.3, the identity operator $I = T^{-1} T$ is compact, hence every bounded subset of $X$ is relatively compact. It follows by Theorem 4.3.3 that $X$ is finite-dimensional.
 \end{solution}
 
 \section*{Section 5.3 -- Elements of Spectral Theory}
@@ -2794,7 +2811,39 @@ If $\lambda_0 \in \sigma(T)$, then $|\lambda_0| \le \norm{T}$.
   Suppose $|\lambda_0| > \norm T$. Then $|\lambda_0|^n > \norm T^n \ge \norm{T^n}$, so $|\lambda_0| > \norm{T^n}^{1/n}$. It follows by the previous problem that $R(\lambda_0; T)$ exists, hence that $\lambda_0 \in \rho(T)$.
 \end{solution}
 
+
+\subsubsection*{5.3.11}
+Prove the identity $R(\lambda;S) - R(\lambda;T) = R(\lambda;S)(S-T)R(\lambda;T)$, where $S,T$ are bounded linear operators in a normed linear space $X$.
+
+\begin{solution}
+  We must of course assume that $\lambda \in \rho(T) \cap \rho(S)$. The identity follows immediately upon rewriting the right-hand side with
+  \begin{equation*}
+    S - T = (\lambda I - T) - (\lambda I - S).
+  \end{equation*}
+\end{solution}
+
 \chapter*{Chapter 6 -- Hilbert Spaces and Spectral Theory}
+
+\section*{Section 6.1 -- Hilbert Spaces}
+
+\subsection*{Problems}
+
+\subsubsection*{6.1.3}
+If $\{x_n\}$ is weakly convergent to $x$, in a Hilbert space $X$, and if $\lim_n \norm{x_n} = \norm x$, then $\lim_n x_n = x$.
+
+\begin{solution}
+  Let $\bb F \in \{\bb R, \bb C\}$ be the scalar field associated with $X$. The map $X \to \bb F$ given by $y \mapsto (y,x)$ is clearly linear, and by the Cauchy-Schwarz inequality (Theorem 6.1.1) it is also also bounded. Hence it is an element of $X^*$, and by the weak convergence of the sequence $(x_n)$ we have $\lim_n (x_n,x) = (x,x) = \norm x^2$. Since we also have $\lim_n \norm{x_n} = \norm x$ by assumption, it follows that
+  \begin{equation*}
+    \begin{split}
+      \norm{x_n - x}^2 &= (x_n - x, x_n - x) \\
+      &= (x_n, x_n) - (x_n, x) - (x, x_n) + (x,x) \\
+      &= \norm{x_n}^2 - (x_n, x) - \overline{(x_n, x)} + \norm x^2 \\
+      &\to \norm x^2 - \norm x^2 - \norm x^2 + \norm x^2 \\
+      &= 0.
+    \end{split}
+  \end{equation*}
+  Thus $\lim_n x_n = x$.
+\end{solution}
 
 \section*{Section 6.2 -- The Projection Theorem}
 
