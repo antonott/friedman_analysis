@@ -18,6 +18,7 @@
 \newcommand{\norm}[1]{{\lVert #1 \rVert}}
 \newcommand{\snorm}[1]{\left\lVert #1 \right\rVert}
 \newcommand{\brac}[1]{\langle #1 \rangle}
+\newcommand{\sabs}[1]{\left\lvert #1 \right\rvert}
 
 \let\sc\relax
 \newcommand{\sc}[1]{\mathscr{#1}}
@@ -2705,6 +2706,74 @@ Let $T$ be a compact linear operator from a Banach space $X$ onto itself. If $T^
   The assumption that $T$ is onto is unnecessary; we need only assume that $T$ is injective. By Theorem 5.1.3, the identity operator $I = T^{-1} T$ is compact, hence every bounded subset of $X$ is relatively compact. It follows by Theorem 4.3.3 that $X$ is finite-dimensional.
 \end{solution}
 
+
+\section*{Section 5.2 -- The Fredholm-Riesz-Schauder Theory}
+
+\subsection*{Problems}
+
+\subsubsection*{5.2.4}
+Consider the \emph{Volterra integral equation}
+\begin{equation*}
+  f(s) = g(s) + \int_0^t K(s,t) f(t) \, dt \quad (0 \le t \le 1), \tag{5.2.6}
+\end{equation*}
+where $K(s,t)$ is continuous for $0 \le s, t \le 1$. Prove that for any continuous function $g$ there exists a unique continuous solution $f$ of (5.2.6).
+
+\begin{solution}
+  Note that there is an error in (5.2.6). It should read (something like)
+  \begin{equation*}
+    f(t) = g(t) + \int_0^t K(t,s) f(s) \, ds \quad (0 \le t \le 1).
+  \end{equation*}
+  Equip $C[0,1]$ with the uniform norm, denoted $\norm{\phantom x}$, and recall that this makes $C[0,1]$ a Banach space.
+
+  Define $T: C[0,1] \to C[0,1]$ by
+  \begin{equation*}
+    (Tf)(t) = \int_0^t K(t,s) f(s) \, dt.
+  \end{equation*}
+  It is clear that $T$ is linear. Note that $K$ is bounded by Theorem 3.6.2 (applied to $|K|$), say by $L < \infty$. Hence
+  \begin{equation*}
+    |(Tf)(t)| \le \int_0^t |K(t,s)| \cdot |f(s)| \, dt \le L \cdot \norm f,
+  \end{equation*}
+  so that $T$ is bounded. We will proceed as follows:
+  \begin{enumerate}[label=(\roman*)]
+    \item Show that $T$ is a compact operator.
+    \item Show that $(I-T)f = 0$ has only the trivial solution in $C[0,1]$.
+    \item Use the Fredholm alternative to argue that $I-T$ is a bijection.
+  \end{enumerate}
+
+  We use the Ascoli-Arzela lemma (Theorem 3.6.4) to show (i). Hence let $(f_n)$ be a bounded sequence of functions in $C[0,1]$; say $\norm{f_n} < M < \infty$ for all $n \in \bb N$. Then $\norm{Tf_n} \le L \cdot M$ for all $n$, so $(Tf_n)$ is a bounded sequence as well. Let $\epsilon > 0$ be given. Note that $K$ is uniformly continuous by Theorem 3.6.1, so there exists $\delta > 0$ such that
+  \begin{equation*}
+    |(t_1, s_1) - (t_2, s_2)| < \delta \quad \implies \quad |K(t_1, s_1) - K(t_2, s_2)| < \frac{\epsilon}{2M},
+  \end{equation*}
+  and we may additionally choose $\delta$ to be less than $\epsilon/(2 L M)$. Then, for all $n \in \bb N$,
+  \begin{equation*}
+    \begin{split}
+      |(Tf_n)(t_1&) - (Tf_n)(t_2)| \\
+      &= \sabs{\int_0^{t_1} K(t_1,s) f_n(s) \, ds - \int_0^{t_2} K(t_2,s) f_n(s) \, ds} \\
+      &= \sabs{\int_0^{t_1} [K(t_1,s) - K(t_2,s)] f_n(s) \, ds - \int_{t_1}^{t_2} K(t_2, s) f_n(s) \, ds} \\
+      &\le \int_0^{t_1} |K(t_1,s) - K(t_2,s)| \cdot |f_n(s)| \, ds + \int_{t_1}^{t_2} |K(t_2, s)| \cdot |f_n(s)| \, ds \\
+      &\le \frac{\epsilon}{2M} \cdot M + \frac{\epsilon}{2LM} \cdot L \cdot M \\
+      &= \epsilon
+    \end{split}
+  \end{equation*}
+  whenever $|t_1 - t_2| < \delta$. It follows that $\{Tf_n\}$ is an equicontinuous family. By the Ascoli-Arzela lemma $(Tf_n)$ has a subsequence convergent in $C[0,1]$, thus $T$ is compact.
+
+  For (ii), suppose that $(I-T)f = 0$. We will use induction to show that
+  \begin{equation*}
+    |(T^n f)(t)| \le \frac{t^n L^n \norm f}{n!}
+  \end{equation*}
+  for all $t \in [0,1]$ and $n \in \bb N$. Since $f = Tf = T^2f = \dots$, it then follows that $f \equiv 0$. The inequality certainly holds for $n = 1$, since
+  \begin{equation*}
+    |(T f)(t)| = \int_0^t |K(t,s)| \cdot |f(s)| \, ds \le t \cdot L \cdot \norm f.
+  \end{equation*}
+  For the inductive step, assume that it holds for some $n$. It then follows that
+  \begin{equation*}
+    |(T^{n+1} f)(t)| \le \int_0^t |K(t,s)| \cdot |(T^n f)(s)| \, ds \le \int_0^t L \cdot \frac{t^n L^n \norm f}{n!} ds = \frac{t^{n+1} L^{n+1} \norm f}{(n+1)!}.
+  \end{equation*}
+  Thus the inequality holds for all $n$, concluding step (ii).
+
+  Finally, having shown that $T$ is compact and that there is no nonzero $f \in C[0,1]$ such that $(I -T)f = 0$, the Fredholm alternative tells us that the equation $(I-T)f = g$ has a unique solution $f \in C[0,1]$ for every $g \in C[0,1]$.
+\end{solution}
+
 \section*{Section 5.3 -- Elements of Spectral Theory}
 
 \subsection*{Problems}
@@ -2879,7 +2948,7 @@ Let $M$ be any subset of a Hilbert space $H$. Then $(M^\perp)^\perp$ is the clos
   \end{equation*}
   by orthogonality, so $z = 0$ and $x = y \in C$. Hence $(C^\perp)^\perp \subset C$, and the lemma follows.
 
-  Note that ``the closed linear space spanned by $M$'' is the intersection of all linear subspaces of $H$ that contain $M$ (by definition; see Section 4.2). Let us denote this subspace by $C$. We immediately see that $C \subset (M^\perp)^\perp$, since the latter is a closed linear subspace containing $M$. Moreover, since $M \subset C$, we have $C^\perp \subset M^\perp$. By taking orthogonal complements once more and applying the lemma, we obtain
+  Note that ``the closed linear space spanned by $M$'' is the intersection of all closed linear subspaces of $H$ that contain $M$ (by definition; see Section 4.2). Let us denote this subspace by $C$. We immediately see that $C \subset (M^\perp)^\perp$, since the latter is a closed linear subspace containing $M$. Moreover, since $M \subset C$, we have $C^\perp \subset M^\perp$. By taking orthogonal complements once more and applying the lemma, we obtain
   \begin{equation*}
     (M^\perp)^\perp \subset (C^\perp)^\perp = C,
   \end{equation*}
