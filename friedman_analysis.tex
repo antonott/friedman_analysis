@@ -2955,4 +2955,112 @@ Let $M$ be any subset of a Hilbert space $H$. Then $(M^\perp)^\perp$ is the clos
   thus proving that $(M^\perp)^\perp = C$.
 \end{solution}
 
+
+\section*{Section 6.3 -- Projection Operators}
+
+\subsection*{Notes}
+
+\subsubsection*{Definition of the adjoint}
+We should verify that the adjoint $T^*$ is well-defined, and that it is linear and bounded.
+
+Let $T$ be a bounded linear operator on a Hilbert space $H$, with associated scalar field $\bb F \in \{\bb R, \bb C\}$. Given $y \in H$, define
+\begin{equation*}
+  f_y: H \to \bb F, \quad f_y(x) = (Tx, y).
+\end{equation*}
+It is clear that $f_y$ is linear, and
+\begin{equation*}
+  |f_y(x)| = |(Tx,y)| \le \norm{Tx} \cdot \norm{y} \le \norm T \cdot \norm x \cdot \norm y
+\end{equation*}
+for all $x \in H$ by the Schwarz inequality (Theorem 6.1.1), so that $f_y$ is also bounded, with $\norm{f_y} \le \norm T \cdot \norm y$. Hence $f_y \in H^*$, and Riesz' theorem (Theorem 6.2.4) yields a unique element of $H$, which we may denote $T^* y$, such that $f_y(x) = (x,T^*y)$ for all $x \in H$. Also by that theorem,
+\begin{equation*}
+  \norm{T^*y} = \norm{f_y} \le \norm T \cdot \norm y.
+\end{equation*}
+
+This way we obtain a well-defined injective mapping $T^*: H \to H$, taking any $y \in H$ to the unique element $T^*y$ such that $(Tx,y) = (x, T^*y)$ for all $x \in H$. To see that it is linear, let $\lambda, \mu \in \bb F$ and $y,z \in H$, and notice that
+\begin{equation*}
+  \begin{split}
+    (Tx, \lambda y + \mu z) &= \bar \lambda (Tx, y) + \bar \mu (Tx, z) \\
+    &= \bar \lambda (x, T^*y) + \bar \mu (x, T^*z) \\
+    &= (x, \lambda T^* y + \mu T^* z)
+  \end{split}
+\end{equation*}
+for all $x \in H$. Hence $T^*(\lambda y + \mu z) = \lambda T^* y + \mu T^* z$, and $T^*$ is linear. Since we have already seen that $T^*$ is bounded, we have $T^* \in \sc B(H)$.
+
+\subsubsection*{Banach space adjoint vs.\ Hilbert space adjoint}
+Consider a bounded linear operator $T$ on a Hilbert space $H$ over a field $\bb F \in \{\bb R, \bb C\}$. Let us for the moment write $T'$ for the adjoint of $T$ in the sense of Definition 4.13.1, i.e.\ the map which takes $x^* \in H^*$ to $x^* \circ T \in H^*$, and let us write $T^*$ for the present notion of adjoint in a Hilbert space. Also let $\sigma$ be the bijection $H \to H^*$ of Corollary 6.2.5, which takes $x \in H$ to the linear functional $y \mapsto (y,x)$. Then
+\begin{equation*}
+  (Tx, y) = (\sigma y)(Tx) = (T'\sigma y)(x) = (\sigma \sigma^{-1} T' \sigma y)(x) = (x, \sigma^{-1} T' \sigma y)
+\end{equation*}
+for all $x,y \in H$, hence $T^* = \sigma^{-1} T' \sigma$. The mapping $T' \mapsto T^* = \sigma^{-1} T' \sigma$ is seen to be a conjugate-linear isometric bijection $\sc B(H^*) \to \sc B(H)$.
+
+\subsection*{Problems}
+
+\subsubsection*{6.3.1}
+Let $T$ and $S$ be bounded linear operators in a Hilbert space $H$, and let $\lambda$ be a scalar. Prove: $(T+S)^* = T^* + S^*$, $(TS)^* = S^* T^*$, $(\lambda T)^* = \bar \lambda T^*$, $I^* = I$, $T^{**} = T$, $\norm{T^*} = \norm T$. If, further, $T^{-1}$ is a bounded linear map (with domain $H$), then also $(T^*)^{-1}$ is a bounded linear map (with domain $H$) and $(T^{-1})^* = (T^*)^{-1}$.
+
+\begin{solution}
+  For all $x,y \in H$, we have
+  \begin{equation*}
+    (x, (T^* + S^*)y) = (x, T^* y) + (x, S^* y) = (Tx,y) + (Sx,y) = ((T + S)x, y),
+  \end{equation*}
+  hence $T^* + S^* = (T+S)^*$;
+  \begin{equation*}
+    (x, S^*T^*y) = (Sx, T^*y) = (TSx,y),
+  \end{equation*}
+  hence $S^*T^* = (TS)^*$;
+  \begin{equation*}
+    (x, \bar \lambda T^* y) = \lambda (x, T^*y) = \lambda (Tx,y) = (\lambda Tx, y),
+  \end{equation*}
+  hence $\bar \lambda T^* = (\lambda T)^*$;
+  \begin{equation*}
+    (x, Iy) = (Ix,y),
+  \end{equation*}
+  hence $I^* = I$; and
+  \begin{equation*}
+    (x,Ty) = \overline{(Ty,x)} = \overline{(y,T^*x)} = (T^*x, y),
+  \end{equation*}
+  hence $T^{**} = T$.
+
+  We showed in the Notes section above that $\norm{T^*x} \le \norm T \cdot \norm x$ for all $x \in H$, hence $\norm{T^*} \le \norm T$. But since $T = T^{**}$ we also have $\norm T = \norm{T^{**}} \le \norm{T^*}$, hence $\norm{T^*} = \norm T$.
+
+  Finally, suppose that $T^{-1} \in \sc B(H)$. By what we have already shown, $(T^{-1})^* T^* = (T T^{-1})^* = I^* = I$ and similarly $T^* (T^{-1})^* = I$, thus $(T^*)^{-1} = (T^{-1})^* \in \sc B(H)$.
+\end{solution}
+
+\subsubsection*{6.3.3}
+If $P$ is self-adjoint and $P^2$ is a projection, is $P$ a projection?
+
+\begin{solution}
+  The answer is no. Indeed, for any non-trivial Hilbert space $H$, define $P \in \sc B(H)$ by $Px = -x$. Then
+  \begin{equation*}
+    (Px,y) = (-x,y) = -(x,y) = (x,-y) = (x,Py)
+  \end{equation*}
+  for all $x,y \in H$, so $P$ is self-adjoint. Moreover, $P^2 = I$ is a projection. But $P$ is not a projection by Theorem 6.3.1, since $P^2 = I \ne P$.
+\end{solution}
+
+\subsubsection*{6.3.4}
+Let $(X,\mu)$ be a measure space and denote by $\chi_E$ the characteristic function of a measurable set $E$. Then the operator $Q_E f = \chi_E f$ defined in $L^2(X,\mu)$ is a projection. Under what condition on $E$, $F$ is $Q_E + Q_F$ a projection?
+
+\begin{solution}
+  We equip $H = L^2(X,\mu)$ with the inner product $(f,g) = \int f \bar g \, d\mu$; this makes $H$ into a Hilbert space.
+
+  It is clear that $Q_E$ is linear and bounded. Moreover, for all $f,g \in H$,
+  \begin{equation*}
+    (Q_E f, g) = \int \chi_E f \bar g \, d\mu = \int f \, \overline{\chi_E g} \, d\mu = (f, Q_E g)
+  \end{equation*}
+  and
+  \begin{equation*}
+    Q_E^2 f = \chi_E^2 f = \chi_E f = Q_E f,
+  \end{equation*}
+  so $Q_E$ is a projection by Theorem 6.3.2.
+
+  By Theorem 6.3.4, the sum $Q_E + Q_F$ is a projection if and only if $Q_E Q_F = 0$. This in turn holds if and only if $\norm{\chi_{E \cap F} f} = 0$ for all $f \in H$. Taking $f = \chi_{E \cap F}$, we see that this is equivalent to $\norm{\chi_{E \cap F}} = 0$, and finally to $\mu(E \cap F) = 0$. That is, $Q_E + Q_F$ is a projection if and only if $E \cap F$ has measure zero.
+\end{solution}
+
+\subsubsection*{6.3.5}
+Consider the operator $(Qf)(t) = a(t) f(t)$ in $L^2(0,1)$, where $a(t)$ is a scalar function. Find necessary and sufficient conditions on $a(t)$ for $Q$ to be a projection.
+
+\begin{solution}
+  Certainly $a$ must be square-integrable, so that $Q1 = a \in L^2(0,1)$. By Theorem 6.3.1, another necessary condition is that $Q^2 = Q$. This in turn implies that $Q^2 1 = Q 1$, hence that $a(t)^2 = a(t)$ a.e., or $a(t) \in \{0,1\}$ a.e. In other words, $a$ must be a.e.\ equal to the characteristic function of a measurable set. By the previous problem, this is also a sufficient condition.
+\end{solution}
+
 \end{document}
