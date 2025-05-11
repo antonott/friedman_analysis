@@ -3063,4 +3063,56 @@ Consider the operator $(Qf)(t) = a(t) f(t)$ in $L^2(0,1)$, where $a(t)$ is a sca
   Certainly $a$ must be square-integrable, so that $Q1 = a \in L^2(0,1)$. By Theorem 6.3.1, another necessary condition is that $Q^2 = Q$. This in turn implies that $Q^2 1 = Q 1$, hence that $a(t)^2 = a(t)$ a.e., or $a(t) \in \{0,1\}$ a.e. In other words, $a$ must be a.e.\ equal to the characteristic function of a measurable set. By the previous problem, this is also a sufficient condition.
 \end{solution}
 
+
+\section*{Section 6.5 -- Self-Adjoint Operators}
+
+\subsection*{Notes}
+
+\subsubsection*{Proof of Corollary 6.5.6}
+Suppose $\lambda \in \sigma(A)$. Then there is no $c > 0$ such that (6.5.1) holds for all $x \in X$ (else $\lambda$ would be in $\rho(A)$). Hence there exist $x_1, x_2, \dotsc \in H$ such that $\norm{Ax_n - \lambda x_n} < \norm{x_n}/n$. The sequence $y_n = x_n/\norm{x_n}$ satisfies $\norm{y_n} = 1$ and $\lim_n \norm{Ay_n - \lambda y_n} = 0$.
+
+Conversely, suppose there is a sequence $(x_n)$ in $H$ such that $\norm{x_n} = 1$ and $\lim_n \norm{Ax_n - \lambda x_n} = 0$. If $\lambda \in \rho(A)$, then $A - \lambda I$ has a bounded linear inverse, and it follows that
+\begin{equation*}
+  \lim_n x_n = \lim_n (A - \lambda I)^{-1} (A - \lambda I) x_n = (A - \lambda I)^{-1} \lim_n (Ax_n - \lambda x_n) = 0,
+\end{equation*}
+which is a contradiction. Thus $\lambda \in \sigma(A)$.
+
+\subsubsection*{A strengthening of Lemma 6.5.5}
+Lemma 6.5.5 can be strengthened to an ``if and only if'' statement, with the help of Corollary 6.5.6. Indeed, if $\lambda \in \rho(A)$, then there exists $c > 0$ such that $\norm{Ax - \lambda x} \ge c$ for all $x \in H$ with $\norm x = 1$ (else we could construct a sequence as in Corollary 6.5.6). It follows that, for general nonzero $x \in H$,
+\begin{equation*}
+  \norm{Ax - \lambda x} = \snorm{A \frac{x}{\norm x} - \lambda \frac{x}{\norm x}} \cdot \norm x \ge c \norm x.
+\end{equation*}
+
+\subsection*{Problems}
+
+\subsubsection*{6.5.4}
+If $A$ is an operator in $H$ and $L$ is a closed linear subspace of $H$ such that $A(L) \subset L$, then $L$ is called an invariant subspace of $A$. Prove that if $L$ is an invariant subspace of a self-adjoint operator $A$, then also $L^\perp$ is an invariant subspace of $A$.
+
+\begin{solution}
+  If $x \in L^\perp$ and $y \in L$, then $(Ax, y) = (x, Ay) = 0$ since $Ay \in L$. Thus $A(L^\perp) \subset L^\perp$.
+\end{solution}
+
+\subsubsection*{6.5.5}
+Let $L$ be a closed linear subspace, invariant with respect to a self-adjoint operator $A$. Denote by $\sigma_1(A)$ and $\sigma_2(A)$ the spectra of the restriction of $A$ to $L$ and $L^\perp$, respectively. Prove that $\sigma(A) = \sigma_1(A) \cup \sigma_2(A)$. [\emph{Hint:} Prove $\sigma(A) \subset \sigma_1(A) \cup \sigma_2(A)$ by using Lemma 6.5.5, and prove $\sigma(A) \supset \sigma_1(A) \cup \sigma_2(A)$ by using Corollary 6.5.6.]
+
+\begin{solution}
+  Let $\lambda \in \sigma_1(A)^c \cap \sigma_2(A)^c$, and note that $\sigma_1(A)^c$ and $\sigma_2(A)^c$ are the resolvent sets of $A|_L$ and $A|_{L^\perp}$, respectively. By Lemma 6.5.5 (or rather the strengthened version in the Notes above) there exist constants $c_1, c_2 > 0$ such that
+  \begin{equation*}
+    \norm{Ax - \lambda x} \ge c_1 \norm x \quad (\forall x \in L), \quad \norm{Ax - \lambda x} \ge c_2 \norm x \quad (\forall x \in L^\perp).
+  \end{equation*}
+  Let $c = \min(c_1,c_2)$.
+
+  Given any $x \in H$, write $x = y + z$ with $y \in L$ and $z \in L^\perp$. Then
+  \begin{equation*}
+    c \norm x \le c \norm y + c \norm z \le \norm{Ay - \lambda y} + \norm{Az - \lambda z}.
+  \end{equation*}
+  Note that $Ay - \lambda y \in L$ since $L$ is invariant with respect to $A$, and $Az - \lambda z \in L^\perp$ by the previous problem. Hence $(Ay - \lambda y) \perp (Az - \lambda z)$, and it follows that
+  \begin{equation*}
+    \norm{Ax - \lambda x}^2 = \norm{Ay - \lambda y}^2 + \norm{Az - \lambda z}^2.
+  \end{equation*}
+  Thus $c \norm x \le 2 \norm{Ax - \lambda x}$, and $\lambda \in \rho(A) = \sigma(A)^c$ by Lemma 6.5.5. This proves (by contrapositive) that $\sigma(A) \subset \sigma_1(A) \cup \sigma_2(A)$.
+
+  Now suppose $\lambda \in \sigma_1(A)$. By Corollary 6.5.6 there exist $x_1, x_2, \dotsc \in L$ such that $\norm{x_n} = 1$ and $\lim_n \norm{A x_n - \lambda x_n} = 0$. Regarding $(x_n)$ as a sequence in $H$ and applying Corollary 6.5.6 again, we obtain $\lambda \in \sigma(A)$. Hence $\sigma_1(A) \subset \sigma(A)$, and one similarly finds that $\sigma_2(A) \subset \sigma(A)$, so that $\sigma(A) \supset \sigma_1(A) \cup \sigma_2(A)$.
+\end{solution}
+
 \end{document}
