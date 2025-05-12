@@ -1461,7 +1461,82 @@ Let $\nu$ and $\mu$ be $\sigma$-finite signed measures and let $\nu \ll \mu$. Fo
 [\emph{Hint:} Consider first the case where $\mu$ and $\nu$ are measures and $\varphi$ is a simple function.]
 
 \begin{solution}
+  We will divide the proof into multiple parts.
+  \begin{enumerate}[label=(\roman*)]
+    \item Consider first the case where $\mu$ and $\nu$ are measures (i.e.\ nonnegative) and $\varphi$ is an integrable simple function. Then
+      \begin{equation*}
+        \varphi = \sum_{i=1}^n \alpha_i \chi_{E_i}
+      \end{equation*}
+      for some measurable sets $E_i$ with $\nu(E_i) < \infty$. It follows by the Radon-Nikodym theorem that
+      \begin{equation*}
+        \begin{split}
+          \int \varphi \, d\nu &= \sum_{i=1}^n \alpha_i \nu(E_i) = \sum_{i=1}^n \alpha_i \int_{E_i} \frac{d\nu}{d\mu} d\mu = \int \sum_{i=1}^n \alpha_i \chi_{E_i} \frac{d\nu}{d\mu} d\mu \\
+          &= \int \varphi \frac{d\nu}{d\mu} d\mu.
+        \end{split}
+      \end{equation*}
+      In particular, $\varphi \cdot d\nu/d\mu$ is $\mu$-integrable.
 
+    \item Next, let $\mu$ and $\nu$ remain measures, but let $\varphi$ be any nonnegative $\nu$-integrable function. Theorem 2.2.5 provides a monotone-increasing sequence $(\varphi_n)$ of nonnegative simple functions such that $\varphi_n(x) \to \varphi(x)$ everywhere, and each $\varphi_n$ is $\nu$-integrable since $\varphi_n \le \varphi$ (Theorem 2.10.1). By the monotone convergence theorem and part (i) above,
+      \begin{equation*}
+        \int \varphi \, d\nu = \lim_n \int \varphi_n \, d\nu = \lim_n \int \varphi_n \frac{d\nu}{d\mu} d\mu.
+      \end{equation*}
+
+      Let $N = \{x; (d\nu/d\mu)(x) < 0\}$. By $\sigma$-finiteness there are measurable sets $A_n$ such that $X = \bigcup_n A_n$ and $\nu(A_n) < \infty$. For each $n \in \bb N$ we have
+      \begin{equation*}
+        0 \le \nu(N \cap A_n) = \int_{N \cap A_n} \frac{d\nu}{d\mu} d\mu \le 0,
+      \end{equation*}
+      hence $\mu(N \cap A_n) = 0$ by Theorem 2.7.5 (applied to $-d\nu/d\mu$). It follows that $\mu(N) = 0$, i.e.\ that $d\nu/d\mu \ge 0$ $\mu$-a.e. We can therefore redefine $d\nu/d\mu$ to be 0 on $N$, and it will still be a Radon-Nikodym derivative.
+
+      The non-negative integrable functions $\varphi_n \cdot d\nu/d\mu$ make up a monotone-increasing sequence with pointwise limit $\varphi \cdot d\nu/d\mu$. Thus
+      \begin{equation*}
+        \lim_n \int \varphi_n \frac{d\nu}{d\mu} d\mu = \int \varphi \frac{d\nu}{d\mu} d\mu
+      \end{equation*}
+      by monotone convergence, yielding
+      \begin{equation*}
+        \int \varphi \, d\nu = \int \varphi \frac{d\nu}{d\mu} d\mu.
+      \end{equation*}
+
+    \item Let $\mu$ be a measure, $\nu$ a signed measure, and $\varphi$ a nonnegative $\nu$-integrable function. Then
+      \begin{equation*}
+        \int \varphi \, d\nu = \int \varphi \, d\nu^+ - \int \varphi \, d\nu^- = \int \varphi \frac{d\nu^+}{d\mu} d\mu - \int \varphi \frac{d\nu^-}{d\mu} d\mu
+      \end{equation*}
+      by part (ii). Note that
+      \begin{equation*}
+        \nu(E) = \nu^+(E) - \nu^-(E) = \int \frac{d\nu^+}{d\mu} d\mu - \int \frac{d\nu^-}{d\mu} d\mu = \int \left( \frac{d\nu^+}{d\mu} - \frac{d\nu^-}{d\mu} \right) d\mu
+      \end{equation*}
+      for all measurable subsets $E$ with $|\nu|(E) < \infty$. Hence
+      \begin{equation*}
+        \left( \frac{d\nu^+}{d\mu} - \frac{d\nu^-}{d\mu} \right) = \frac{d\nu}{d\mu} \quad \text{$\mu$-a.e.}
+      \end{equation*}
+      by the Radon-Nikodym theorem, and it follows that
+      \begin{equation*}
+        \int \varphi \, d\nu = \int \varphi \frac{d\nu}{d\mu} d\mu.
+      \end{equation*}
+
+    \item Now let both $\mu$ and $\nu$ be signed measures, with $\varphi$ still a nonnegative $\nu$-integrable function. As in the solution of Problem 2.12.2, let $X = A \cup B$ be a Hahn decomposition of $(X, \cal A, \mu)$. We obtain Radon-Nikodym derivatives $d\nu/d\mu^+$ and $d\nu/d\mu^-$ on the measure subspaces $(A, \cal A_A, \mu^+)$ and $(A, \cal A_B, \mu^-)$, respectively, and extend them to $X$ by setting $d\nu/d\mu^+ = 0$ on $B$ and $d\nu/d\mu^- = 0$ on $A$. Then
+      \begin{equation*}
+        \begin{split}
+          \int \varphi \, d\nu &= \int_A \varphi \, d\nu + \int_B \varphi \, d\nu \\
+          &= \int \varphi \frac{d\nu}{d\mu^+} d\mu^+ + \int \varphi \frac{d\nu}{d\mu^+} d\mu^+ \\
+          &= \int \varphi \left( \frac{d\nu}{d\mu^+} - \frac{d\nu}{d\mu^-} \right) d\mu^+ - \int \varphi \left( \frac{d\nu}{d\mu^+} - \frac{d\nu}{d\mu^-} \right) d\mu^- \\
+          &= \int \varphi \left( \frac{d\nu}{d\mu^+} - \frac{d\nu}{d\mu^-} \right) d\mu,
+        \end{split}
+      \end{equation*}
+      with the second equality following from part (iii). In particular,
+      \begin{equation*}
+        \nu(E) = \int \chi_E \, d\nu = \int \chi_E \left( \frac{d\nu}{d\mu^+} - \frac{d\nu}{d\mu^-} \right) d\mu
+      \end{equation*}
+      for all $E \in \cal A$ with $|\nu|(E) < \infty$, and it follows by Problem 2.12.2 that
+      \begin{equation*}
+        \frac{d\nu}{d\mu} = \frac{d\nu}{d\mu^+} - \frac{d\nu}{d\mu^-}  \quad \text{$\mu$-a.e.}
+      \end{equation*}
+      Thus
+      \begin{equation*}
+        \int \varphi \, d\nu = \int \varphi \frac{d\nu}{d\mu} d\mu.
+      \end{equation*}
+
+    \item Finally, let $\mu$ and $\nu$ be signed, and $\varphi$ be $\nu$-integrable. The result follows by applying the conclusion of part (iv) to $\varphi^+$ and $\varphi^-$.
+  \end{enumerate}
 \end{solution}
 
 \chapter*{Chapter 3 -- Metric Spaces}
