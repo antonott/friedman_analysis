@@ -3190,4 +3190,45 @@ Let $L$ be a closed linear subspace, invariant with respect to a self-adjoint op
   Now suppose $\lambda \in \sigma_1(A)$. By Corollary 6.5.6 there exist $x_1, x_2, \dotsc \in L$ such that $\norm{x_n} = 1$ and $\lim_n \norm{A x_n - \lambda x_n} = 0$. Regarding $(x_n)$ as a sequence in $H$ and applying Corollary 6.5.6 again, we obtain $\lambda \in \sigma(A)$. Hence $\sigma_1(A) \subset \sigma(A)$, and one similarly finds that $\sigma_2(A) \subset \sigma(A)$, so that $\sigma(A) \supset \sigma_1(A) \cup \sigma_2(A)$.
 \end{solution}
 
+
+\section*{Section 6.6 -- Positive Operators}
+
+\subsection*{Problems}
+
+\subsubsection*{6.6.3}
+If $P_L$ and $P_M$ are projections, then $P_L \le P_M$ if and only if $L \subset M$.
+
+\begin{solution}
+  Assume first that $P_L \le P_M$. Let $x \in L$, and write $x = y + z$ with $y \in M$, $z \in M^\perp$. We have
+  \begin{equation*}
+    0 \le ((P_M - P_L)x, x) = (y - x, x) = (y,y + z) - (x,x) = \norm y^2 - \norm x^2.
+  \end{equation*}
+  But $\norm x^2 = \norm y^2 + \norm z^2$, so $z = 0$, and $x \in M$. It follows that $L \subset M$.
+
+  Conversely, suppose that $L \subset M$. Then $P_L$ is a part of $P_M$, so $\norm{P_L x} \le \norm{P_M x}$ for all $x \in H$, by Theorem 6.3.6. Hence
+  \begin{equation*}
+    ((P_M - P_L)x, x) = (P_M x, P_M x) - (P_L x, P_L x) = \norm{P_M x}^2 - \norm{P_L x}^2 \ge 0
+  \end{equation*}
+  for all $x \in H$, with the first equality following from Theorem 6.3.1.
+\end{solution}
+
+\subsubsection*{6.6.4}
+If $A$ is a self-adjoint operator and if $-\eta I \le A \le \eta I$ for some $\eta > 0$, then $\norm A \le \eta$.
+
+\begin{solution}
+  We have
+  \begin{equation*}
+    (Ax, x) \ge (-\eta x, x) = -\eta \norm x^2
+  \end{equation*}
+  and
+  \begin{equation*}
+    (Ax,x) \le (\eta x, x) = \eta \norm x^2
+  \end{equation*}
+  for all $x \in H$. Hence the lower and upper bounds of $A$ satisfy
+  \begin{equation*}
+    m = \inf_{\norm x = 1} (Ax,x) \ge -\eta, \quad M = \sup_{\norm x = 1} (Ax,x) \le \eta,
+  \end{equation*}
+  so that $-\eta \le m \le M \le \eta$, and $\norm A = \max(|m|, |M|) \le \eta$ follows.
+\end{solution}
+
 \end{document}
